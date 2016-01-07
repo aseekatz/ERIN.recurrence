@@ -1,0 +1,48 @@
+### Mistakes in ERIN files that should be checked for corrections:
+
+# DA0394: sample_n should be 1, not 2
+	sum$sample_n[sum$sampleID==c("DA0394")]<-1
+# EIN00191, second sample: should be 2, not 1
+	subsum2$sample_n[subsum2$patientID==c("EIN00191") & subsum2$rel_day==7]<-2
+	
+
+
+
+
+	
+### practicing dotplots and etc R stuff	
+
+ylab = expression(paste("Diameter of aperture ( ", hat(mu), " )"))
+
+# question to stack overflow:
+groups<-c(rep("A",4), rep("B",4), rep("C",4))
+otu1<-runif(12, min=0, max=100)
+otu2<-runif(12, min=0, max=100)
+data<-data.frame(groups, otu1, otu2)
+
+medians<-ddply(data, c("groups"), colwise(median, is.numeric))
+highq<-ddply(data, c("groups"), colwise(quantile, is.numeric))
+
+d <- data.frame(groups=c(rep("A",4), rep("B",4), rep("C",4)),
+            otu1 = runif(12, min=0, max=100),
+            otu2 = runif(12, min=0, max=100),
+            otu3 = runif(12, min=0, max=100)
+            )
+            
+# some dotplot help:
+
+regions <- read.table(file="/Users/annaseekatz/Desktop/umich/work/dotplot_tutorial/regions.txt", header = T)
+
+regions$sequence <- seq(1, length(regions$priority))
+
+regions$state <- reorder(regions$state, regions$sequence)
+
+dotplot(state ~ priority, data = regions,
+   aspect = 1.5,
+   xlab = "State policy priority scores, 1992",
+   xlim = c(.49, .55),
+   scales = list(cex = .6),
+   panel = function (x, y) {
+   panel.dotplot(x[x > 0], y[x > 0],
+     pch = 16, col = "black", lty = 2)} )
+

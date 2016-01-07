@@ -1,0 +1,2330 @@
+#### Subsetting ERIN samples into only nonrecurrent, recurrent samples
+## 12.14.15
+
+## Directory: /Users/aseekatz/Desktop/umich/projects/ERIN_clinical/ERIN_16S/ERIN.UMFMT_mothur/ERINsubset
+
+## files used:
+
+# (in directory /Users/aseekatz/Desktop/umich/projects/ERIN_clinical/ERIN_16S/ERIN.UMFMT_mothur/mothur.files_3.18.15)
+	# erinfmt_summary.txt
+		# got nonrecurrent and recurrent sample list from here
+	# dist.shared(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared
+		# should be able to subset this, then recalculate pcoa using mothur
+	# ERIN.UMFMT_metadata_filtered.txt
+
+# get recurrent and nonrecurrent seqIDs:
+# in R:
+combined<-read.table(file="../erinfmt_summary.txt", header=TRUE)
+erinsub<-combined[combined$group %in% c("recurrent", "nonrecurrent"), ]
+#erinsub<-combined[combined$group_reinfection %in% c("recurrent", "nonrecurrent", "reinfection"), ]
+erinsub.reinfectiongroup.design<-erinsub[, c("seqID", "group_reinfection")]
+write.table(erinsub.reinfectiongroup.design, file="erinsubset_mothurfiles/erinsub.reinfectiongroup.design", sep="\t", quote=FALSE, col.names=NA)
+# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" erinsub.reinfectiongroup.design
+
+# samples: DA0154-DA0156-DA0157-DA0165-DA0192-DA0207-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0718_R-DA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0753-DA0754-DA0776-DA0778-DA0779-DA0780-DA0793-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2830-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143-DA3173-DA3240-DA3260_P-DA3298-DA3299-DA3376
+/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles
+
+# from  on FLUX:
+# mothur v.1.34.4
+	$ cd /home/aseekatz/ERIN/mothur.erinfmt_3.17.15/ERINsubset
+	$ /home/aseekatz/mothur.v1.34.3/mothur/mothur
+		# in mothur:
+		dist.shared(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, calc=thetayc, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0207-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0718_R-DA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0753-DA0754-DA0776-DA0778-DA0779-DA0780-DA0793-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2830-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143-DA3173-DA3240-DA3260_P-DA3298-DA3299-DA3376)
+		pcoa(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist)
+		nmds(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, mindim=4, maxdim=4)
+		
+		amova(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, design=erinsubset.group.design)
+		amova(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, design=erinsubset.clinical.design)
+		
+		get.groups(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0207-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0718_R-DA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0753-DA0754-DA0776-DA0778-DA0779-DA0780-DA0793-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2830-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143-DA3173-DA3240-DA3260_P-DA3298-DA3299-DA3376)
+		lefse(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared, design=erinsubset.group.design)
+		lefse(shared=erinsubset.0.03.shared, design=erinsubset.clinical.design)
+		
+		# also, just using the reinfectiondesign file that has 3 groups for amova (all subsetted samples):
+		amova(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, design=erinsub.reinfectiongroup.design)
+		
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.nmds.iters erinsubset.thetayc0.03.nmds.iters
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.nmds.stress erinsubset.thetayc0.03.nmds.stress
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.nmds.axes erinsubset.thetayc0.03.nmds.axes
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.pcoa.axes erinsubset.thetayc0.03.pcoa.axes
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.pcoa.loadings erinsubset.thetayc0.03.pcoa.loadings
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared erinsubset.0.03.shared
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.0.03.lefse_summary erinsubset.0.03.lefse_summary
+	$ mv erinsubset.0.03.0.03.lefse_summary erinsubset.clinical.0.03_lefse_summary
+	$ mv erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.amova erinsubset.group.0.03.thetayc.amova
+	
+# (1.2.15)
+# redoing lefse, getting rid of 'reinfection' samples:
+combined<-read.table(file="../erinfmt_summary.txt", header=TRUE)
+erinsub<-combined[combined$group_reinfection %in% c("recurrent", "nonrecurrent"), ]
+erinsub$seqID
+DA0154-DA0156-DA0157-DA0165-DA0207-DA0208-DA0281-DA0283-DA0288-DA0299-DA0318-DA0338-DA0345-DA0379-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0689-DA0695-DA0705-DA0718_RDA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0753-DA0776-DA0778-DA0780-DA0806-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1249-DA1250-DA1251-DA1287-DA1320-DA1324-DA1335-DA1359-DA1365-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1514-DA1519-DA1525-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2047-DA2058-DA2063-DA2095-DA2102-DA2267-DA2347-DA2363-DA2444-DA2559-DA2699-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3091-DA3108-DA3137-DA3143-DA3240-DA3260_P-DA3298-DA3299-DA3376
+
+reinfection.design<-erinsub[, c("seqID", "group_reinfection")]
+write.table(reinfection.design, file="erinsubset_mothurfiles/reinfection.group.design", sep="\t", quote=FALSE, col.names=NA)
+	# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" reinfection.group.design
+reinfection.clinical.design<-erinsub[, c("seqID", "clinical_result")]
+write.table(reinfection.clinical.design, file="erinsubset_mothurfiles/reinfection.clinical.design", sep="\t", quote=FALSE, col.names=NA)
+	# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" reinfection.clinical.design
+
+# also wanted to see if plating or abx results would yield anything
+	# apparently for lefse you can have a huge metafile--however, you can't for amova, so separate it is
+
+# on home computer:
+# files in: /Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles
+	$ cd /Users/annaseekatz/Desktop/umich/mothur_v1.33.3
+	$ ./mothur
+		# in mothur:
+				get.groups(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0207-DA0208-DA0281-DA0283-DA0288-DA0299-DA0318-DA0338-DA0345-DA0379-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0689-DA0695-DA0705-DA0718_RDA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0753-DA0776-DA0778-DA0780-DA0806-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1249-DA1250-DA1251-DA1287-DA1320-DA1324-DA1335-DA1359-DA1365-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1514-DA1519-DA1525-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2047-DA2058-DA2063-DA2095-DA2102-DA2267-DA2347-DA2363-DA2444-DA2559-DA2699-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3091-DA3108-DA3137-DA3143-DA3240-DA3260_P-DA3298-DA3299-DA3376)
+				lefse(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.reinfection.0.03.pick.shared, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/reinfection.group.design)
+				lefse(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.reinfection.0.03.pick.shared, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/reinfection.clinical.design)
+				
+				dist.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.reinfection.0.03.pick.shared, calc=thetayc)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.reinfection.0.03.pick.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/reinfection.group.design)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.reinfection.0.03.pick.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/reinfection.clinical.design)
+		
+				# also, just using the reinfectiondesign file that has 3 groups for amova (all subsetted samples):
+				dist.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, calc=thetayc)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsub.reinfectiongroup.design)
+				corr.axes(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, axes=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/pcoa.nmds/erinsubset.thetayc0.03.pcoa.axes, method=spearman, numaxes=2)
+				corr.axes(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, axes=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/pcoa.nmds/erinsubset.thetayc0.03.nmds.axes, method=spearman, numaxes=2)
+				
+	$ mv erinsubset.0.03.0.03.pick.shared erinsubset.reinfection.0.03.pick.shared
+	$ mv erinsubset.reinfection.0.03.pick.0.03.lefse_summary erinsubset.reinfection.0.03.group.lefse_summary
+	$ mv erinsubset.reinfection.0.03.pick.0.03.lefse_summary erinsubset.reinfection.0.03.clinical.lefse_summary
+	$ mv erinsubset.reinfection.0.03.pick.thetayc.0.03.lt.amova erinsubset.reinfection.group.thetayc.0.03.lt.amova
+	$ mv erinsubset.reinfection.0.03.pick.thetayc.0.03.lt.amova erinsubset.reinfection.clinical.thetayc.0.03.lt.amova
+	$ mv erinsubset.0.03.thetayc.0.03.lt.amova erinsubset.all3reinfection.0.03.lt.amova
+	$ mv erinsubset.0.03.spearman.corr.axes erinsubset.0.03.spearman.pcoa.corr.axes
+	$ mv erinsubset.0.03.spearman.corr.axes erinsubset.0.03.spearman.nmds.corr.axes
+# almost exact same results EXCEPT:
+	# Otu00044 is in NEGATIVE group now
+	# Otu00006 is not found in group separation (Otu00023 is the only OTU significantly different now)
+	# compiled all results into 'erinsubset_all.lefse.results.txt'
+		# clin_ columns are for all subset sample results, using clinical result categorization (with reinfection samples wrapped into the nonrecurrent)
+		# group_ columns are for all subset sample results, using patient_group result categorization (with reinfection samples wrapped into the nonrecurrent)
+		# clin2_ columns are for reinfection sample results, using clinical result categorization (no reinfection in nonrecurrent)
+		# group2_ columns are for reinfection sample results, using patient_group result categorization (no reinfection in nonrecurrent)
+	# in thinking about it, the clinical score can be used on ALL samples (including reinfection, since this is not a patient status)
+
+# (1.3.15)
+
+# once again, redoing lefse, amova based on a couple more criteria: abx_pre, plating_result, severeidsa (although this will have to be subsetted again)
+	# used file 'erinfmt_extra.meta.txt'
+
+## for abx:
+# in R:
+extra<-read.table(file="../erinfmt_extra.meta.txt", header=TRUE)
+all<-read.table(file="suberin_all.alpha.phylo.txt", header=TRUE)
+keep<-as.character(all$sampleID)			#just to get sample names
+filtered.extra<-extra[extra$seqID %in% keep, ]
+	# a couple samples are missing, so we DO need to filter for this one, and get groups
+abx.design<-filtered.extra[, c("seqID", "abx_prior")]
+write.table(abx.design, file="erinsubset_mothurfiles/abx.design", sep="\t", quote=FALSE, col.names=NA)
+	# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" abx.design
+# samples: DA0806-DA0963-DA0156-DA0207-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0427-DA0474-DA0165-DA0208-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0296-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0338-DA0498-DA0527-DA0381-DA0676-DA1306-DA1536-DA0382-DA0415-DA0453-DA0475-DA0488-DA0383-DA0416-DA0426-DA0635-DA0394-DA0458-DA0467-DA0574-DA0753-DA0461-DA0530-DA0556-DA2559-DA0565-DA1208-DA1399-DA1519-DA0568-DA0780-DA2764-DA0864-DA0933-DA2909-DA0600-DA0617-DA0738-DA0603-DA0618-DA0638-DA0695-DA0719-DA2699-DA0666-DA0689-DA0673-DA0718_R-DA0734_R-DA0705-DA0725-DA0721_R-DA0731-DA0752-DA0735-DA0741-DA0776-DA0754-DA0793-DA0820-DA1120-DA0192-DA0779-DA0954-DA0778-DA0904-DA1365-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0948-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0978-DA0993-DA0989-DA1102-DA1125-DA1026-DA1039-DA1030-DA1046-DA1359-DA1044-DA1088-DA1071-DA1428-DA1193-DA1217-DA1287-DA1231-DA1249-DA1223-DA1250-DA1227-DA1251-DA1235-DA2766-DA2879-DA3035-DA1244-DA1369-DA1320-DA1324-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1419-DA1384-DA1475-DA1468-DA1484-DA1525-DA1482-DA1514-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA1648-DA1673-DA2867-DA2960-DA3108-DA1609-DA1621-DA1686-DA1749-DA1945-DA1810-DA1837-DA2058-DA1936-DA2047-DA1918-DA1937-DA1960-DA1993-DA2063-DA2267-DA2095-DA2102-DA2276-DA3081-DA2444-DA2792-DA2850-DA2910-DA2797-DA2826-DA2851-DA2875-DA2911-DA2946-DA3091-DA2803-DA2845-DA2940-DA2819-DA2832-DA2852-DA2840-DA2871-DA2869-DA2939-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA1645-DA1752-DA2014-DA2347-DA2363
+$ cd /Users/annaseekatz/Desktop/umich/mothur_v1.33.3
+	$ ./mothur
+		# in mothur:
+				get.groups(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0806-DA0963-DA0156-DA0207-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0427-DA0474-DA0165-DA0208-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0296-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0338-DA0498-DA0527-DA0381-DA0676-DA1306-DA1536-DA0382-DA0415-DA0453-DA0475-DA0488-DA0383-DA0416-DA0426-DA0635-DA0394-DA0458-DA0467-DA0574-DA0753-DA0461-DA0530-DA0556-DA2559-DA0565-DA1208-DA1399-DA1519-DA0568-DA0780-DA2764-DA0864-DA0933-DA2909-DA0600-DA0617-DA0738-DA0603-DA0618-DA0638-DA0695-DA0719-DA2699-DA0666-DA0689-DA0673-DA0718_R-DA0734_R-DA0705-DA0725-DA0721_R-DA0731-DA0752-DA0735-DA0741-DA0776-DA0754-DA0793-DA0820-DA1120-DA0192-DA0779-DA0954-DA0778-DA0904-DA1365-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0948-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0978-DA0993-DA0989-DA1102-DA1125-DA1026-DA1039-DA1030-DA1046-DA1359-DA1044-DA1088-DA1071-DA1428-DA1193-DA1217-DA1287-DA1231-DA1249-DA1223-DA1250-DA1227-DA1251-DA1235-DA2766-DA2879-DA3035-DA1244-DA1369-DA1320-DA1324-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1419-DA1384-DA1475-DA1468-DA1484-DA1525-DA1482-DA1514-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA1648-DA1673-DA2867-DA2960-DA3108-DA1609-DA1621-DA1686-DA1749-DA1945-DA1810-DA1837-DA2058-DA1936-DA2047-DA1918-DA1937-DA1960-DA1993-DA2063-DA2267-DA2095-DA2102-DA2276-DA3081-DA2444-DA2792-DA2850-DA2910-DA2797-DA2826-DA2851-DA2875-DA2911-DA2946-DA3091-DA2803-DA2845-DA2940-DA2819-DA2832-DA2852-DA2840-DA2871-DA2869-DA2939-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA1645-DA1752-DA2014-DA2347-DA2363)
+				lefse(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.abx.shared, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/abx.design)
+				dist.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.abx.shared, calc=thetayc)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.abx.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/abx.design)
+		$ mv erinsubset.0.03.0.03.pick.shared erinsubset.abx.shared
+
+## for plating results:
+# in R:
+plating.design<-filtered.extra[, c("seqID", "final_plating")]
+plating.design<-plating.design[plating.design$final_plating %in% c("Negative", "Positive"), ]
+write.table(plating.design, file="erinsubset_mothurfiles/plating.design", sep="\t", quote=FALSE, col.names=NA)
+	# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" plating.design
+samples: DA0806-DA0963-DA0156-DA0207-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0427-DA0474-DA0165-DA0208-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0296-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0338-DA0498-DA0527-DA0381-DA0676-DA1306-DA1536-DA0382-DA0415-DA0453-DA0475-DA0488-DA0383-DA0416-DA0426-DA0394-DA0458-DA0467-DA0574-DA0461-DA0530-DA0556-DA2559-DA0565-DA1208-DA1399-DA1519-DA0568-DA0780-DA2764-DA0864-DA0933-DA2909-DA0600-DA0617-DA0738-DA0603-DA0618-DA0638-DA0695-DA0719-DA2699-DA0666-DA0689-DA0673-DA0718_R-DA0734_R-DA0705-DA0725-DA0721_R-DA0731-DA0752-DA0735-DA0741-DA0776-DA0754-DA0793-DA0820-DA1120-DA0192-DA0779-DA0954-DA0778-DA0904-DA1365-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0948-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0978-DA0993-DA0989-DA1102-DA1125-DA1026-DA1039-DA1030-DA1046-DA1359-DA1044-DA1088-DA1071-DA1428-DA1193-DA1217-DA1287-DA1231-DA1249-DA1223-DA1250-DA1227-DA1251-DA1235-DA2766-DA2879-DA3035-DA1244-DA1369-DA1320-DA1324-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1419-DA1384-DA1475-DA1468-DA1484-DA1525-DA1482-DA1514-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA1648-DA1673-DA2867-DA2960-DA3108-DA1609-DA1621-DA1686-DA1749-DA1945-DA1810-DA1837-DA2058-DA1936-DA2047-DA1918-DA1937-DA1960-DA1993-DA2063-DA2267-DA2095-DA2102-DA2276-DA3081-DA2444-DA2792-DA2850-DA2910-DA2797-DA2851-DA2875-DA2946-DA3091-DA2803-DA2845-DA2940-DA2819-DA2832-DA2852-DA2840-DA2871-DA2869-DA2939-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA1645-DA1752-DA2014-DA2347-DA2363
+
+$ cd /Users/annaseekatz/Desktop/umich/mothur_v1.33.3
+	$ ./mothur
+		# in mothur:
+				get.groups(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0806-DA0963-DA0156-DA0207-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0427-DA0474-DA0165-DA0208-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0296-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0338-DA0498-DA0527-DA0381-DA0676-DA1306-DA1536-DA0382-DA0415-DA0453-DA0475-DA0488-DA0383-DA0416-DA0426-DA0394-DA0458-DA0467-DA0574-DA0461-DA0530-DA0556-DA2559-DA0565-DA1208-DA1399-DA1519-DA0568-DA0780-DA2764-DA0864-DA0933-DA2909-DA0600-DA0617-DA0738-DA0603-DA0618-DA0638-DA0695-DA0719-DA2699-DA0666-DA0689-DA0673-DA0718_R-DA0734_R-DA0705-DA0725-DA0721_R-DA0731-DA0752-DA0735-DA0741-DA0776-DA0754-DA0793-DA0820-DA1120-DA0192-DA0779-DA0954-DA0778-DA0904-DA1365-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0948-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0978-DA0993-DA0989-DA1102-DA1125-DA1026-DA1039-DA1030-DA1046-DA1359-DA1044-DA1088-DA1071-DA1428-DA1193-DA1217-DA1287-DA1231-DA1249-DA1223-DA1250-DA1227-DA1251-DA1235-DA2766-DA2879-DA3035-DA1244-DA1369-DA1320-DA1324-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1419-DA1384-DA1475-DA1468-DA1484-DA1525-DA1482-DA1514-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA1648-DA1673-DA2867-DA2960-DA3108-DA1609-DA1621-DA1686-DA1749-DA1945-DA1810-DA1837-DA2058-DA1936-DA2047-DA1918-DA1937-DA1960-DA1993-DA2063-DA2267-DA2095-DA2102-DA2276-DA3081-DA2444-DA2792-DA2850-DA2910-DA2797-DA2851-DA2875-DA2946-DA3091-DA2803-DA2845-DA2940-DA2819-DA2832-DA2852-DA2840-DA2871-DA2869-DA2939-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA1645-DA1752-DA2014-DA2347-DA2363)
+				lefse(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.plating.03.pick.shared, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/plating.design)
+				dist.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.plating.03.pick.shared, calc=thetayc)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.plating.03.pick.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/plating.design)
+		$ mv erinsubset.0.03.0.03.pick.shared erinsubset.plating.03.pick.shared
+		
+## for severeidsa results:
+# in R:
+severe.design<-filtered.extra[, c("seqID", "severeidsa")]
+severe.design<-severe.design[severe.design$severeidsa %in% c("1", "0"), ]		#only about 2/3 have a score
+write.table(severe.design, file="erinsubset_mothurfiles/severe.design", sep="\t", quote=FALSE, col.names=NA)
+	# erase first column in excel
+	$ perl -pi -e "tr/\015/\012/" severe.design
+samples: DA0806-DA0156-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0165-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0498-DA0527-DA0676-DA1306-DA0382-DA0453-DA0383-DA0416-DA0635-DA0394-DA0458-DA0753-DA0461-DA0530-DA0556-DA2559-DA1208-DA1399-DA1519-DA0568-DA0780-DA2909-DA0600-DA0738-DA0603-DA0638-DA0719-DA2699-DA0666-DA0689-DA0673-DA0705-DA0725-DA0721_R-DA0735-DA0741-DA0754-DA0820-DA0192-DA0779-DA0954-DA0778-DA0904-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0989-DA1102-DA1026-DA1039-DA1030-DA1359-DA1044-DA1088-DA1071-DA1193-DA1287-DA1231-DA1223-DA1227-DA2766-DA1244-DA1369-DA1320-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1384-DA1468-DA1482-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA2867-DA2960-DA1609-DA1621-DA1686-DA1749-DA1810-DA2058-DA1918-DA1993-DA2063-DA2095-DA2276-DA3081-DA2444-DA2792-DA2797-DA2826-DA2851-DA3091-DA2803-DA2819-DA2840-DA2871-DA2869-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA2014-
+$ cd /Users/annaseekatz/Desktop/umich/mothur_v1.33.3
+	$ ./mothur
+		# in mothur:
+				get.groups(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0806-DA0156-DA0288-DA0551-DA0154-DA3137-DA0157-DA0397-DA0165-DA0281-DA0417-DA0283-DA0379-DA0611-DA0845-DA0309-DA1718-DA0299-DA0345-DA0318-DA0435-DA0476-DA0450-DA0498-DA0527-DA0676-DA1306-DA0382-DA0453-DA0383-DA0416-DA0635-DA0394-DA0458-DA0753-DA0461-DA0530-DA0556-DA2559-DA1208-DA1399-DA1519-DA0568-DA0780-DA2909-DA0600-DA0738-DA0603-DA0638-DA0719-DA2699-DA0666-DA0689-DA0673-DA0705-DA0725-DA0721_R-DA0735-DA0741-DA0754-DA0820-DA0192-DA0779-DA0954-DA0778-DA0904-DA0908-DA1043-DA0918-DA0941-DA0980-DA0926-DA0939-DA0977-DA0991_R-DA1033_R-DA0943-DA1008-DA1174-DA1497-DA0949-DA0989-DA1102-DA1026-DA1039-DA1030-DA1359-DA1044-DA1088-DA1071-DA1193-DA1287-DA1231-DA1223-DA1227-DA2766-DA1244-DA1369-DA1320-DA3143-DA1335-DA1370-DA1483-DA1779-DA2822-DA1388-DA1384-DA1468-DA1482-DA1504-DA2045-DA1513-DA2245-DA2355-DA2710-DA1563-DA2867-DA2960-DA1609-DA1621-DA1686-DA1749-DA1810-DA2058-DA1918-DA1993-DA2063-DA2095-DA2276-DA3081-DA2444-DA2792-DA2797-DA2826-DA2851-DA3091-DA2803-DA2819-DA2840-DA2871-DA2869-DA2870-DA2894-DA2905-DA2932-DA2942-DA2763-DA2997-DA2014)
+				lefse(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.severe.03.pick.shared, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/severe.design)
+				dist.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.severe.03.pick.shared, calc=thetayc)
+				amova(phylip=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.severe.03.pick.thetayc.0.03.lt.dist, design=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/severe.design)
+		$ mv erinsubset.0.03.0.03.pick.shared erinsubset.severe.03.pick.shared
+	# lefse actually provided 5 OTUs: 30, 44, 48, 50 were all ID'd with positive samples previously--15 was not
+###
+#-----
+###
+
+# PCOA/NMDS:
+
+# used files:
+	# erinsubset.thetayc0.03.pcoa.axes
+	# erinsubset.thetayc0.03.nmds.axes
+	# erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.groups.summary
+	# ERIN.UMFMT_metadata_filtered.txt
+	# erinfmt_extra.meta.txt
+	# erinsubset_summary.txt #created from the mothur files
+	
+# read in files and merge together:
+#meta<-read.table(file="ERIN.UMFMT_metadata.txt", header=TRUE)
+meta<-read.table(file="../ERIN.UMFMT_metadata_filtered.txt", header=TRUE)
+	erinsub.meta<-meta[meta$group %in% c("recurrent", "nonrecurrent"), ]
+pcoa<-read.table(file="erinsubset_mothurfiles/erinsubset.thetayc0.03.pcoa.axes", header=TRUE)
+	colnames(pcoa)[1:4] <- c("sampleID", "pcoa_axis1", "pcoa_axis2", "pcoa_axis3")
+nmds<-read.table(file="erinsubset_mothurfiles/erinsubset.thetayc0.03.nmds.axes", header=TRUE)
+	colnames(nmds)[1:4] <- c("sampleID", "nmds_axis1", "nmds_axis2", "nmds_axis3")
+sum<-read.table(file="../mothur.files_3.18.15/erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.groups.summary", header=TRUE)
+
+combined.pcoa<-merge(erinsub.meta, pcoa, by.x=c("seqID"), by.y=c("sampleID"))
+combined.nmds<-merge(combined.pcoa, nmds, by.x=c("seqID"), by.y=c("sampleID"))
+combined.sum<-merge(combined.nmds, sum, by.x=c("seqID"), by.y=c("group"))
+combined.all<-combined.sum[,c(1:26, 254:256, 259:273)]  #this picks the specific columns
+#write.table(combined.all, 'erinsubset_summary.txt',quote=FALSE,sep="\t", col.names=NA)
+
+combined.all<-read.table(file="erinsubset_summary.txt", header=TRUE)
+extra<-read.table(file="../erinfmt_extra.meta.txt", header=TRUE)
+filtered.extra<-extra[, c("seqID", "abx_prior", "abx_allprior", "ppi", "final_plating", "severeidsa")]
+
+community<-merge(combined.all, filtered.extra, by.x="seqID", by.y="seqID", all.x=TRUE)
+#write.table(community, file="erinsub_all.extrameta.summary.txt", sep="\t", quote=FALSE, col.names=NA)
+
+# color vectors
+group.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "recurrent" ) {
+	colorvec[i] = "orange"
+	}
+	if ( n[i] == "nonrecurrent" ) {
+	colorvec[i] = "chartreuse3"
+	}
+	if ( n[i] == "reinfection" ) {
+	colorvec[i] = "darkgoldenrod"
+	}
+	}
+	c(colorvec)
+	}
+
+clin.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "positive" ) {
+	colorvec[i] = "magenta"
+	}
+	if ( n[i] == "negative" ) {
+	colorvec[i] = "grey87"
+	}
+	}
+	c(colorvec)
+	}
+
+par(mfrow=c(1,2))
+# PCOA:
+df<-community
+par(mfrow=c(1,2))
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.55,0.55), xlim=c(-0.55,0.55), main="PCOA: by patient group")
+legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
+text(0.38,-0.55, labels="AMOVA, p=0.107", cex=0.7)
+
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.55,0.55), xlim=c(-0.55,0.55), main="PCOA: by sample clinical result")
+legend("topright",legend=c("positive", "negative"), col="black", pt.bg=c("magenta", "grey87"), cex=0.7, pch=21)
+text(0.38,-0.55, labels="**AMOVA, p=0.002", cex=0.7)
+
+#NMDS:
+df<-community
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.65,0.65), xlim=c(-0.65,0.65), main="nmds: by patient group")
+legend("topleft",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
+text(0.42,-0.65, labels="AMOVA, p=0.107", cex=0.7)
+
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.65,0.65), xlim=c(-0.65,0.65), main="nmds: by sample clinical result")
+legend("topleft",legend=c("positive", "negative"), col="black", pt.bg=c("magenta", "grey87"), cex=0.7, pch=21)
+text(0.42,-0.65, labels="**AMOVA, p=0.002", cex=0.7)
+
+####
+# However, let's do an AMOVA just to see if it separates statistically:
+erinsubset.group.design<-combined.all[, c("seqID", "group")]
+erinsubset.group.design<-rename(erinsubset.group.design, replace=c("seqID"="group", "group"="CDI"))
+write.table(erinsubset.group.design, file="erinsubset.group.design", sep="\t", quote=FALSE, col.names=NA)
+
+# AMOVA results: NOPE
+#nonrecurrent-recurrent	Among	Within	Total
+#SS	0.576944	92.9168	93.4937
+#df	1	228	229
+#MS	0.576944	0.40753
+#Fs:	1.41571
+#p-value: 0.143
+
+# how about by sample type:
+erinsubset.clinical.design<-combined.all[, c("seqID", "clinical_result")]
+erinsubset.clinical.design<-rename(erinsubset.clinical.design, replace=c("seqID"="group"))
+write.table(erinsubset.clinical.design, file="erinsubset.clinical.design", sep="\t", quote=FALSE, col.names=NA)
+	# this actually DID separate significantly...
+
+####
+
+## corr.axes to pcoa or nmds plots:
+# produced corr.axes files based on erinsub samples only:
+	# erinsubset.0.03.spearman.pcoa.corr.axes
+		# filter: p<0.0005 for both axes, length>0.5 = 12 OTUs
+	# erinsubset.0.03.spearman.nmds.corr.axes
+
+library(shape)
+
+corr.pcoa<-read.table(file="erinsubset_mothurfiles/pcoa.nmds/erinsubset.0.03.spearman.pcoa.corr.axes", header=TRUE)
+tax<-read.table(file="../erinfmt.new.taxonomy.names.txt", header=TRUE)
+	corr.pcoa<-merge(corr.pcoa, tax, by="OTU", all.y=TRUE)
+	
+corr.nmds<-read.table(file="erinsubset_mothurfiles/pcoa.nmds/erinsubset.0.03.spearman.nmds.corr.axes", header=TRUE)
+tax<-read.table(file="erinfmt.new.taxonomy.names.txt", header=TRUE)
+	corr.nmds<-merge(corr.nmds, tax, by="OTU", all.y=TRUE)
+
+	
+# subset to get significant OTUs:
+corr.pcoa1<-subset(corr.pcoa, p.value < 0.001)
+dim(corr.pcoa1)										#78 OTUs
+corr.pcoa2<-subset(corr.pcoa1, p.value.1 < 0.001)			#50 OTUs
+corr.pcoa2.abundant<-subset(corr.pcoa2, Size > 100000 & length > 0.4)		# 4 OTUs!
+
+corr.nmds1<-subset(corr.nmds, p.value < 0.001)
+dim(corr.nmds1)										#142 OTUs
+corr.nmds2<-subset(corr.nmds1, p.value.1 < 0.001)			#2 OTUs
+corr.nmds2.abundant<-subset(corr.nmds2, Size > 100000 & length > 0.4)		# 2 OTUs!
+
+# PCOA:
+par(mfrow=c(1,2))
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="nmds: by patient group")
+Arrows(0, 0, x1=0.637056, y1=0.348986, lty=1, arr.length=0.3, arr.type="triangle")
+text(0.637056, 0.348986, label="Otu2: \nEnterococcus", cex=.6, pos=2)
+
+Arrows(0, 0, x1=-0.560707, y1=-0.479283, lty=1, arr.length=0.3, arr.type="triangle")
+text(-0.560707, -0.479283, label="Otu3 & Otu6: \nBacteroides", cex=.6, pos=1)
+
+Arrows(0, 0, x1=-0.516695, y1=0.570671, lty=1, arr.length=0.3, arr.type="triangle")
+text(-0.516695, 0.570671, label="Otu4: \nEscherichia", cex=.6, pos=4)
+
+Arrows(0, 0, x1=-0.414691, y1=-0.349732, lty=1, arr.length=0.3, arr.type="triangle")
+#text(-0.414691, -0.349732, label="Otu6: \nBacteroides", cex=.6, pos=1)
+
+# PCOA:
+par(mfrow=c(1,2))
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.75,0.75), xlim=c(-0.75,0.75), main="nmds: by patient group")
+Arrows(0, 0, x1=0.404481, y1=0.277719, lty=1, arr.length=0.3, arr.type="triangle")
+text(0.404481, 0.277719, label="Otu1: \nEnterobacteriaceae", cex=.6, pos=4)
+
+Arrows(0, 0, x1=0.6412387, y1=-0.412713, lty=1, arr.length=0.3, arr.type="triangle")
+text(0.641238, -0.412713, label="Otu2: \nEnterococcus", cex=.6, pos=1)
+
+# both PCOA w/axes:
+par(mfrow=c(1,2))
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="PCOA: by patient group")
+Arrows(0, 0, x1=0.637056, y1=0.348986, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.637056, 0.348986, label="Otu2: \nEnterococcus", cex=.6, pos=2)
+Arrows(0, 0, x1=-0.560707, y1=-0.479283, lty=1, arr.length=0.3, arr.type="triangle")
+	text(-0.560707, -0.479283, label="Otu3 & Otu6: \nBacteroides", cex=.6, pos=1)
+Arrows(0, 0, x1=-0.516695, y1=0.570671, lty=1, arr.length=0.3, arr.type="triangle")
+	text(-0.516695, 0.570671, label="Otu4: \nEscherichia", cex=.6, pos=4)
+Arrows(0, 0, x1=-0.414691, y1=-0.349732, lty=1, arr.length=0.3, arr.type="triangle")
+legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
+	text(0.38,-0.55, labels="AMOVA, p=0.107", cex=0.7)
+
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="PCOA: by sample clinical status")
+Arrows(0, 0, x1=0.637056, y1=0.348986, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.637056, 0.348986, label="Otu2: \nEnterococcus", cex=.6, pos=2)
+Arrows(0, 0, x1=-0.560707, y1=-0.479283, lty=1, arr.length=0.3, arr.type="triangle")
+	text(-0.560707, -0.479283, label="Otu3 & Otu6: \nBacteroides", cex=.6, pos=1)
+Arrows(0, 0, x1=-0.516695, y1=0.570671, lty=1, arr.length=0.3, arr.type="triangle")
+	text(-0.516695, 0.570671, label="Otu4: \nEscherichia", cex=.6, pos=4)
+Arrows(0, 0, x1=-0.414691, y1=-0.349732, lty=1, arr.length=0.3, arr.type="triangle")
+legend("topright",legend=c("positive", "negative"), col="black", pt.bg=c("magenta", "grey87"), cex=0.7, pch=21)
+	text(0.38,-0.55, labels="**AMOVA, p=0.002", cex=0.7)
+	
+# both NMDS w/axes:
+par(mfrow=c(1,2))
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="NMDS: by patient group")
+Arrows(0, 0, x1=0.404481, y1=0.277719, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.404481, 0.277719, label="Otu1: \nEnterobacteriaceae", cex=.6, pos=4)
+Arrows(0, 0, x1=0.6412387, y1=-0.412713, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.641238, -0.412713, label="Otu2: \nEnterococcus", cex=.6, pos=1)
+legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
+	text(0.38,-0.65, labels="AMOVA, p=0.107", cex=0.7)
+
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="NMDS: by sample clinical status")
+Arrows(0, 0, x1=0.404481, y1=0.277719, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.404481, 0.277719, label="Otu1: \nEnterobacteriaceae", cex=.6, pos=4)
+Arrows(0, 0, x1=0.6412387, y1=-0.412713, lty=1, arr.length=0.3, arr.type="triangle")
+	text(0.641238, -0.412713, label="Otu2: \nEnterococcus", cex=.6, pos=1)
+legend("topright",legend=c("positive", "negative"), col="black", pt.bg=c("magenta", "grey87"), cex=0.7, pch=21)
+	text(0.38,-0.65, labels="**AMOVA, p=0.002", cex=0.7)
+
+
+
+	
+###
+#-----
+###
+
+# Community typing based on phylotype: for subset and full data set
+
+# files used:
+	# erinsubset.0.03.shared (only subset samples)
+	# erinfmt_summary.txt (all samples)
+	# erinfmt_genfrac2p_w.meta.txt (all samples)
+	
+# in R:
+library(cluster)
+library(vegan)
+library(labdsv)
+
+# sjd enterotyping:
+
+## all samples, OTU vs. phylotype:
+	#phylo:
+combined.all<-read.table(file='../erinfmt_summary.txt', header=TRUE)
+allnames<-as.character(combined.all$seqID)		# these are all legit samples
+phylos<-read.table(file="../erinfmt_genfrac2p_w.meta.txt", header=TRUE)
+rownames(phylos)<-phylos$sampleID
+phylos.df<-phylos[which(phylos$sampleID %in% allnames), 2:101]
+
+	#OTU:
+d<-read.table(file="../erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared", header=TRUE, row.names=2)
+dd.all<- subset(d, select = -c(label, numOtus ))					#removing the columns you do not need
+dd.all<-dd.all[,colSums(dd.all) > 100]										#this removes all OTUs that are present at < 100 seqs
+dd.frac<-dd.all/rowSums(dd.all)
+
+# enterotype script:
+all.pairs.jensen.shannon <- function(d) {
+  kl.divergence <- function(pq, midpoint) {
+    sum(ifelse(pq == 0.0, 0.0, pq * log(pq / midpoint)))
+  }
+ 
+  jensen.shannon <- function(row1, row2) {
+    midpoint <- 0.5 * (row1 + row2)
+    kl.divergence(row1, midpoint) + kl.divergence(row2, midpoint)
+  }
+ 
+  d <- as.matrix(d)
+  num.rows <- nrow(d)
+  result <- matrix(0, nrow=num.rows, ncol=num.rows, dimnames=list(rownames(d), rownames(d)))
+  for (j in 1:(num.rows - 1)) {
+    for (i in (j + 1):num.rows) {
+      distance <- jensen.shannon(c(d[i, ]), c(d[j, ]))
+      result[i, j] <- distance
+      result[j, i] <- distance
+    }
+  }
+  as.dist(result)
+ }
+ 
+# apply script to your dataset:
+js <- all.pairs.jensen.shannon(phylos.df)
+js.otu <- all.pairs.jensen.shannon(dd.frac)
+
+# how many clusters should you use??
+# you can do a silhouette test to see how many clusters 'naturally' form from the data:
+
+# Test how many clusters form:
+	#for phylos:
+postscript('/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/allerin.phylo_pamtest.ps',width=8,height=8,horizontal=TRUE)
+for (nc in 2:10) {
+plot(pam(js, k=nc))
+}
+dev.off()
+	#for OTUs:
+postscript('/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/allerin.otu_pamtest.ps',width=8,height=8,horizontal=TRUE)
+for (nc in 2:10) {
+plot(pam(js.otu, k=nc))
+}
+dev.off()
+
+# create a phylo2 file
+allphylotype2 <- pam(js, k=2)										#the k= , will give you however many clusters you are defining
+allphylo2<-as.data.frame(allphylotype2$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+allphylo2$SEQ_NAME<-rownames(allphylo2)
+colnames(allphylo2)[1] <- c("phylopam2_cluster")
+allerin.summary<-merge(phylos, allphylo2, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+allphylotype4 <- pam(js, k=4)										#the k= , will give you however many clusters you are defining
+allphylo4<-as.data.frame(allphylotype4$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+allphylo4$SEQ_NAME<-rownames(allphylo4)
+colnames(allphylo4)[1] <- c("phylopam4_cluster")
+allerin.summary2<-merge(allerin.summary, allphylo4, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+#write.table(allerin.summary2, file="../allerin_summary.phylo2.txt", quote=FALSE, sep="\t", col.names=NA)
+
+# it looks like with phylotyped data, you can get a good kc score for 2 clusters, vs. 9 clusters for OTU data
+	# let's try with the subsetted data...
+	
+### heatmap with ALL samples:
+
+# files used:
+	# allerin_summary.phylo2.txt
+	# erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared
+	# ERIN.UMFMT_metadata_filtered.txt
+
+library(RColorBrewer)
+library(gplots)
+library(vegan)
+library(plyr)
+
+allsum<-read.table(file='../allerin_summary.phylo2.txt', header=TRUE)
+allshared<-read.table(file="../erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared", header=TRUE, row.names=2)
+
+allotu<-subset(allshared, select =-c(label, numOtus) )								#gets rid of extra columns in R
+allotu.filtered<-allotu[,which(colSums(allotu)>=100)]									#eliminates any OTUs present at less than a count of 100
+allotu.filtered<- allotu.filtered[ order(row.names(allotu.filtered)), ]					#order by the rownames (your samples)
+allotu.matrix<-as.matrix(allotu.filtered)
+	
+	# get relative abundance of file instead of raw counts:
+allotu.rel<-allotu.matrix/rowSums(allotu.matrix)
+
+	# to filter out OTUs that are present in less than x%:
+allotu.rel.max<-apply(allotu.rel,2,max)
+allotu.rel.filtered<-allotu.rel[,allotu.rel.max>0.020]
+	#median, if you wanted to do that...
+allotu.rel.med<-apply(allotu.rel,2,median)
+allotu.rel.filtered.med<-allotu.rel[,allotu.rel.med>0.0001]
+
+# graph it:			
+my.col <- colorRampPalette(c("aliceblue","blue"))(n = 249)			#you can put in as many colors as you want here
+my.breaks = c(seq(0,0.001,length=50),  								#just remember: your breaks must always = 1 more than the number of colors you are defining!
+               seq(0.001,0.01,length=50),
+               seq(0.01,0.10,length=50),
+               seq(0.10,0.50,length=50),
+               seq(0.50,1,length=50))
+
+	# heatmap of top 40 (?) OTUs:
+alltopotus<- allotu.rel.filtered[, order(-colSums(allotu.rel.filtered))]	
+alltop30<-alltopotus[, 1:30]
+alltop40<-alltopotus[, 1:40]
+
+my.col <- colorRampPalette(c("aliceblue","blue"))(n = 249)			#you can put in as many colors as you want here
+my.breaks = c(seq(0,0.001,length=50),  								#just remember: your breaks must always = 1 more than the number of colors you are defining!
+               seq(0.001,0.01,length=50),
+               seq(0.01,0.10,length=50),
+               seq(0.10,0.50,length=50),
+               seq(0.50,1,length=50))
+
+# add row metadata:
+allsum<-read.table(file="../allerin_summary.phylo2.txt", header=TRUE)
+allsum<- allsum[order(allsum$sampleID),]									#remember that the order of this must equal the order of the matrix read into the heatmap command
+allsamples<-rownames(alltop40)										#this is the list of sample names in the heatmap matrix
+allsum2<-allsum[allsum$sampleID %in% allsamples , ]							#eliminate any samples from the original meta file to get the exact list (since not doing a merge)
+alltop40<-alltop40[order(rownames(alltop40)), ]							#must be in same order
+cbind(rownames(alltop40), allsum2$sampleID)									#check that this is right
+
+myCol4 <- colorRampPalette(brewer.pal(4,"BrBG"))(4)			# only for more than 3 colors
+myCol3<-c("yellow2", "blue2")
+allsum2$color<-mapvalues(allsum2$group2, from = c("control", "donor", "nonrecurrent", "recipient", "recipient_pre", "recurrent"), to = c("grey67", "blue4", "chartreuse3", "purple", "orchid2", "orange"))
+allsum2$phylopam2_cluster<-as.factor(allsum2$phylopam2_cluster)
+allsum2$color2<-mapvalues(allsum2$phylopam2_cluster, from = c("1", "2"), to = myCol3)
+allsum2$phylopam4_cluster<-as.factor(allsum2$phylopam4_cluster)
+allsum2$color4<-mapvalues(allsum2$phylopam4_cluster, from = c("1", "2", "3", "4"), to = myCol4)
+
+# add column metadata (taxonomy info):
+taxonomy_file<-read.table(file="../erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.cons.taxonomy", header=TRUE)
+tax <- taxonomy_file$Taxonomy
+tax <- gsub("\\(\\d*\\)", "", tax)
+tax <- gsub(";unclassified", "", tax)
+tax <- gsub("_1", "", tax)
+tax <- gsub(";$", "", tax)
+tax <- gsub("/.*", "", tax)
+tax <- gsub(".*;", "", tax)
+tax.names <-paste(taxonomy_file$OTU, tax)
+taxonomy_file$taxname<-tax.names
+phylum <- taxonomy_file$Taxonomy
+phylum <- gsub("\\(\\d*\\)", "", phylum)
+phylum <- gsub("Bacteria;", "", phylum)
+phylum <- gsub(";$", "", phylum)
+phylum <- gsub(";.*", "", phylum)
+taxonomy_file$phylum<-phylum
+tax<-taxonomy_file
+tax<-tax[order(tax$OTU),]
+#write.table(tax, file="erinfmt.new.taxonomy.names.txt", sep="\t", quote=FALSE, col.names=NA)
+
+alltopotu.list<-colnames(alltop40)												#define the OTUs you want to keep (those in the top 98%)
+allfiltered.tax<-tax[tax$OTU %in% alltopotu.list , ]							#filter out the taxonomy metadata file
+allfiltered.tax<-droplevels(allfiltered.tax)										#sometimes R keeps levels that were discarded--this gets rid of them completely
+
+allfiltered.tax$phylum<-factor(allfiltered.tax$phylum, levels=c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"))
+alltax.col<- allfiltered.tax[order(allfiltered.tax$phylum, -allfiltered.tax$Size) , ]
+alltax.col$color<-mapvalues(alltax.col$phylum, from = c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"), to = c("green4", "dodgerblue1","gold", "firebrick1", "firebrick4", "hotpink", "grey47"))
+alltax.col2<-t(alltax.col)
+allphyla.col<-alltax.col2[6, ]
+
+allcol.order<-as.character(alltax.col2[1, ])								#convert the order of the OTUs into a list
+alltop40<-alltop40[,allcol.order]											#order your matrix by the ordered list
+rbind(colnames(alltop40), alltax.col2)									#check order of the matrix and list to ensure that colors will be correct (they should match!)
+
+# by group:
+alltop40<-alltop40[order(allsum2$group2), ]
+allsum2<-allsum2[order(allsum2$group2), ]
+# OR by phylotype:
+alltop40<-alltop40[order(allsum2$phylopam4_cluster), ]
+allsum2<-allsum2[order(allsum2$phylopam4_cluster), ]
+
+heatmap.2(alltop40,
+                    notecol="black",     
+                    density.info="none",
+                    key.xlab="",
+                    key.title="",  
+                    trace="none",         
+                    margins =c(4,4),    
+                    col=my.col,        
+                    breaks=my.breaks,    
+                    dendrogram="none",    
+                    Colv=F,
+                    Rowv=F,
+                    srtCol=45,
+                    cexRow= 0.7,
+                    cexCol = 0.8,
+                    keysize=1.5,
+                    lwid = c(2.5,5),
+                    lhei = c(1.5,5),
+                    labCol=alltax.col$taxname,
+					RowSideColors = as.character(allsum2$color2),
+					ColSideColors = as.character(allphyla.col)
+					)
+legend("bottomleft",legend=c("recurrent", "nonrecurrent","control", "recipient-pre", "recipient-post", "donor"), col=c("orange", "chartreuse3", "grey47", "orchid2", "purple", "blue4"), cex=0.8, pch=19)
+legend("topleft",legend=rep(1:2, 1), col=myCol3, cex=0.8, pch=19)
+legend("topright", c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"), col=c("green4", "dodgerblue1","gold", "firebrick1", "firebrick4", "hotpink", "grey47"), pch=15, cex=0.8)
+
+################
+## for subset samples, OTU vs. phylo:
+	#phylo:
+names.subset<-read.table(file="/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared", header=TRUE, row.names=2)
+names<-as.character(rownames(names.subset))		# these are all of the subset samples
+phylos<-read.table(file="../erinfmt_genfrac2p_w.meta.txt", header=TRUE)
+rownames(phylos)<-phylos$sampleID
+sub.phylos.df<-phylos[which(phylos$sampleID %in% names), 2:101]
+	#otu:
+dd.all<- subset(names.subset, select = -c(label, numOtus ))					#removing the columns you do not need
+dd.all<-dd.all[,colSums(dd.all) > 100]										#this removes all OTUs that are present at < 100 seqs
+sub.dd.frac<-dd.all/rowSums(dd.all)
+
+sub.js.phylo <- all.pairs.jensen.shannon(sub.phylos.df)
+sub.js.otu <- all.pairs.jensen.shannon(sub.dd.frac)
+
+#for phylos:
+postscript('/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome//ERINsubset/sub.erin.phylo_pamtest.ps',width=8,height=8,horizontal=TRUE)
+for (nc in 2:10) {
+plot(pam(js, k=nc))
+}
+dev.off()
+	#for OTUs:
+postscript('/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome//ERINsubset/sub.erin.otu_pamtest.ps',width=8,height=8,horizontal=TRUE)
+for (nc in 2:10) {
+plot(pam(js.otu, k=nc))
+}
+dev.off()
+
+# let's give the phylotype-based cluster of 2 for the subsetted data:
+phylotype2 <- pam(sub.js.phylo, k=2)										#the k= , will give you however many clusters you are defining
+phylo2<-as.data.frame(phylotype2$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylo2$SEQ_NAME<-rownames(phylo2)
+colnames(phylo2)[1] <- c("phylopam2_cluster")
+suberin.summary<-merge(phylos, phylo2, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+phylotype4 <- pam(sub.js.phylo, k=4)										#the k= , will give you however many clusters you are defining
+phylo4<-as.data.frame(phylotype4$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylo4$SEQ_NAME<-rownames(phylo4)
+colnames(phylo4)[1] <- c("phylopam4_cluster")
+suberin.summary2<-merge(suberin.summary, phylo4, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+
+#write.table(suberin.summary2, file="suberin_summary.phylo2.txt", quote=FALSE, sep="\t", col.names=NA)
+
+###
+
+# Heatmap of subsetted data:
+# files used:
+	# suberin_summary.phylo2.txt
+	# erinsubset.0.03.shared
+	# ERIN.UMFMT_metadata_filtered.txt
+	# erinfmt_otu.taxonomy.txt (since I subsetted data from the shared file, they should all be the same)
+
+library(RColorBrewer)
+library(gplots)
+library(vegan)
+library(plyr)
+
+sum<-read.table(file='suberin_summary.phylo2.txt', header=TRUE)
+shared<-read.table(file="erinsubset_mothurfiles/erinsubset.0.03.shared", header=TRUE, row.names=2)
+
+otu<-subset(shared, select =-c(label, numOtus) )								#gets rid of extra columns in R
+otu.filtered<-otu[,which(colSums(otu)>=100)]									#eliminates any OTUs present at less than a count of 100
+otu.filtered<- otu.filtered[ order(row.names(otu.filtered)), ]					#order by the rownames (your samples)
+otu.matrix<-as.matrix(otu.filtered)
+	
+	# get relative abundance of file instead of raw counts:
+otu.rel<-otu.matrix/rowSums(otu.matrix)
+#otu.rel<-(otu.matrix/rowSums(otu.matrix))*100
+#write.table(otu.rel, file="suberin.relOTUs.txt", sep="\t", quote=FALSE, col.names=NA)
+
+	# to filter out OTUs that are present in less than x%:
+otu.rel.max<-apply(otu.rel,2,max)
+otu.rel.filtered<-otu.rel[,otu.rel.max>0.020]
+	#median, if you wanted to do that...
+otu.rel.med<-apply(otu.rel,2,median)
+otu.rel.filtered.med<-otu.rel[,otu.rel.med>0.0001]
+
+# graph it:			
+my.col <- colorRampPalette(c("aliceblue","blue"))(n = 249)			#you can put in as many colors as you want here
+my.breaks = c(seq(0,0.001,length=50),  								#just remember: your breaks must always = 1 more than the number of colors you are defining!
+               seq(0.001,0.01,length=50),
+               seq(0.01,0.10,length=50),
+               seq(0.10,0.50,length=50),
+               seq(0.50,1,length=50))
+heatmap.2(otu.rel.filtered, 
+			col=my.col, 
+			breaks=my.breaks, 
+			cexRow=0.5, 
+			cexCol=0.5, 
+			trace="none"
+			)
+# there are some interesting little patches in here...			
+			
+	# heatmap of top 30 (?) OTUs:
+topotus<- otu.rel.filtered[, order(-colSums(otu.rel.filtered))]	
+top30<-topotus[, 1:30]
+top40<-topotus[, 1:40]
+
+my.col <- colorRampPalette(c("aliceblue","blue"))(n = 249)			#you can put in as many colors as you want here
+my.breaks = c(seq(0,0.001,length=50),  								#just remember: your breaks must always = 1 more than the number of colors you are defining!
+               seq(0.001,0.01,length=50),
+               seq(0.01,0.10,length=50),
+               seq(0.10,0.50,length=50),
+               seq(0.50,1,length=50))
+heatmap.2(top30, 
+			col=my.col, 
+			breaks=my.breaks, 
+			trace="none", 
+			density.info="none", 
+			Colv=F, 			
+			Rowv=T,
+			dendrogram="none",
+			#RowSideColors = as.character(sum2$color1),
+			#ColSideColors = as.character(phyla.col)
+			)
+#legend("left", c("control","patient"), col=c("red","orange"), pch=15, cex=0.8)
+
+# add row metadata:
+sum<-read.table(file="suberin_summary.phylo2.txt", header=TRUE)
+sum<- sum[order(sum$sampleID),]									#remember that the order of this must equal the order of the matrix read into the heatmap command
+samples<-rownames(top40)										#this is the list of sample names in the heatmap matrix
+sum2<-sum[sum$sampleID %in% samples , ]							#eliminate any samples from the original meta file to get the exact list (since not doing a merge)
+top40<-top40[order(rownames(top40)), ]							#must be in same order
+cbind(rownames(top40), sum2$sampleID)									#check that this is right
+
+# giving some options to color by:
+myCol4 <- colorRampPalette(brewer.pal(4,"BrBG"))(4)			# only for more than 3 colors
+myCol3<-c("yellow2", "blue2")
+sum2$color<-mapvalues(sum2$group2, from = c("nonrecurrent", "recurrent"), to = c("chartreuse3", "orange"))
+sum2$phylopam2_cluster<-as.factor(sum2$phylopam2_cluster)
+sum2$color2<-mapvalues(sum2$phylopam2_cluster, from = c("1", "2"), to = myCol3)
+sum2$phylopam4_cluster<-as.factor(sum2$phylopam4_cluster)
+sum2$color4<-mapvalues(sum2$phylopam4_cluster, from = c("1", "2", "3", "4"), to = myCol4)
+sum2$index<-as.factor(sum2$index)
+sum2$color.index<-mapvalues(sum2$index, from = c("0", "1"), to = c("green", "red"))
+sum2$recur<-as.factor(sum2$recur)
+sum2$color.recur<-mapvalues(sum2$recur, from = c("0", "1"), to = c("green", "red"))
+sum2$patient_status<-paste(sum2$group2, sum2$index, sep="_")
+sum2$color.status<-mapvalues(sum2$patient_status, from = c("nonrecurrent_0", "nonrecurrent_1", "recurrent_0", "recurrent_1"), to = c("lightgreen", "lightpink", "green3", "red"))
+sum2$patient_status<-paste(sum2$group2, sum2$index, sep="_")
+sum2$color.clinical<-mapvalues(sum2$clinical_status, from = c("negative", "positive"), to = c("lightgreen","red"))
+
+
+# add column metadata (taxonomy info):
+taxonomy_file<-read.table(file="../erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.cons.taxonomy", header=TRUE)
+tax <- taxonomy_file$Taxonomy
+tax <- gsub("\\(\\d*\\)", "", tax)
+tax <- gsub(";unclassified", "", tax)
+tax <- gsub("_1", "", tax)
+tax <- gsub(";$", "", tax)
+tax <- gsub("/.*", "", tax)
+tax <- gsub(".*;", "", tax)
+tax.names <-paste(taxonomy_file$OTU, tax)
+taxonomy_file$taxname<-tax.names
+phylum <- taxonomy_file$Taxonomy
+phylum <- gsub("\\(\\d*\\)", "", phylum)
+phylum <- gsub("Bacteria;", "", phylum)
+phylum <- gsub(";$", "", phylum)
+phylum <- gsub(";.*", "", phylum)
+taxonomy_file$phylum<-phylum
+tax<-taxonomy_file
+tax<-tax[order(tax$OTU),]
+
+topotu.list<-colnames(top40)												#define the OTUs you want to keep (those in the top 98%)
+filtered.tax<-tax[tax$OTU %in% topotu.list , ]							#filter out the taxonomy metadata file
+filtered.tax<-droplevels(filtered.tax)										#sometimes R keeps levels that were discarded--this gets rid of them completely
+
+filtered.tax$phylum<-factor(filtered.tax$phylum, levels=c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"))
+tax.col<- filtered.tax[order(filtered.tax$phylum, -filtered.tax$Size) , ]
+tax.col$color<-mapvalues(tax.col$phylum, from = c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"), to = c("green4", "dodgerblue1","gold", "firebrick1", "firebrick4", "hotpink", "grey47"))
+tax.col2<-t(tax.col)
+phyla.col<-tax.col2[6, ]
+
+col.order<-as.character(tax.col2[1, ])								#convert the order of the OTUs into a list
+top40<-top40[,col.order]											#order your matrix by the ordered list
+rbind(colnames(top40), tax.col2)									#check order of the matrix and list to ensure that colors will be correct (they should match!)
+
+# by group:
+top40<-top40[order(sum2$group2), ]
+sum2<-sum2[order(sum2$group2), ]
+# OR by phylotype:
+top40<-top40[order(sum2$phylopam4_cluster), ]
+sum2<-sum2[order(sum2$phylopam4_cluster), ]
+
+# graph--subset samples:
+heatmap.2(top40,
+                    notecol="black",     
+                    density.info="none",
+                    key.xlab="",
+                    key.title="",  
+                    trace="none",         
+                    margins =c(4,4),    
+                    col=my.col,        
+                    breaks=my.breaks,    
+                    dendrogram="none",    
+                    Colv=F,
+                    Rowv=F,
+                    srtCol=45,
+                    cexRow= 0.7,
+                    cexCol = 0.8,
+                    keysize=1.5,
+                    lwid = c(2.5,5),
+                    lhei = c(1.5,5),
+                    labCol=tax.col$Genus,
+					RowSideColors = as.character(sum2$color4),
+					ColSideColors = as.character(phyla.col)
+					)
+legend("bottomleft",legend=c("recurrent", "nonrecurrent"), col=c("orange", "chartreuse3"), cex=0.8, pch=19)
+legend("topleft",legend=rep(1:2, 1), col=myCol3, cex=0.8, pch=19)
+legend("topright", c("Bacteroidetes", "Firmicutes", "Proteobacteria", "Actinobacteria", "Verrucomicrobia", "Fusobacteria", "unclassified"), col=c("green4", "dodgerblue1","gold", "firebrick1", "firebrick4", "hotpink", "grey47"), pch=15, cex=0.8)
+
+###
+#-----
+###
+
+# graphing diversity by sampling:
+
+# files used:
+	# allerin_summary.phylo2.txt
+	# erinfmt_summary.txt
+
+sum<-read.table(file='../erinfmt_summary.txt', header=TRUE)
+subsum<-sum[sum$group2 %in% c("recurrent", "nonrecurrent"), ]
+levels(as.factor(subsum$total_sample_n))
+subsum2<-subsum[subsum$total_sample_n > 1, ]
+subsum2<-droplevels(subsum2)
+
+boxplot.double = boxplot(shannon~group2 + sample_n, data = subsum2, xaxt='n', col = c("chartreuse3", "orange"), ylab="shannon", cex=0.6, at=(1:64)[as.logical((1:64) %% 4)])
+#legend("topright", c("negative", "KPC_POSITIVE", "Conversion"), col=c("chartreuse3", "orange", "magenta"), pch=15, cex=0.8)
+#axis(side=1, at=seq(2,64, by=4), labels=seq(1,16), line=0.5, lwd=0)
+
+sample.col <- function(n) {
+colorvec <- vector(mode="character", length=length(n))
+for (i in 1:length(n)) {
+colorvec[i] = "light grey"
+if ( n[i] == "positive" ) {
+colorvec[i] = "orange"
+}
+if ( n[i] == "negative" ) {
+colorvec[i] = "chartreuse3"
+}
+}
+c(colorvec)
+}
+boxplot(shannon ~ group2 + sample_n, data = subsum2, outpch = NA) 
+stripchart(shannon ~ sample_n, data = subsum2, 
+            vertical = TRUE, method = "jitter", 
+            pch = 21, bg = sample.col(subsum2$clinical_result), col = "black", 
+            add = TRUE)
+# all of these suck
+
+# let's try graphing over time:
+plot(shannon ~ rel_day, data=subsum2, pch = 21, bg = sample.col(subsum2$clinical_result), col = "black")
+
+# graphing each group, with a regression line:
+recur<-subset(subsum2, (subset=group2 %in% c("recurrent")))				#subset data by group
+non<-subset(subsum2, (subset=group2 %in% c("nonrecurrent")))
+
+#par(mfrow=c(2,1))
+#over relative day:
+plot(recur$rel_day, recur$invsimpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,20),
+	main="Diversity over time", ylab="invsimpson", xlab="relative day")
+points(non$rel_day, non$invsimpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+	#add regression line per group:
+recline <- lm(invsimpson~rel_day, data=recur)
+nonline <- lm(invsimpson~rel_day, data=non)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+#over sampling:
+plot(recur$sample_n, recur$invsimpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,20),
+	main="Diversity over time", ylab="invsimpson", xlab="relative day")
+axis(1, at=kpc$sample_n, labels=kpc$sample_n)
+points(non$sample_n, non$invsimpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+	#add regression line per group:
+recline <- lm(invsimpson~rel_day, data=recur)
+nonline <- lm(invsimpson~rel_day, data=non)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+	# interesting idea....but misleading
+	# how about calculating the change in diversity over time, per patient?
+	
+# take first day for each patient, then calculate the change from that...
+firstdiv<-subsum2[which(subsum2$sample_n==1), c("patientID","invsimpson","group2", "group_reinfection")]
+duplicated(firstdiv$patientID)		# patient EIN191 is duplicated?
+	#fix this:
+	subsum2[subsum2$patientID==c("EIN00191"),]
+	subsum2$sample_n[subsum2$patientID==c("EIN00191") & subsum2$rel_day==7]<-2
+# now, create 'change in diversity' column:
+	# combined to get a column with the diversity upon first sampling
+subsum3<-merge(subsum2, firstdiv, by.x="patientID", by.y="patientID")
+	# get difference in diversity:
+subsum3$change.simpson<-subsum3$invsimpson.y-subsum3$invsimpson.x
+	# if you want to eliminate first point:
+#subsum4<-subsum3[-which(subsum3$sample_n==1), ]
+
+# plot:
+recur<-subset(subsum3, (subset=group2 %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group2 %in% c("nonrecurrent")))
+	# relative sampling:
+plot(recur$sample_n, recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,20),
+	main="Diversity over time", ylab="invsimpson", xlab="relative day")
+axis(1, at=recur$sample_n, labels=recur$sample_n)
+points(non$sample_n+0.25, non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+
+	# relative day:
+plot(recur$rel_day, recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,75),
+	main="Diversity over time", ylab="delta invsimpson", xlab="relative day")
+points(non$rel_day, non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+recline <- lm(change.simpson~rel_day, data=recur)
+nonline <- lm(change.simpson~rel_day, data=non)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+
+# what if we do inverse simpson, by sampling, but the line is with the rel_day?
+plot(recur$sample_n, recur$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,20),
+	main="Diversity over time", ylab="invsimpson", xlab="relative day")
+points(non$sample_n, non$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+	#add regression line per group:
+recline <- lm(invsimpson.x~rel_day, data=recur)
+nonline <- lm(invsimpson.x~rel_day, data=non)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+
+
+#### single time point diversity graphing:
+extra<-read.table(file="../erinfmt_extra.meta.txt", header=TRUE)
+	# from this, we want to include severeidsa, abx_prior, abx_allprior, ppi, final_plating
+filtered.extra<-extra[, c("seqID", "abx_prior", "abx_allprior", "ppi", "final_plating", "severeidsa")]
+
+sum<-read.table(file='../erinfmt_summary.txt', header=TRUE)
+subsum<-sum[sum$group_reinfection %in% c("recurrent", "nonrecurrent", "reinfection"), ]
+subsum<-droplevels(subsum)
+subsum2<-merge(subsum, filtered.extra, by.x="seqID", by.y="seqID", all.x=TRUE)
+	# finally, take only first sample:
+#subsum3<-subsum2[subsum2$sample_n==1, ]
+
+## option 1: only first day, taking into account reinfection:
+group.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "recurrent" ) {
+	colorvec[i] = "orange"
+	}
+	if ( n[i] == "nonrecurrent" ) {
+	colorvec[i] = "chartreuse3"
+	}
+	if ( n[i] == "reinfection" ) {
+	colorvec[i] = "darkgoldenrod"
+	}
+	}
+	c(colorvec)
+	}
+# for only longitudinal samples:
+subsum2.longi<-subsum2[subsum2$total_sample_n>1, ]		
+firstdiv2<-subsum2.longi[which(subsum2.longi$sample_n==1), c("patientID","invsimpson","group2", "group_reinfection", "clinical_result", "final_plating", "severeidsa", "abx_prior", "abx_allprior", "ppi")]
+
+# for even singly sampled individuals:
+firstdiv<-subsum2[which(subsum2$sample_n==1), c("patientID","invsimpson","group2", "group_reinfection", "clinical_result", "final_plating", "severeidsa", "abx_prior", "abx_allprior", "ppi")]
+	# had previously 
+boxplot(invsimpson~group_reinfection, data=firstdiv)
+	# looks promising: let's only use longitudinal patients, since we know more about them...
+
+plot<-plot(invsimpson ~ as.factor(group_reinfection), data = firstdiv2, ylab="inverse Simpson", xlab="", xaxt="n", outline=FALSE, main="Diversity, index sample \n(by patient type)")
+points(invsimpson ~ jitter(as.numeric(group_reinfection, factor=0)), data = firstdiv2, bg=group.col(firstdiv2$group_reinfection), col="black", pch=21)
+names<-as.character(unique(firstdiv2$group_reinfection))
+text(x =  seq(1,3,by=1), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+kruskal.test(invsimpson~group_reinfection, data=firstdiv2)
+text(2.7,17, labels="Kruskal-Wallis test, p=0.070", cex=0.6)
+	#Kruskal-Wallis rank sum test
+	#data:  invsimpson by group_reinfection
+	#Kruskal-Wallis chi-squared = 5.3128, df = 2, p-value = 0.0702
+	# so close!!!
+	summary(as.factor(firstdiv$group_reinfection))		# uneven proportions
+
+## option 2: clinical result, ALL samples:
+clin.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "positive" ) {
+	colorvec[i] = "magenta"
+	}
+	if ( n[i] == "negative" ) {
+	colorvec[i] = "grey47"
+	}
+	}
+	c(colorvec)
+	}
+ycat<-subsum2$clinical_result
+plot<-plot(invsimpson ~ as.factor(ycat), data = subsum2, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(by clinical result)", ylim=c(0,20))
+points(invsimpson ~ jitter(as.numeric(ycat, factor=0)), data = subsum2, bg=clin.col(ycat), col="black", pch=21)
+names<-levels(ycat)
+text(x =  seq(1,3,by=1), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+wilcox.test(invsimpson~ycat, data=subsum2)
+text(2.1,20, labels="Wilcoxon test, p=0.14", cex=0.6)
+
+## option 3: plating result, ALL samples:
+clin2.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "Positive" ) {
+	colorvec[i] = "magenta"
+	}
+	if ( n[i] == "Negative" ) {
+	colorvec[i] = "grey47"
+	}
+	}
+	c(colorvec)
+	}
+subsum3<-subsum2[subsum2$final_plating %in% c("Negative", "Positive"), ]
+subsum3<-droplevels(subsum3)
+ycat<-subsum3$final_plating
+plot<-plot(invsimpson ~ as.factor(ycat), data = subsum3, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(by plating result)", ylim=c(0,20))
+points(invsimpson ~ jitter(as.numeric(ycat, factor=0)), data = subsum3, bg=clin2.col(ycat), col="black", pch=21)
+names<-levels(ycat)
+text(x =  seq(1,3,by=1), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+wilcox.test(invsimpson~ycat, data=subsum3)
+text(2.1,20, labels="Wilcoxon test, p=0.51", cex=0.6)
+
+## option 4: by prior abx use, ALL samples:
+abx.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "yes" ) {
+	colorvec[i] = "hotpink"
+	}
+	if ( n[i] == "no" ) {
+	colorvec[i] = "thistle1"
+	}
+	}
+	c(colorvec)
+	}
+subsum3<-subsum2[subsum2$abx_prior %in% c("yes", "no"), ]
+subsum3<-droplevels(subsum3)
+ycat<-subsum3$abx_prior
+data<-subsum3
+plot<-plot(invsimpson ~ as.factor(ycat), data = data, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(by prior abx exposure)", ylim=c(0,20))
+points(invsimpson ~ jitter(as.numeric(ycat, factor=0)), data = data, bg=abx.col(ycat), col="black", pch=21)
+names<-levels(unique(ycat))
+text(x =  seq(1,3,by=1), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+wilcox.test(invsimpson~ycat, data=data)
+text(2.1,20, labels="Wilcoxon test, p=0.67", cex=0.6)
+
+## option 5: by severeidsa use, ALL samples:
+group.col <- function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "recurrent" ) {
+	colorvec[i] = "orange"
+	}
+	if ( n[i] == "nonrecurrent" ) {
+	colorvec[i] = "chartreuse3"
+	}
+	if ( n[i] == "reinfection" ) {
+	colorvec[i] = "darkgoldenrod"
+	}
+	}
+	c(colorvec)
+	}
+sev.pch <- function(n) {
+pchvec <- vector(mode="numeric", length=length(n))
+for (i in 1:length(n)) {
+pchvec[i] = 15
+if ( n[i] == 1 ) {
+pchvec[i] = 21
+}
+if (n[i] == 0 ) {
+pchvec[i] = 24
+}
+}
+c(pchvec)
+}
+subsum2$severeidsa<-as.factor(subsum2$severeidsa)
+subsum3<-subsum2[subsum2$severeidsa %in% c("0", "1"), ]
+subsum3<-droplevels(subsum3)
+ycat<-subsum3$severeidsa
+data<-subsum3
+plot<-plot(invsimpson ~ as.factor(ycat), data = data, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(by severeidsa)", ylim=c(0,20))
+points(invsimpson ~ jitter(as.numeric(ycat, factor=0)), data = data, bg=sev.col(severeidsa), col="black", pch=21)
+names<-c("no", "severe")
+text(x =  seq(1,3,by=1), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+wilcox.test(invsimpson~ycat, data=data)
+	## significance!!!!!
+text(2.1,20, labels="*Wilcoxon test, p=0.037", cex=0.6)
+
+## option 6: slicing and dicing: severity WITHIN patient groups:
+prop.table(table(subsum3$group_reinfection, subsum3$severeidsa))
+table(subsum3$group_reinfection, subsum3$severeidsa)
+	# pretty even distributions of severity within these groups...
+sev.pch <- function(n) {
+pchvec <- vector(mode="numeric", length=length(n))
+for (i in 1:length(n)) {
+pchvec[i] = 15
+if ( n[i] == 1 ) {
+pchvec[i] = 24
+}
+if (n[i] == 0 ) {
+pchvec[i] = 21
+}
+}
+c(pchvec)
+}
+subsum2$severeidsa<-as.factor(subsum2$severeidsa)
+subsum3<-subsum2[subsum2$severeidsa %in% c("0", "1"), ]
+subsum3<-droplevels(subsum3)
+ycat<-subsum3$severeidsa
+ycat2<-subsum3$group_reinfection
+data<-subsum3
+#boxplot.double<-boxplot(invsimpson ~ as.factor(ycat)+ycat2, data = data, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(by severeidsa)", ylim=c(0,20), at=(1:9)[as.logical((1:9) %% 3)])
+#points(invsimpson ~ as.factor(ycat)+ycat2, data = data, bg=sev2.col(ycat), col="black", pch=21)
+#names<-as.character(unique(subsum3$group_reinfection))
+#text(x =  c(1.5, 4.5, 7.5), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+	# the boxplot works, but I cannot get it to print out the points...for later
+# for now, let's do it this way:
+group<-as.character(subsum3$group_reinfection)
+sev<-as.character(subsum3$severeidsa)
+subsum3$combo<-paste(group, sev, sep="_")
+subsum3$combo<-as.factor(subsum3$combo)
+ycat<-subsum3$combo
+data<-subsum3
+plot<-plot(invsimpson ~ as.factor(ycat), data = data, ylab="inverse Simpson", xlab="", outline=FALSE, xaxt="n", main="Diversity, all samples \n(severity in patient groups)", ylim=c(0,20))
+	# although the at function can be used here, I can't figure out how to add the points when the 'at' is specified...
+points(invsimpson ~ jitter(as.numeric(ycat, factor=0)), data = data, bg=group.col(group_reinfection), col="black", pch=sev.pch(severeidsa), cex=0.7)
+names<-as.character(unique(subsum3$group_reinfection))
+text(x =  c(1.5, 3.5, 5.5), y = par("usr")[3]-1, srt = 45, adj = 1, labels = names, xpd = TRUE)
+legend("topright", c("not severe", "severe"), col=c("black"), pch=c(21,24), cex=0.7)
+kruskal.test(invsimpson~ycat, data=data)
+text(2.1,20, labels="*Kruskal-Wallis test, p=0.049", cex=0.6)
+	## BARELY significant
+
+
+
+
+# 
+non0<-subsum3[subsum3$group_reinfection==c("nonrecurrent") & subsum3$severeidsa==0, ]
+
+points(zx_means [ order (zx_means)], pch = 22, col = "darkgrey", lwd = 7)
+
+stripchart(invsimpson ~ rel_conversion, data = long2, 
+            vertical = TRUE, method = "jitter", 
+            pch = 21, col = "maroon", bg = "bisque", 
+            add = TRUE)
+
+#### now let's separate reinfection in the overtime graphs:
+	# CHANGE in invsimpson:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(recur$rel_day, recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Diversity over time", ylab="delta invsimpson", xlab="relative day")
+points(non$rel_day, non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$rel_day, reinf$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(change.simpson~rel_day, data=recur)
+nonline <- lm(change.simpson~rel_day, data=non)
+reinfline <- lm(change.simpson~rel_day, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+	# since this is on change, it is probably not right to do a regression on change--let's do it on the actual values
+	# invsimpson:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(recur$rel_day, recur$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Diversity over time", ylab="delta invsimpson", xlab="relative day")
+points(non$rel_day, non$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$rel_day, reinf$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(invsimpson.x~rel_day, data=recur)
+nonline <- lm(invsimpson.x~rel_day, data=non)
+reinfline <- lm(invsimpson.x~rel_day, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgldenrod")
+	# doesn't look awesome
+
+# lastly, plotting change by sample_n, making lins from change (no first sample included):
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+recur2<-subset(subsum4, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non2<-subset(subsum4, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf2<-subset(subsum4, (subset=group_reinfection %in% c("reinfection")))
+plot(recur$sample_n, recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Diversity over time", ylab="delta invsimpson", xlab="relative day")
+points(non$sample_n, non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$sample_n, reinf$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+	# however, exclude first day since that is 0:
+recline <- lm(change.simpson~sample_n, data=recur2)
+nonline <- lm(change.simpson~sample_n, data=non2)
+reinfline <- lm(change.simpson~sample_n, data=reinf2)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+# one more time: invsimpson over time, taking into account reinfection:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(recur$rel_day, recur$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,75),
+	main="Diversity over time", ylab="delta invsimpson", xlab="relative day")
+points(non$rel_day, non$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$rel_day, reinf$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(invsimpson.x~rel_day, data=recur)
+nonline <- lm(invsimpson.x~rel_day, data=non)
+reinfline <- lm(invsimpson.x~rel_day, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+	# not promising...\
+# straight shannon:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(jitter(recur$sample_n, amount=0.05), recur$shannon, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,max(subsum3$shannon)),
+	main="Diversity over time", ylab="delta shannon", xlab="relative day")
+points(0.25+jitter(non$sample_n, amount=0.05), non$shannon, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf$sample_n, amount=0.05), reinf$shannon, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(shannon~sample_n, data=recur)
+nonline <- lm(shannon~sample_n, data=non)
+reinfline <- lm(shannon~sample_n, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+# overtime diversity, option 1:
+# straight simpson:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(jitter(recur$sample_n, amount=0.05), recur$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Diversity over time", ylab="invsimpson", xlab="relative sampling")
+points(0.25+jitter(non$sample_n, amount=0.05), non$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf$sample_n, amount=0.05), reinf$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(invsimpson.x~sample_n, data=recur)
+nonline <- lm(invsimpson.x~sample_n, data=non)
+reinfline <- lm(invsimpson.x~sample_n, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+# overtime diversity, option 2:
+# CHANGE in simpson:
+recur<-subset(subsum3, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non<-subset(subsum3, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf<-subset(subsum3, (subset=group_reinfection %in% c("reinfection")))
+plot(jitter(recur$sample_n, amount=0.05), recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Change in diversity over time", ylab="delta invsimpson", xlab="relative sampling")
+points(0.25+jitter(non$sample_n, amount=0.05), non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf$sample_n, amount=0.05), reinf$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(change.simpson~sample_n, data=recur)
+nonline <- lm(change.simpson~sample_n, data=non)
+reinfline <- lm(change.simpson~sample_n, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+# overtime diversity, option 3:
+# CHANGE in simpson, excluding first sampling:
+recur2<-subset(subsum4, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non2<-subset(subsum4, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf2<-subset(subsum4, (subset=group_reinfection %in% c("reinfection")))
+plot(jitter(recur2$sample_n, amount=0.05), recur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Change in diversity over time", ylab="delta invsimpson", xlab="relative sampling")
+points(0.25+jitter(non2$sample_n, amount=0.05), non2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$sample_n, amount=0.05), reinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~sample_n, data=recur2)
+nonline2 <- lm(change.simpson~sample_n, data=non2)
+reinfline2 <- lm(change.simpson~sample_n, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 4:
+# CHANGE in simpson, excluding first sampling, by relative time:
+recur2<-subset(subsum4, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non2<-subset(subsum4, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf2<-subset(subsum4, (subset=group_reinfection %in% c("reinfection")))
+plot(jitter(recur2$rel_day, amount=0.05), recur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Change in diversity over time", ylab="delta invsimpson", xlab="relative sampling")
+points(0.25+jitter(non2$rel_day, amount=0.05), non2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$rel_day, amount=0.05), reinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~rel_day, data=recur2)
+nonline2 <- lm(change.simpson~rel_day, data=non2)
+reinfline2 <- lm(change.simpson~rel_day, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 4:
+# CHANGE in simpson, excluding first sampling, by relative time:
+recur2<-subset(subsum4, (subset=group_reinfection %in% c("recurrent")))				#subset data by group
+non2<-subset(subsum4, (subset=group_reinfection %in% c("nonrecurrent")))
+reinf2<-subset(subsum4, (subset=group_reinfection %in% c("reinfection")))
+plot(recur2$rel_day, recur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Change in diversity over time, by day", ylab="delta invsimpson", xlab="relative day")
+points(non2$rel_day, non2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf2$rel_day, reinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~rel_day, data=recur2)
+nonline2 <- lm(change.simpson~rel_day, data=non2)
+reinfline2 <- lm(change.simpson~rel_day, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 5:
+# CHANGE in simpson, by relative time (with first sample:
+plot(recur$rel_day, recur$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Change in diversity over time, by day (with first sample)", ylab="delta invsimpson", xlab="relative day")
+points(non$rel_day, non$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$rel_day, reinf$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(change.simpson~rel_day, data=recur)
+nonline <- lm(change.simpson~rel_day, data=non)
+reinfline <- lm(change.simpson~rel_day, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+# overtime diversity, option 6:
+# CHANGE in simpson, by relative time (with first sample:
+plot(recur$rel_day, recur$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Invsimpson over time, by day (with first sample)", ylab="invsimpson", xlab="relative day")
+points(non$rel_day, non$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(reinf$rel_day, reinf$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline <- lm(invsimpson.x~rel_day, data=recur)
+nonline <- lm(invsimpson.x~rel_day, data=non)
+reinfline <- lm(invsimpson.x~rel_day, data=reinf)
+abline(nonline, col="chartreuse3")
+abline(recline, col="orange")
+abline(reinfline, col="darkgoldenrod")
+
+###
+#-----
+###
+
+# let's look at diversity by patient type, within the phylotype clustering
+library(cluster)
+library(vegan)
+library(labdsv)
+
+# files used:
+	# erinsubset.0.03.shared (to get subset sample names)
+	# erinfmt_genfrac2p_w.meta.txt (subset samples from this file)
+
+# first, let's assign the pam cluster to the initial sampling only:
+
+	#phylo:
+names.subset<-read.table(file="/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared", header=TRUE, row.names=2)
+names<-as.character(rownames(names.subset))		# these are all of the subset samples
+phylos<-read.table(file="../erinfmt_genfrac2p_w.meta.txt", header=TRUE)
+rownames(phylos)<-phylos$sampleID
+sub.phylos<-phylos[which(phylos$sampleID %in% names), ]
+phylos.first<-sub.phylos[sub.phylos$sample_n==1, ]
+	# this has 98..why is this more than the 69 in previous diversity?
+	# this also includes non-multi samples...let's include those, too
+sub.phylosfirst.df<-phylos.first[, 2:101]
+	# this was like before
+	# for now, let's get ONLY the first sampling per patient, then compare them to what we get when you include all samples
+
+all.pairs.jensen.shannon <- function(d) {
+  kl.divergence <- function(pq, midpoint) {
+    sum(ifelse(pq == 0.0, 0.0, pq * log(pq / midpoint)))
+  }
+ 
+  jensen.shannon <- function(row1, row2) {
+    midpoint <- 0.5 * (row1 + row2)
+    kl.divergence(row1, midpoint) + kl.divergence(row2, midpoint)
+  }
+ 
+  d <- as.matrix(d)
+  num.rows <- nrow(d)
+  result <- matrix(0, nrow=num.rows, ncol=num.rows, dimnames=list(rownames(d), rownames(d)))
+  for (j in 1:(num.rows - 1)) {
+    for (i in (j + 1):num.rows) {
+      distance <- jensen.shannon(c(d[i, ]), c(d[j, ]))
+      result[i, j] <- distance
+      result[j, i] <- distance
+    }
+  }
+  as.dist(result)
+ }
+
+subfirst.js.phylo <- all.pairs.jensen.shannon(sub.phylosfirst.df)		#only first samples
+sub.js.phylo <- all.pairs.jensen.shannon(sub.phylos.df)		#all samples (as before)
+
+#for phylos:
+postscript('/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome//ERINsubset/sub.erin.phylofirst_pamtest.ps',width=8,height=8,horizontal=TRUE)
+for (nc in 2:10) {
+plot(pam(subfirst.js.phylo, k=nc))
+}
+dev.off()
+
+
+# let's give the phylotype-based cluster of 4 for the subsetted data (both first sample-only and all-samples):
+# we want to see if the clustering changes drastically
+	# all subsetted (as before), then subset the first only:
+phylotype4 <- pam(sub.js.phylo, k=4)										#the k= , will give you however many clusters you are defining
+phylo4<-as.data.frame(phylotype4$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylo4$SEQ_NAME<-rownames(phylo4)
+colnames(phylo4)[1] <- c("phylopam4_cluster")
+suberin.summary<-merge(sub.phylos, phylo4, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+phylotype2 <- pam(sub.js.phylo, k=2)										#the k= , will give you however many clusters you are defining
+phylo2<-as.data.frame(phylotype2$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylo2$SEQ_NAME<-rownames(phylo2)
+colnames(phylo2)[1] <- c("phylopam2_cluster")
+suberin2.summary<-merge(suberin.summary, phylo2, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+# this is the same as the file 'suberin_summary.phylo2.txt' created earlier
+	suberinfirst.summary<-suberin2.summary[suberin2.summary$sample_n==1, ]
+
+
+	# add clustering when using only one sample:
+phylofirst4 <- pam(subfirst.js.phylo, k=4)										#the k= , will give you however many clusters you are defining
+phylofirst4<-as.data.frame(phylofirst4$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylofirst4$SEQ_NAME<-rownames(phylofirst4)
+colnames(phylofirst4)[1] <- c("phylofirstpam4_cluster")
+suberinfirst.summary2<-merge(suberinfirst.summary, phylofirst4, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+
+# in looking at the clusters, they do not appear to match...
+# the 2 clusters looks pretty good--let's start with those
+phylofirst2 <- pam(subfirst.js.phylo, k=2)										#the k= , will give you however many clusters you are defining
+phylofirst2<-as.data.frame(phylofirst2$silinfo$widths[,1])   											#this will list the samples, their assigned cluster, and the silhouette info for each sample
+phylofirst2$SEQ_NAME<-rownames(phylofirst2)
+colnames(phylofirst2)[1] <- c("phylofirstpam2_cluster")
+suberinfirst.summary3<-merge(suberinfirst.summary2, phylofirst2, by.x=c("sampleID"), by.y=c("SEQ_NAME"))
+suberinfirst.summary3[, c("phylofirstpam2_cluster", "phylopam2_cluster")]
+	# in looking at these, it looks like 2 clusters agree nicely with each other
+
+# let's look at diversity of the first samples, categorized by pam clustering:
+	#merge this with the summary file:
+sum<-read.table(file='../erinfmt_summary.txt', header=TRUE)
+	#fixing a mistake:
+	sum$sample_n[sum$sampleID==c("DA0394")]<-1
+	sum$sample_n[sum$patientID==c("EIN00191") & sum$rel_day==7]<-2
+	#write.table(sum, file='../erinfmr_summary.txt', sep="\t", quote=FALSE, col.names=NA)
+subsum<-sum[sum$group2 %in% c("recurrent", "nonrecurrent"), ]
+	#levels(as.factor(subsum$total_sample_n))
+	#subsum2<-subsum[subsum$total_sample_n > 1, ] 		#for now, include all, so do not limit to longi samples
+subsum.first<-subsum[subsum$sample_n==1, ]
+subsum.first<-droplevels(subsum.first)
+firstsub.summaries<-subsum.first[, c(1, 24:35)]
+first.phylopam.summary<-merge(suberinfirst.summary3, firstsub.summaries, by.x="sampleID", by.y="seqID", all.x=TRUE)
+	# DA0394 is missing from firstsub.summaries
+	# instead, there is a DA0450
+	# both are non-multi sampled
+first.phylopam.summary<-droplevels(first.phylopam.summary)
+
+# plot:
+plot<-boxplot(invsimpson ~ group_reinfection + phylofirstpam2_cluster, data = first.phylopam.summary, ylab="inverse Simpson", xlab="", las=2)
+plot<-boxplot(invsimpson ~ phylofirstpam2_cluster + group_reinfection, data = first.phylopam.summary, ylab="inverse Simpson", xlab="", las=2)
+	# doesn't look that good--no separation of groups within groups
+
+# let's use 2-pamclustering to look at ALL samples...
+subphylo<-read.table(file='suberin_summary.phylo2.txt', header=TRUE)
+	# merge with summary file:
+sum<-read.table(file='../erinfmt_summary.txt', header=TRUE)
+subsum<-sum[sum$group2 %in% c("recurrent", "nonrecurrent"), ]
+summaries<-subsum[, c(1, 24:35)]
+all<-merge(subphylo, summaries, by.x="seqID", by.y="seqID")
+#write.table(all, file="suberin_all.alpha.phylo.txt", sep="\t", quote=FALSE, col.names=NA)
+
+plot<-boxplot(invsimpson ~ group_reinfection + phylopam2_cluster, data = all, ylab="inverse Simpson", xlab="", las=2, ylim=c(0,20))
+
+# let's add the changes in diversity, and overtime, concentrating on the different clusterings:
+firstdiv<-all[which(all$sample_n==1), c("patientID","invsimpson","phylopam2_cluster", "phylopam4_cluster")]
+all1<-merge(all, firstdiv, by.x="patientID", by.y="patientID")
+all1$change.simpson<-all1$invsimpson.y-all1$invsimpson.x
+all1$phylochange[all1$phylopam2_cluster.x==all1$phylopam2_cluster.y]<-"NO"
+all1$phylochange[is.na(all1$phylochange)]<-"YES"
+	# which patients change phylotype?
+	changing<-all1[-which(all1$sample_n==1), ]
+	summary(as.factor(changing$phylochange))
+	# interesting!! most people do NOT change
+
+# we have the original cluster assignment for the patients--let's start with that, and repeat some of the above analyses:
+recur1<-all1[(all1$group_reinfection %in% c("recurrent") & all1$phylopam2_cluster.y==1), ]				#subset data by group
+recur2<-all1[(all1$group_reinfection %in% c("recurrent") & all1$phylopam2_cluster.y==2), ]				#subset data by group
+non1<-all1[(all1$group_reinfection %in% c("nonrecurrent") & all1$phylopam2_cluster.y==1), ]				#subset data by group
+non2<-all1[(all1$group_reinfection %in% c("nonrecurrent") & all1$phylopam2_cluster.y==2), ]
+reinf1<-all1[(all1$group_reinfection %in% c("reinfection") & all1$phylopam2_cluster.y==1), ]				#subset data by group
+reinf2<-all1[(all1$group_reinfection %in% c("reinfection") & all1$phylopam2_cluster.y==2), ]
+
+	# without first sample (for options 5 and 6):
+nofirst<-all1[which(all1$sample_n>1), ]
+longirecur1<-nofirst[(nofirst$group_reinfection %in% c("recurrent") & nofirst$phylopam2_cluster.y==1), ]				#subset data by group
+longirecur2<-nofirst[(nofirst$group_reinfection %in% c("recurrent") & nofirst$phylopam2_cluster.y==2), ]				#subset data by group
+longinon1<-nofirst[(nofirst$group_reinfection %in% c("nonrecurrent") & nofirst$phylopam2_cluster.y==1), ]				#subset data by group
+longinon2<-nofirst[(nofirst$group_reinfection %in% c("nonrecurrent") & nofirst$phylopam2_cluster.y==2), ]
+longireinf1<-nofirst[(nofirst$group_reinfection %in% c("reinfection") & nofirst$phylopam2_cluster.y==1), ]				#subset data by group
+longireinf2<-nofirst[(nofirst$group_reinfection %in% c("reinfection") & nofirst$phylopam2_cluster.y==2), ]				#subset data by group
+
+
+# overtime diversity, option 1:
+# straight simpson, oversampling:
+par(mfrow=c(1,2))
+plot(jitter(recur1$sample_n, amount=0.05), recur1$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Pam 1: Diversity over sampling", ylab="invsimpson", xlab="relative sampling")
+points(0.25+jitter(non1$sample_n, amount=0.05), non1$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf1$sample_n, amount=0.05), reinf1$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(invsimpson.x~sample_n, data=recur1)
+nonline1 <- lm(invsimpson.x~sample_n, data=non1)
+reinfline1 <- lm(invsimpson.x~sample_n, data=reinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(recur2$sample_n, amount=0.05), recur2$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Pam 2: Diversity over sampling", ylab="invsimpson", xlab="relative sampling")
+points(0.25+jitter(non2$sample_n, amount=0.05), non2$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$sample_n, amount=0.05), reinf2$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(invsimpson.x~sample_n, data=recur2)
+nonline2 <- lm(invsimpson.x~sample_n, data=non2)
+reinfline2 <- lm(invsimpson.x~sample_n, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 2:
+# straight simpson, overs time:
+par(mfrow=c(1,2))
+plot(jitter(recur1$rel_day, amount=0.05), recur1$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Pam1: Diversity over time", ylab="invsimpson", xlab="relative sampling")
+points(0.25+jitter(non1$rel_day, amount=0.05), non1$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf1$rel_day, amount=0.05), reinf1$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(invsimpson.x~rel_day, data=recur1)
+nonline1 <- lm(invsimpson.x~rel_day, data=non1)
+reinfline1 <- lm(invsimpson.x~rel_day, data=reinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(recur2$rel_day, amount=0.05), recur2$invsimpson.x, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(0,50),
+	main="Pam 2: Diversity over time", ylab="invsimpson", xlab="relative sampling")
+points(0.25+jitter(non2$rel_day, amount=0.05), non2$invsimpson.x, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$rel_day, amount=0.05), reinf2$invsimpson.x, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(invsimpson.x~rel_day, data=recur2)
+nonline2 <- lm(invsimpson.x~rel_day, data=non2)
+reinfline2 <- lm(invsimpson.x~rel_day, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 3:
+# CHANGE in simpson, over sampling:
+par(mfrow=c(1,2))
+plot(jitter(recur1$sample_n, amount=0.05), recur1$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 1: Change in diversity, over sampling", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative sampling")
+points(0.25+jitter(non1$sample_n, amount=0.05), non1$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf1$sample_n, amount=0.05), reinf1$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(change.simpson~sample_n, data=recur1)
+nonline1 <- lm(change.simpson~sample_n, data=non1)
+reinfline1 <- lm(change.simpson~sample_n, data=reinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(recur2$sample_n, amount=0.05), recur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 2: Change in diversity, over sampling", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative sampling")
+points(0.25+jitter(non2$sample_n, amount=0.05), non2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$sample_n, amount=0.05), reinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~sample_n, data=recur2)
+nonline2 <- lm(change.simpson~sample_n, data=non2)
+reinfline2 <- lm(change.simpson~sample_n, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 4:
+# CHANGE in simpson, over time:
+par(mfrow=c(1,2))
+plot(jitter(recur1$rel_day, amount=0.05), recur1$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 1: Change in diversity, over sampling", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative day")
+points(0.25+jitter(non1$rel_day, amount=0.05), non1$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf1$rel_day, amount=0.05), reinf1$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(change.simpson~rel_day, data=recur1)
+nonline1 <- lm(change.simpson~rel_day, data=non1)
+reinfline1 <- lm(change.simpson~rel_day, data=reinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(recur2$rel_day, amount=0.05), recur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 2: Change in diversity, over sampling", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative day")
+points(0.25+jitter(non2$rel_day, amount=0.05), non2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(reinf2$rel_day, amount=0.05), reinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~rel_day, data=recur2)
+nonline2 <- lm(change.simpson~rel_day, data=non2)
+reinfline2 <- lm(change.simpson~rel_day, data=reinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 5:
+# CHANGE in simpson, over sampling, WITHOUT the first sample:
+par(mfrow=c(1,2))
+plot(jitter(longirecur1$sample_n, amount=0.05), longirecur1$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 1: Change in diversity, over sampling \n(no index sample)", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative sampling")
+points(0.25+jitter(longinon1$sample_n, amount=0.05), longinon1$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(longireinf1$sample_n, amount=0.05), longireinf1$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(change.simpson~sample_n, data=longirecur1)
+nonline1 <- lm(change.simpson~sample_n, data=longinon1)
+reinfline1 <- lm(change.simpson~sample_n, data=longireinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(longirecur2$sample_n, amount=0.05), longirecur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 2: Change in diversity, over sampling \n(no index sample)", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative sampling")
+points(0.25+jitter(longinon2$sample_n, amount=0.05), longinon2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(longireinf2$sample_n, amount=0.05), longireinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~sample_n, data=longirecur2)
+nonline2 <- lm(change.simpson~sample_n, data=longinon2)
+reinfline2 <- lm(change.simpson~sample_n, data=longireinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+# overtime diversity, option 6:
+# CHANGE in simpson, over time, WITHOUT the first sample:
+par(mfrow=c(1,2))
+plot(jitter(longirecur1$rel_day, amount=0.05), longirecur1$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 1: Change in diversity, over time \n(no index sample)", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative day")
+points(0.25+jitter(longinon1$rel_day, amount=0.05), longinon1$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(longireinf1$rel_day, amount=0.05), longireinf1$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline1 <- lm(change.simpson~rel_day, data=longirecur1)
+nonline1 <- lm(change.simpson~rel_day, data=longinon1)
+reinfline1 <- lm(change.simpson~rel_day, data=longireinf1)
+abline(nonline1, col="chartreuse3")
+abline(recline1, col="orange")
+abline(reinfline1, col="darkgoldenrod")
+plot(jitter(longirecur2$rel_day, amount=0.05), longirecur2$change.simpson, 
+	pch=21, col="black", bg="orange", cex=0.8, ylim=c(-20,20),
+	main="Pam 2: Change in diversity, over time \n(no index sample)", ylab=expression(paste("", Delta, " invsimpson")), xlab="relative day")
+points(0.25+jitter(longinon2$rel_day, amount=0.05), longinon2$change.simpson, pch=21, xaxt='n', col="black", bg="chartreuse3", cex=0.8)
+points(0.5+jitter(longireinf2$rel_day, amount=0.05), longireinf2$change.simpson, pch=21, xaxt='n', col="black", bg="darkgoldenrod", cex=0.8)
+recline2 <- lm(change.simpson~rel_day, data=longirecur2)
+nonline2 <- lm(change.simpson~rel_day, data=longinon2)
+reinfline2 <- lm(change.simpson~rel_day, data=longireinf2)
+abline(nonline2, col="chartreuse3")
+abline(recline2, col="orange")
+abline(reinfline2, col="darkgoldenrod")
+
+
+###
+#-----
+###
+
+# dotplots (of lefse results)
+# adapted from http://polisci.msu.edu/jacoby/research/dotplots/tpm/Creating%20figures/Creating%20Figure%204.R
+library(plyr)
+library(reshape2)
+library(Hmisc)
+
+library(lattice)
+library(dplyr)
+
+# files used:
+	# suberin_all.alpha.phylo.txt
+	# suberin.relOTUs.txt
+	# erinfmt.new.taxonomy.names.txt
+	# erinsubset_all.lefse.results.txt
+	
+all<-read.table(file="suberin_all.alpha.phylo.txt", header=TRUE)
+all<-all[, c(1, 104:142)]
+	# except this is phylotypes, and we want OTUs:
+sub.otus<-read.table(file="suberin.relOTUs.txt", header=TRUE)
+tax<-read.table(file="erinfmt.new.taxonomy.names.txt", header=TRUE)
+keep<-as.character(colnames(sub.otus[1:506]))
+filtered.tax<-tax[tax$OTU %in% keep, ]
+colnames(sub.otus)<-filtered.tax$taxname
+sub.otus$sampleID<-rownames(sub.otus)
+
+sub.all<-merge(all, sub.otus, by.x="sampleID", by.y="sampleID")
+rownames(sub.all)<-sub.all$sampleID
+otus<-sub.all[, c("group_reinfection", "Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides")]
+
+# now, you have to calculate the stats
+# there a couple ways to do this 
+# first way: with ddply and reshape
+	#means         
+mean<-ddply(otus, c("group_reinfection"), colwise(mean, is.numeric))
+reordered.mean <- reshape(mean, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "means",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+reordered.mean$labels<-paste(as.character(reordered.mean$group_reinfection), as.character(reordered.mean$otuname))
+	
+	#sd
+sd<-ddply(otus, c("group_reinfection"), colwise(sd, is.numeric))
+reordered.sd <- reshape(sd, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "sd",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+	
+	#medians:
+median<-ddply(otus, c("group_reinfection"), colwise(median, is.numeric))
+reordered.median <- reshape(median, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "median",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+
+	#upper quantile:
+#highq<-ddply(otus, c("group_reinfection"), colwise(quantile(is.numeric, 0.75))
+#highq<-ddply(otus, c("group_reinfection"), function (x) quantile(is.numeric, c(.25,.5,.75)))
+	# can't get these to work in colwise...
+	
+	#set lower/upper lines (whatever lines you want to graph):
+lower <- mean[,2:4] + (sd[,2:4])
+reordered.lower <- reshape(lower, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "lower.sd",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+upper <- mean[,2:4] - (sd[,2:4])
+reordered.upper <- reshape(upper, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "upper.sd",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+
+# now, create new data from this:
+new.data<-data.frame(reordered.mean$labels, reordered.mean$mean, reordered.sd$sd, reordered.lower$lower.sd, reordered.upper$upper.sd)
+	# the standard mean is quite large....
+	# let's do some other things
+
+### aggregate could also work:
+aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus) ~ group_reinfection, data = otus, mean)
+	# or, to do a lot at once:
+x<-otus
+#aggregate(. ~ group_reinfection+other_variable,data = x,FUN=function(x) c(mn =mean(x), n=length(x) ) )
+aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) c(n=length(x), mn =mean(x),  sd=sd(x), se=sd(x)/sqrt(length(x)), median=median(x), lowq=quantile(x, 0.25), highq=quantile(x, 0.75) ) )
+	# this works really well!
+	# except, we will still have to do it individually, since we need to reshape...
+
+# all together:
+x<-otus	
+means<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) mean =mean(x) )
+means2<-melt(means, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.means<-means2$value
+
+sds<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) sd =sd(x) )
+sds2<-melt(sds, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.sds<-sds2$value
+otu.highsd<-otu.means+sds2$value
+otu.lowsd<-otu.means-sds2$value
+
+medians<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) median =median(x) )
+medians2<-melt(medians, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.medians<-medians2$value
+
+ses<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) se=sd(x)/sqrt(length(x)) )
+ses2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.ses<-ses2$value
+otu.highse<-otu.means+ses2$value
+otu.lowse<-otu.means-ses2$value
+
+highq<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) highq=quantile(x, 0.75) )
+highq2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.highq<-otu.medians+highq2$value
+
+lowq<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides) ~ group_reinfection,data = x,FUN=function(x) lowq=quantile(x, 0.75) )
+lowq2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"))
+otu.lowq<-otu.medians-lowq2$value
+
+	# create new data:
+labels<-paste(as.character(means2$group_reinfection), as.character(means2$variable))
+summary<-data.frame(label=labels, 
+			mean = otu.means, 
+			sd = otu.sds, 
+			se = otu.ses, 
+			median = otu.medians, 
+			highq = otu.highq,
+			lowq = otu.lowq,
+			highse = otu.highse,
+			lowse = otu.lowse,
+			highsd = otu.highsd,
+			lowsd = otu.lowsd
+			)
+summary$sequence <- seq(1, length(summary$label))
+summary$label <- reorder(summary$label, summary$sequence)
+summary$otu <- means2$variable
+summary$group <-means2$group_reinfection
+
+# now plot it:
+dotplot(label ~ mean, data = summary,
+   aspect = .5,
+   xlim = c(0, 50),
+   xlab = "Relative Abundance", scales = list(cex = .6),
+   panel = function (x, y) {
+   panel.xyplot(x, y, pch = 16, col = c("chartreuse3", "orange", "darkgoldenrod"))
+   panel.segments(summary$highse, as.numeric(y),
+     summary$lowse, as.numeric(y), lty = 1, col = c("chartreuse3", "orange", "darkgoldenrod"))} )
+     
+ # another way of plotting it:
+labels <- summary$label
+averages <- summary$mean
+ranges <- summary$se
+dotchart(averages, labels=labels, xlab='average',  pch=20,
+         xlim=c(min(averages-ranges)-1, max(averages+ranges)+1))
+segments(averages-ranges, 1:9, averages+ranges, 1:9)
+ 	#trying to add groups:
+labels <- summary$otu
+averages <- summary$mean
+ranges <- summary$se
+groupnames<-as.character(unique(summary$group))
+dotchart(averages, labels=labels, xlab='average',  pch=20, col=c("chartreuse3", "orange", "darkgoldenrod"),
+		groups=summary$group,
+         xlim=c(min(averages-ranges)-1, max(averages+ranges)+1))
+dotchart(averages, labels="", xlab='average',  pch=20, col=c("chartreuse3", "orange", "darkgoldenrod"),
+		groups=summary$otu, cex=0.8,
+         xlim=c(min(averages-ranges)-1, max(averages+ranges)+1))
+segments(averages-ranges, c(11:13, 6:8, 1:3), averages+ranges, c(11:13, 6:8, 1:3), col=c("chartreuse3", "orange", "darkgoldenrod"), lwd=2)
+	# each dotchart grouping skips 2 positions
+	# have to reverse the numbers, too
+	# dotchart2 (from Hmisc) also looks good, but different segments partitions...
+legend("topright", groupnames, col=c("chartreuse3", "orange", "darkgoldenrod"), pch=19, cex=0.5)
+	# good enough for now!
+
+
+####### using actual lefse OTUs:
+# let's use the ACTUAL lefse results:
+lefse<-read.table(file="erinsubset_all.lefse.results.txt", header=TRUE)
+tax<-read.table(file="erinfmt.new.taxonomy.names.txt", header=TRUE)
+keep<-as.character(lefse$OTU)
+filtered.tax<-tax[tax$OTU %in% keep, ]
+lefse$otuname<-filtered.tax$taxname
+lefse <- lefse[order(lefse$clin_Class, lefse$group_Class, lefse$otuname),]
+lefse.otus<-as.character(lefse$otuname)
+
+otus.df<-sub.all[, which(colnames(sub.all) %in% lefse.otus)]
+otus.df$sampleID<-rownames(otus.df)
+groups<-sub.all[, c("sampleID", "group_reinfection")]
+otus<-merge(groups, otus.df, by="sampleID")
+otus<-otus[,2:14]
+	# now you have your list of significant otus in a dataframe!
+
+# create your stats summary dataframe:
+# column names: Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria
+# column names, with "": "Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"
+x<-otus	
+means<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) mean =mean(x) )
+means2<-melt(means, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.means<-means2$value
+
+sds<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) sd =sd(x) )
+sds2<-melt(sds, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.sds<-sds2$value
+otu.highsd<-otu.means+sds2$value
+otu.lowsd<-otu.means-sds2$value
+
+medians<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) median =median(x) )
+medians2<-melt(medians, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.medians<-medians2$value
+
+ses<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) se=sd(x)/sqrt(length(x)) )
+ses2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.ses<-ses2$value
+otu.highse<-otu.means+ses2$value
+otu.lowse<-otu.means-ses2$value
+
+highq<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) highq=quantile(x, 0.75) )
+highq2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.highq<-otu.medians+highq2$value
+
+lowq<-aggregate(cbind(Otu00001_Enterobacteriaceae, Otu00002_Enterococcus, Otu00003_Bacteroides, Otu00006_Bacteroides, Otu00010_Bacteroides, Otu00016_Clostridium_XlVa, Otu00023_Roseburia, Otu00030_Blautia, Otu00034_Clostridium_XVIII, Otu00044_Flavonifractor, Otu00048_Subdoligranulum, Otu00050_Bacteria) ~ group_reinfection,data = x,FUN=function(x) lowq=quantile(x, 0.75) )
+lowq2<-melt(ses, id.vars = "group_reinfection", measure.vars = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides", "Otu00006_Bacteroides", "Otu00010_Bacteroides", "Otu00016_Clostridium_XlVa", "Otu00023_Roseburia", "Otu00030_Blautia", "Otu00034_Clostridium_XVIII", "Otu00044_Flavonifractor", "Otu00048_Subdoligranulum", "Otu00050_Bacteria"))
+otu.lowq<-otu.medians-lowq2$value
+
+# add all the data together:
+labels<-paste(as.character(means2$group_reinfection), as.character(means2$variable))
+summary<-data.frame(label=labels, 
+			mean = otu.means, 
+			sd = otu.sds, 
+			se = otu.ses, 
+			median = otu.medians, 
+			highq = otu.highq,
+			lowq = otu.lowq,
+			highse = otu.highse,
+			lowse = otu.lowse,
+			highsd = otu.highsd,
+			lowsd = otu.lowsd
+			)
+summary$sequence <- seq(1, length(summary$label))
+summary$label <- reorder(summary$label, summary$sequence)
+summary$otu <- means2$variable
+summary$group <-means2$group_reinfection
+
+# plot it:
+labels <- summary$otu
+labels <- gsub("_", ": ", labels)
+summary$otu<-gsub("_", ": ", summary$otu)
+averages <- summary$mean
+ranges <- summary$se
+groupnames<-as.character(unique(summary$group))
+
+# option 2:
+dotchart(averages, labels=labels, xlab='relative abundance (mean + se)',  pch=20, col=c("chartreuse3", "orange", "darkgoldenrod"),
+		groups=summary$group, cex=0.7,
+         xlim=c(min(averages-ranges)-1, max(averages+ranges)+1))
+segments(averages-ranges, c(29, 15, 1, 30, 16, 2, 31, 17, 3, 32, 18, 4, 33, 19, 5, 34, 20, 6, 35, 21, 7, 36, 22, 8, 37, 23, 9, 38, 24, 10, 39, 25, 11, 40, 26, 12), averages+ranges, c(29, 15, 1, 30, 16, 2, 31, 17, 3, 32, 18, 4, 33, 19, 5, 34, 20, 6, 35, 21, 7, 36, 22, 8, 37, 23, 9, 38, 24, 10, 39, 25, 11, 40, 26, 12), col=c("chartreuse3", "orange", "darkgoldenrod"), lwd=2)
+	# note: adding the bars on your graph is a bit confusing
+	# you may have to play around with the ordering, since this is a grouped dotplot
+	# future ways of making this step simpler are appreciated!
+	
+# option 1:  
+dotchart(averages, labels="", xlab='relative abundance (mean + se)',  pch=20, col=c("chartreuse3", "orange", "darkgoldenrod"),
+		groups=as.factor(summary$otu), cex=0.8,
+         xlim=c(min(averages-ranges)-1, max(averages+ranges)+1))
+segments(averages-ranges, c(56:58, 51:53, 46:48, 41:43, 36:38, 31:33, 26:28, 21:23, 16:18, 11:13, 6:8, 1:3), averages+ranges, c(56:58, 51:53, 46:48, 41:43, 36:38, 31:33, 26:28, 21:23, 16:18, 11:13, 6:8, 1:3), col=c("chartreuse3", "orange", "darkgoldenrod"), lwd=2)
+legend("bottomright", groupnames, col=c("chartreuse3", "orange", "darkgoldenrod"), pch=19, cex=0.6)
+	#Looks BEAUTIFUL
+
+# figuring out numbering order for dotplots....
+# YES (option 1): 56:58, 51:53, 46:48, 41:43, 36:38, 31:33, 26:28, 21:23, 16:18, 11:13, 6:8, 1:3
+## no: 40, 26, 12, 39, 25, 11, 38, 24, 10, 37, 23, 9, 36, 22, 8, 35, 21, 7, 34, 20, 6, 33, 19, 5, 32, 18, 4, 31, 17, 3, 30, 16, 2, 29, 15, 1
+## no: 1, 15, 29, 2, 16, 30, 3, 17, 31, 4, 18, 32, 5, 19, 33, 6, 20, 34, 7, 21, 35, 8, 22, 36, 9, 23, 37, 10, 24, 38, 11, 25, 39, 12, 26, 40
+## YES (option 2): 29, 15, 1, 30, 16, 2, 31, 17, 3, 32, 18, 4, 33, 19, 5, 34, 20, 6, 35, 21, 7, 36, 22, 8, 37, 23, 9, 38, 24, 10, 39, 25, 11, 40, 26, 12
+
+
+###
+#-----
+###
+
+# redoing community similarity overtime and between clinical status change:
+# files used:
+	# erinsubset.0.03.summary		#note: you have to fix the columns before reading into R
+	# erinsub_all.extrameta.summary.txt
+	# erinsub_ind.dist.byindex.txt (created)
+	# erinsub_shared.meta.dist.txt (created)
+	# erinsub_ind.dist.overtime.txt (created)
+	
+library(shape)
+
+# have to recalculate a summary.shared file from the .dist file created earlier:
+#(in mothur):
+	# summary.shared(shared=/Users/annaseekatz/Desktop/umich/projects/ERIN_clinical/erinfmt_analysis_athome/ERINsubset/erinsubset_mothurfiles/erinsubset.0.03.shared, calc=sharedsobs-braycurtis-spearman-thetayc-jsd-sharednseqs)
+
+# merge shared files with meta (includes extra meta):
+var<-read.table(file="erinsub_all.extrameta.summary.txt", header=TRUE)
+mdist<-read.table(file="erinsubset_mothurfiles/erinsubset.0.03.summary", header=TRUE)
+
+#add sample information for 'group1':
+m<-merge(var, mdist, by.x=c("seqID"), by.y=c("s1"))				#merge for sample1 metadata 			
+m.2<-m[,1:49]													#separate to add a s1 to colnames
+m.3<-m[,50:58]
+colnames(m.2) <- paste("s1", colnames(m.2), sep = "_")
+m<-cbind(m.2,m.3)
+
+#add sample information for 2nd sample: ('group2'):
+m2<-merge(var, m, by.x=c("seqID"), by.y=c("s2"))				#merge for sample2 metadata 			
+m2.2<-m2[,1:49]													#separate to add a s1 to colnames
+m2.3<-m2[,50:106]
+colnames(m2.2) <- paste("s2", colnames(m2.2), sep = "_")
+m.shared<-cbind(m2.2,m2.3)
+
+#write.table(m.shared, file="erinsub_shared.meta.dist.txt", quote=FALSE, sep="\t")
+
+# filter distances ONLY within a patient:
+# first, we will split the data so that we ONLY keep distances between the same patientID:
+ind<-m.shared[(m.shared$s1_patientID==m.shared$s2_patientID), ]
+
+test<-ind[,c("s2_total_sample_n", "s2_patientID", "s1_patientID", "s2_sample_n", "s1_sample_n")]			#check if this looks good....
+#write.table(test, file="test_dist.within.individual.txt", quote=FALSE, sep="\t", col.names=NA)
+length(unique(ind$s1_patientID))
+	#[1] 69		#this appears to be right!
+write.table(ind, file="erinsub_dist.within.individual.txt", quote=FALSE, sep="\t", col.names=NA)
+
+# separate your samples by total n samples collected:
+summary(as.factor(ind$s1.total_sample_n))							#how many sampling levels do you have?
+two<-ind[(ind$s1_total_sample_n=="2" & ind$s2_total_sample_n=="2"), ]
+three<-ind[(ind$s1_total_sample_n=="3" & ind$s2_total_sample_n=="3"), ]
+four<-ind[(ind$s1_total_sample_n=="4" & ind$s2_total_sample_n=="4"), ]
+five<-ind[(ind$s1_total_sample_n=="5" & ind$s2_total_sample_n=="5"), ]
+six<-ind[(ind$s1_total_sample_n=="6" & ind$s2_total_sample_n=="6"), ]
+seven<-ind[(ind$s1_total_sample_n=="7" & ind$s2_total_sample_n=="7"), ]
+	#this can be used if you need to split each of the samplings
+	#you could also work from the large file (ind) itself
+	# for instance, you can see how many patients are in each sampling group:
+	length(unique(three$s1_patientID))
+		# 21 patients with 3 samplings
+
+# now, for each level, let's make sure that we are only doing within-sample comparisons-sample1 compared to sample 2, etc:
+#three[,c("s2.seqID", "s1.seqID", "s2.sample_n", "s1.sample_n", "thetayc", "s1.patientID", "s2.patientID")]
+	#can subset, but let's just include all of the info just in case we want to do another type of comparison
+
+# differences between sampling 1 and 2:
+ind.1a<-ind[(ind$s1_sample_n=="1" & ind$s2_sample_n=="2"), ]
+ind.1b<-ind[(ind$s1_sample_n=="2" & ind$s2_sample_n=="1"), ]		#none this way
+ind1<-rbind(ind.1a, ind.1b)
+ind1$sampling<- c(1)
+
+# differences between sampling 2 and 3:
+ind.2a<-ind[(ind$s1_sample_n=="3" & ind$s2_sample_n=="2"), ]
+ind.2b<-ind[(ind$s1_sample_n=="2" & ind$s2_sample_n=="3"), ]		
+ind2<-rbind(ind.2a, ind.2b)
+ind2$sampling<- c(2)
+
+# differences between sampling 3 and 4:
+ind.3a<-ind[(ind$s1_sample_n=="3" & ind$s2_sample_n=="4"), ]
+ind.3b<-ind[(ind$s1_sample_n=="4" & ind$s2_sample_n=="3"), ]		
+ind3<-rbind(ind.3a, ind.3b)
+ind3$sampling<- c(3)
+
+# differences between sampling 4 and 5:
+ind.4a<-ind[(ind$s1_sample_n=="5" & ind$s2_sample_n=="4"), ]
+ind.4b<-ind[(ind$s1_sample_n=="4" & ind$s2_sample_n=="5"), ]		
+ind4<-rbind(ind.4a, ind.4b)
+ind4$sampling<- c(4)
+
+# differences between sampling 5 and 6:
+ind.5a<-ind[(ind$s1_sample_n=="5" & ind$s2_sample_n=="6"), ]
+ind.5b<-ind[(ind$s1_sample_n=="6" & ind$s2_sample_n=="5"), ]		
+ind5<-rbind(ind.5a, ind.5b)
+ind5$sampling<- c(5)
+
+# differences between sampling 5 and 6:
+ind.6a<-ind[(ind$s1_sample_n=="5" & ind$s2_sample_n=="6"), ]
+ind.6b<-ind[(ind$s1_sample_n=="6" & ind$s2_sample_n=="5"), ]		
+ind6<-rbind(ind.6a, ind.6b)
+ind6$sampling<- c(6)
+
+# differences between sampling 6 and 5:
+ind.7a<-ind[(ind$s1_sample_n=="7" & ind$s2_sample_n=="6"), ]
+ind.7b<-ind[(ind$s1_sample_n=="6" & ind$s2_sample_n=="7"), ]		
+ind7<-rbind(ind.7a, ind.7b)
+ind7$sampling<- c(7)
+
+ind.overtime<-rbind(ind1, ind2, ind3, ind4, ind5, ind6, ind7)
+#write.table(ind.overtime, file="erinsub_ind.dist.overtime.txt", quote=FALSE, sep="\t", col.names=NA)
+
+# plot it:
+
+group.col<-function(n) {
+	colorvec <- vector(mode="character", length=length(n))
+	for (i in 1:length(n)) {
+	colorvec[i] = "light grey"
+	if ( n[i] == "recurrent" ) {
+	colorvec[i] = "orange"
+	}
+	if ( n[i] == "nonrecurrent" ) {
+	colorvec[i] = "chartreuse3"
+	}
+	if ( n[i] == "reinfection" ) {
+	colorvec[i] = "darkgoldenrod"
+	}
+	}
+	c(colorvec)
+	}
+# summary stats:
+tyc.data <- ddply(ind.overtime, c("sampling", "s1_group_reinfection"), summarise,
+               N    = length(thetayc),
+               mean = mean(thetayc),
+               sd   = sd(thetayc),
+               se   = sd / sqrt(N),
+               median = median(thetayc),
+               lq	 = quantile(thetayc, 0.25, na.rm=TRUE),
+			   hq	 = quantile(thetayc, 0.75, na.rm=TRUE) )
+
+# tyc.data<-tyc.data[tyc.data$sampling %in% c(1,2,3),]
+	# if you want to eliminate some things
+split.tyc<-split(tyc.data, tyc.data$s1_group)
+tyc.rec<-split.tyc$'recurrent'
+tyc.non<-split.tyc$'nonrecurrent'
+tyc.reinf<-split.tyc$'reinfection'
+
+# in looking at the total (n) per sampling per group, we should eliminate all points after 4 since after that there are 2 or less patients per group
+# done above
+tyc.reinf
+tyc.rec
+tyc.non
+
+# plot it!	
+x<-tyc.rec$sampling
+d<-0.15
+plot(x, tyc.rec$mean,
+    ylim=c(0,1.2),
+    pch=21, xlab="", ylab="Mean thetayc distance from prior sampling \n(community dissimilarity)",
+    xaxt='n', col="black", bg="orange", cex=0.8, xlim=c(0.5, 3), cex.lab=0.8, cex.axis=0.8, mgp=c(2,1,0))
+arrows(x, tyc.rec$mean-tyc.rec$sd, x, tyc.rec$mean+tyc.rec$sd, length=0.05, angle=90, code=3, col="orange")
+lines(x, tyc.rec$mean, col="orange", pch=19)
+points(x, tyc.rec$mean, col="black", bg="orange", pch=21, cex=0.8)
+
+arrows(tyc.non$sampling-d, tyc.non$mean-tyc.non$sd, tyc.non$sampling-d, tyc.non$mean+tyc.non$sd, length=0.05, angle=90, code=3, col="chartreuse3")
+lines(tyc.non$sampling-d, tyc.non$mean, col="chartreuse3", pch=19)
+points(tyc.non$sampling-d, tyc.non$mean, col="black", bg="chartreuse3", pch=21, cex=0.8)
+
+arrows(tyc.reinf$sampling-2*d, tyc.reinf$mean-tyc.reinf$sd, tyc.reinf$sampling-2*d, tyc.reinf$mean+tyc.reinf$sd, length=0.05, angle=90, code=3, col="darkgoldenrod")
+lines(tyc.reinf$sampling-2*d, tyc.reinf$mean, col="darkgoldenrod", pch=19)
+points(tyc.reinf$sampling-2*d, tyc.reinf$mean, col="black", bg="darkgoldenrod", pch=21, cex=0.8)
+		   
+legend("bottomleft",legend=c("nonrecurrent","recurrent", "reinfection"), col=c("chartreuse3", "orange", "darkgoldenrod"), cex=0.7, pch=19)
+axis(side=1, at=c(1-d, 2-d, 3-d), labels=c('s1 > s2', 's2 > s3', 's3 > s4'), line=0.5, lwd=0, mgp=c(1,0,0), cex.axis=0.8)
+#text(c(1.5), c(0.6), c('*FMT'), cex=0.8)	# can add text if necessary (such as n?)
+title('Change in community composition between samplings')
+
+### Community dissimilarity during clinical status change:
+
+# first, split the samples in the original ind file by group:
+ind.all<-split(ind, ind$s1_group_reinfection)
+ind.reinf<-ind.all$'reinfection'
+ind.non<-ind.all$'nonrecurrent'
+ind.rec<-ind.all$'recurrent'
+
+# within group, ID when there is a change in index status:
+# note: this is regardless of sampling time, just change between + and - samples WITHIN a patient
+
+# recurrent:
+rec0<-ind.rec[(ind.rec$s1_index==ind.rec$s2_index), ]
+rec0$delta<-c(0)
+
+rec1<-ind.rec[(ind.rec$s1_index!=ind.rec$s2_index), ]
+rec1$delta<-c(1)
+
+rec<-rbind(rec1, rec0)
+
+# you could also get the sim. between positive samples or negative samples only within a patient:
+	allrec1<-ind.rec[(ind.rec$s1_index==1 & ind.rec$s2_index==1), ]
+	allrec1$STATUS<-c("positive")
+	allrec0<-ind.rec[(ind.rec$s1_index==0 & ind.rec$s2_index==0), ]
+	allrec0$STATUS<-c("negative")
+	allrecs<-ind.rec[(ind.rec$s1_index!=ind.rec$s2_index), ]
+	allrecs$STATUS<-c("switch")
+	allrec<-rbind(allrec0, allrec1, allrecs)
+
+# nonrecurrent:
+non0<-ind.non[(ind.non$s1_index==ind.non$s2_index), ]
+non0$delta<-c(0)
+
+non1<-ind.non[(ind.non$s1_index!=ind.non$s2_index), ]
+non1$delta<-c(1)
+
+non<-rbind(non1, non0)
+
+# you could also get the sim. between positive samples or negative samples only within a patient:
+	allnon1<-ind.non[(ind.non$s1_index==1 & ind.non$s2_index==1), ]
+	allnon1$STATUS<-c("positive")
+	allnon0<-ind.non[(ind.non$s1_index==0 & ind.non$s2_index==0), ]
+	allnon0$STATUS<-c("negative")
+	allnons<-ind.non[(ind.non$s1_index!=ind.non$s2_index), ]
+	allnons$STATUS<-c("switch")
+	allnon<-rbind(allnon0, allnon1, allnons)
+
+# reinfurrent:
+reinf0<-ind.reinf[(ind.reinf$s1_index==ind.reinf$s2_index), ]
+reinf0$delta<-c(0)
+
+reinf1<-ind.reinf[(ind.reinf$s1_index!=ind.reinf$s2_index), ]
+reinf1$delta<-c(1)
+
+reinf<-rbind(reinf1, reinf0)
+
+# you could also get the sim. between positive samples or negative samples only within a patient:
+	allreinf1<-ind.reinf[(ind.reinf$s1_index==1 & ind.reinf$s2_index==1), ]
+	allreinf1$STATUS<-c("positive")
+	allreinf0<-ind.reinf[(ind.reinf$s1_index==0 & ind.reinf$s2_index==0), ]
+	allreinf0$STATUS<-c("negative")
+	allreinfs<-ind.reinf[(ind.reinf$s1_index!=ind.reinf$s2_index), ]
+	allreinfs$STATUS<-c("switch")
+	allreinf<-rbind(allreinf0, allreinf1, allreinfs)
+
+ind.byindex<-rbind(rec, non, reinf)
+#write.table(ind.byindex, file="erinsub_ind.dist.byindex.txt", quote=FALSE, sep="\t", col.names=NA)
+
+# now plot it:
+
+# plot:
+x<-ind.byindex$delta
+plot(x, ind.byindex$thetayc, col=grouped.col(ind.byindex$s1.group), pch=19)
+
+data <- ddply(ind.byindex, c("delta", "s1_group_reinfection"), summarise,
+               N    = length(thetayc),
+               mean.tyc = mean(thetayc),
+               mean.jsd = mean(jsd),
+               mean.bc = mean(braycurtis),
+               mean.sobs = mean(sharedsobs),
+               sd   = sd(thetayc),
+               se   = sd / sqrt(N) )
+# this might actually look good!!
+
+d.split<-split(data, data$s1_group_reinfection)
+d.rec<-d.split$'recurrent'
+d.non<-d.split$'nonrecurrent'
+d.reinf<-d.split$'reinfection'
+
+# let's just plot all of the samples, without separating them into groups:
+# this is significant (see below)
+boxplot(thetayc~delta, data = ind.byindex, cex=0.6, xaxt='n', cex.lab=0.8, 
+	ylab=expression(paste("", theta, "yc distance")), cex.lab=0.8, cex.axis=0.8)
+axis(side=1, at=c(1, 2), labels=c('No change \n(CDI status)', 'Index change \n(CDI status)'), 
+	line=0.5, lwd=0, cex.axis=0.8, mgp=c(1,0.5,0))
+axis(side=3, at=c(1.5), labels=c("Change in community composition \nduring CDI diagnosis \n(all groups together)"), 
+	line=0.5, lwd=0, cex.axis=0.8, mgp=c(1,0.5,0))
+
+# making the graph look better, grouping by multiple factors:
+# option 1: by major category of change vs. no change:
+ind.byindex$s1_group<-droplevels(ind.byindex$s1_group)				#you must drop the ghost levels
+boxplot.double = boxplot(thetayc~s1_group_reinfection + delta, data = ind.byindex, at = c(1, 2, 3, 5, 6, 7), 
+	ylim = c(0,1), col = c('chartreuse3', 'orange', 'darkgoldenrod'), xlim=c(0,8), 
+	ylab=expression(paste("", theta, "yc distance")), las=2, mgp=c(0.5,1,1), xaxt='n', xlab='', cex.axis=0.8)
+legend("bottomright", c("nonrecurrent", "recurrent", reinfection), col=c('chartreuse3', 'orange', 'darkgoldenrod'), pch=15, cex=0.7)
+axis(side=2, labels="(community dissimilarity)", at=0.55, line=0.5, lwd=0, cex.axis=0.8, mgp=c(1,1.8,0))
+axis(side=1, at=c(2, 6), labels=c('No change \n(CDI status)', 'Index change \n(CDI status)'), line=0.5, lwd=0, cex.axis=0.8, mgp=c(1,0.5,0))
+title('Change in community composition \nduring CDI diagnosis')
+	# communities are more similar when there is NO change in clinical status 
+	# significant by delta in kruskal test (also wilcox)
+
+# option 2: by major category of groups:
+ind.byindex$s1_group<-droplevels(ind.byindex$s1_group)				#you must drop the ghost levels
+boxplot.double = boxplot(thetayc~delta+s1_group_reinfection, data = ind.byindex, at = c(1, 2, 4, 5, 7, 8), 
+	ylim = c(0,1.1), col = c(rep('chartreuse3', 2), rep('orange', 2), rep('darkgoldenrod', 2)), xlim=c(0,9), 
+	ylab=expression(paste("", theta, "yc distance")), las=2, mgp=c(0.5,1,1), xaxt='n', xlab='', cex.axis=0.8, cex=0.6, cex.lab=0.8)
+legend("bottomright", c("nonrecurrent", "recurrent", 'reinfection'), col=c('chartreuse3', 'orange', 'darkgoldenrod'), pch=15, cex=0.6)
+axis(side=2, labels="(community dissimilarity)", at=0.55, line=0.5, lwd=0, cex.axis=0.8, mgp=c(1,1.8,0))
+axis(side=1, at=c(1, 2, 4, 5, 7, 8), labels=rep(c('-', '+'),3), line=0.5, lwd=0, cex.axis=1.5, mgp=c(1,0.5,0))
+title('Change in community composition \nduring CDI diagnosis')
+mtext(expression(paste("", Delta, " in")), 1, cex=0.8, at=c(-1,-1), padj=0.6)
+mtext("clinical \nstatus:", 1, cex=0.8, at=c(-1,-1), padj=1.5)
+#segments(x0=0.8, y0=1.05, x1 = 2.2, y1 = 1.05, lwd=1.5)
+#segments(x0=3.8, y0=1.05, x1 = 5.2, y1 = 1.05, lwd=1.5)
+#segments(x0=6.8, y0=1.05, x1 = 8.2, y1 = 1.05, lwd=1.5)
+	#useful, but we can do better:
+Arrows(0.8, 1.05, 2.2, 1.05, code = 3, arr.type = "T", arr.length=0.2)
+Arrows(3.8, 1.05, 5.2, 1.05, code = 3, arr.type = "T", arr.length=0.2)
+Arrows(6.8, 1.05, 8.2, 1.05, code = 3, arr.type = "T", arr.length=0.2)
+text(1.5,1.1, labels="** p=0.0014", cex=0.6)
+text(4.5,1.1, labels="ns", cex=0.6)
+text(7.5,1.1, labels="ns", cex=0.6)
+
+# stats:
+	# couldn't get it to separate by two variables
+kruskal.test(thetayc~delta, data=ind.byindex)
+	#data:  thetayc by delta
+	#Kruskal-Wallis chi-squared = 3.9912, df = 1, p-value = 0.04574
+	# but, significant if only looking at change (even if including all groups)
+# if using option 2, can also do stats within group:
+# had previously done this: ind.byindex<-rbind(rec, non, reinf)
+wilcox.test(thetayc~delta, data=non)
+	#W = 764, p-value = 0.001398
+	# woo hoo!
+wilcox.test(thetayc~delta, data=rec)
+	#W = 1328, p-value = 0.3492
+	# not sign. awesome!
+wilcox.test(thetayc~delta, data=rec)
+	#W = 66, p-value = 0.1006
+	# not sig--ok, since there are only a couple points anyhow...
+
+###
+#-----
+###
+
+
+### extra commands not necessarily used:
+	#sample ns (if needed--not used above):
+ns <- ddply(otus, c("group_reinfection"), colwise(sum, is.numeric))
+	#standard error:	
+std.errs <- sd[,2:4] / (ns[,2:4] ^ .5)
+
+#lower <- mean[,2:4] + (std.errs * quantile(.025, (ns[,2:4] - 1)))
+#upper <- mean[,2:4] + (std.errs * quantile(.975, (ns[,2:4] - 1)))
+	#didn't work...not sure why not
+	
+reordered.mean <- reshape(mean, 
+  varying = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  v.names = "means",
+  timevar = "otuname",
+  new.row.names = 1:1000,
+  times = c("Otu00001_Enterobacteriaceae", "Otu00002_Enterococcus", "Otu00003_Bacteroides"), 
+  direction = "long")
+reordered.mean$labels<-paste(as.character(reordered.mean$group_reinfection, as.character(reordered.mean$otuname))
+
+dotplot(group_reinfection ~ means, data = reordered.mean,
+   aspect = 1.5,
+   xlim = c(3.3, 4.3),
+   xlab = "Mean importance rating",
+   panel = function (x, y) {
+   panel.xyplot(x, y, pch = 16, col = "black")
+   panel.segments(new.data$lower, as.numeric(y),
+     new.data$upper, as.numeric(y), lty = 1, col = "black")} )
+
+regions$state <- reorder(regions$state, regions$sequence)
+
+
