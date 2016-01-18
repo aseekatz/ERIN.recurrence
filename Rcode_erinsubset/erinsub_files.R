@@ -28,7 +28,6 @@
 	# suberin_summary.phylotyped.txt: contains phylotype information, clustering info, some metadata
 	# erinsubset.0.03.shared: mothur-generated .shared file of subsetted samples
 	# ERIN.UMFMT_metadata_filtered.txt: an older metafile (has other samples in it, as well)
-	# erinfmt_otu.taxonomy.txt: created taxonomy file
 	# erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.cons.taxonomy: original taxonomy identification file
 		# later produced the erinfmt.new.taxonomy.names.txt that is used in other analyses
 		# suberin.relOTUs.txt: created from this file (relative abundance of most common OTUs)
@@ -36,7 +35,7 @@
 # Fig. 4 (PCOA biplot):
 	# erinsubset.thetayc0.03.pcoa.axes: mothur-generated
 	# erinsubset.thetayc0.03.nmds.axes: mothur-generated
-	# erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.groups.summary: mothur-generated
+	# erinfmt.unique_list.groups.summary.txt: mothur-generated (from a larger batch)
 	# ERIN.UMFMT_metadata_filtered.txt: an older metafile (has other samples in it, as well)
 	# erinfmt_extra.meta.txt: an extra metadata file, queried from available samples
 	# erinsubset_summary.txt #created from the mothur files
