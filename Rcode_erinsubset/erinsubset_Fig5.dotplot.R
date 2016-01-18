@@ -1,5 +1,5 @@
 ## Making a dotplot of LefSe-identified OTUs
-# 1.4.15
+# 1.4.16
 # Anna M. Seekatz
 
 # adapted from http://polisci.msu.edu/jacoby/research/dotplots/tpm/Creating%20figures/Creating%20Figure%204.R

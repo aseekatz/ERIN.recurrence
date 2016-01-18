@@ -1,0 +1,270 @@
+> library(geepack)
+> 
+> recdata<-read.table(file="all_samples.div.txt", header=TRUE)
+> 	# assign variable to sample based on group (y must be a number category, apparently):
+> recdata$variable[recdata$group_reinfection.x==c("recurrent")]<-1
+> recdata$variable[recdata$group_reinfection.x==c("nonrecurrent")]<-0
+> 	# take out reinfection group (for ease):
+> sub.rec<-recdata[recdata$group_reinfection.x %in% c("nonrecurrent", "recurrent"),]
+> sub.rec<-droplevels(sub.rec)
+> 
+> # run geeglm
+> # options for corstr= exchangeable, unstructured, ar1, independence
+> # using 'exchangeable':
+> inv.fit.exch <- geeglm(variable~invsimpson.x+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "exchangeable", std.err="san.se")
+> summary(inv.fit.exch)
+
+Call:
+geeglm(formula = variable ~ invsimpson.x + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "exchangeable", 
+    std.err = "san.se")
+
+ Coefficients:
+              Estimate   Std.err  Wald Pr(>|W|)   
+(Intercept)  -0.771897  0.273533  7.96   0.0048 **
+invsimpson.x  0.001087  0.000491  4.90   0.0268 * 
+sample_n     -0.024541  0.007607 10.41   0.0013 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)     1.14   0.242
+
+Correlation: Structure = exchangeable  Link = identity 
+
+Estimated Correlation Parameters:
+      Estimate Std.err
+alpha     1.19   0.149
+Number of clusters:   61   Maximum cluster size: 7 
+> 		# this is significant for flat invsimpson
+> chn.fit.exch <- geeglm(variable~change.simpson+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "exchangeable", std.err="san.se")
+> summary(chn.fit.exch)
+
+Call:
+geeglm(formula = variable ~ change.simpson + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "exchangeable", 
+    std.err = "san.se")
+
+ Coefficients:
+                Estimate   Std.err  Wald Pr(>|W|)   
+(Intercept)    -0.764651  0.273922  7.79   0.0052 **
+change.simpson -0.000768  0.000511  2.26   0.1326   
+sample_n       -0.024034  0.007591 10.02   0.0015 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)     1.14   0.241
+
+Correlation: Structure = exchangeable  Link = identity 
+
+Estimated Correlation Parameters:
+      Estimate Std.err
+alpha     1.19   0.148
+Number of clusters:   61   Maximum cluster size: 7 
+> 		# exchangeable is not significant for change.simpson
+> 
+> #however:
+> inv.fit.unstr <- geeglm(variable~invsimpson.x+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "unstructured", std.err="san.se")
+> summary(inv.fit.unstr)
+
+Call:
+geeglm(formula = variable ~ invsimpson.x + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "unstructured", 
+    std.err = "san.se")
+
+ Coefficients:
+              Estimate   Std.err   Wald Pr(>|W|)    
+(Intercept)  -3.12e+15  3.32e+14  88.41   <2e-16 ***
+invsimpson.x  3.03e+12  2.08e+12   2.13     0.14    
+sample_n      1.06e+15  9.39e+13 128.37   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate  Std.err
+(Intercept) 1.65e+15 1.02e+37
+
+Correlation: Structure = unstructured  Link = identity 
+
+Estimated Correlation Parameters:
+          Estimate  Std.err
+alpha.1:2 8.66e-01 5.26e+21
+alpha.1:3 6.07e-16 3.75e+06
+alpha.1:4 6.07e-16 3.75e+06
+alpha.1:5 6.07e-16 3.75e+06
+alpha.1:6 6.07e-16 3.75e+06
+alpha.1:7 6.07e-16 3.75e+06
+alpha.2:3 6.07e-16 3.75e+06
+alpha.2:4 6.07e-16 3.75e+06
+alpha.2:5 6.07e-16 3.75e+06
+alpha.2:6 6.07e-16 3.75e+06
+alpha.2:7 6.07e-16 3.75e+06
+alpha.3:4 1.09e+00 6.75e+21
+alpha.3:5 9.11e-01 5.63e+21
+alpha.3:6 1.35e-31 8.32e-10
+alpha.3:7 1.35e-31 8.32e-10
+alpha.4:5 9.11e-01 5.63e+21
+alpha.4:6 1.35e-31 8.32e-10
+alpha.4:7 1.35e-31 8.32e-10
+alpha.5:6 1.35e-31 8.32e-10
+alpha.5:7 1.35e-31 8.32e-10
+alpha.6:7 1.35e-31 8.32e-10
+Number of clusters:   61   Maximum cluster size: 7 
+> 		# this is not significant for flat invsimpson
+> chn.fit.unstr <- geeglm(variable~change.simpson+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "unstructured", std.err="san.se")
+> summary(chn.fit.unstr)
+
+Call:
+geeglm(formula = variable ~ change.simpson + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "unstructured", 
+    std.err = "san.se")
+
+ Coefficients:
+                Estimate   Std.err    Wald Pr(>|W|)    
+(Intercept)    -2.69e+15  5.41e+14   24.69  6.7e-07 ***
+change.simpson  2.50e+14  6.36e+12 1542.74  < 2e-16 ***
+sample_n        4.73e+14  2.21e+14    4.59    0.032 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate  Std.err
+(Intercept) 1.93e+15 2.34e+37
+
+Correlation: Structure = unstructured  Link = identity 
+
+Estimated Correlation Parameters:
+          Estimate  Std.err
+alpha.1:2 7.00e-01 8.33e+21
+alpha.1:3 9.19e-01 1.11e+22
+alpha.1:4 9.33e-01 1.13e+22
+alpha.1:5 1.56e+00 1.88e+22
+alpha.1:6 1.17e+00 1.41e+22
+alpha.1:7 5.18e-16 6.27e+06
+alpha.2:3 9.90e-01 1.20e+22
+alpha.2:4 1.24e+00 1.51e+22
+alpha.2:5 1.56e+00 1.88e+22
+alpha.2:6 1.17e+00 1.41e+22
+alpha.2:7 4.44e-16 6.27e+06
+alpha.3:4 1.24e+00 1.51e+22
+alpha.3:5 2.33e+00 2.82e+22
+alpha.3:6 1.17e+00 1.41e+22
+alpha.3:7 4.44e-16 6.27e+06
+alpha.4:5 1.56e+00 1.88e+22
+alpha.4:6 1.17e+00 1.41e+22
+alpha.4:7 4.44e-16 6.27e+06
+alpha.5:6 1.17e+00 1.41e+22
+alpha.5:7 4.44e-16 6.27e+06
+alpha.6:7 4.44e-16 6.27e+06
+Number of clusters:   61   Maximum cluster size: 7 
+> 		# this IS significant for change.simpson
+> 
+> # others:
+> #ar1:
+> inv.fit.ar1 <- geeglm(variable~invsimpson.x+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "ar1", std.err="san.se")
+> summary(inv.fit.ar1)			#significant
+
+Call:
+geeglm(formula = variable ~ invsimpson.x + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "ar1", std.err = "san.se")
+
+ Coefficients:
+              Estimate   Std.err Wald Pr(>|W|)   
+(Intercept)  -0.757548  0.275395 7.57   0.0059 **
+invsimpson.x  0.000885  0.000405 4.76   0.0291 * 
+sample_n     -0.057095  0.020499 7.76   0.0053 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)     1.19   0.303
+
+Correlation: Structure = ar1  Link = identity 
+
+Estimated Correlation Parameters:
+      Estimate Std.err
+alpha     1.15  0.0419
+Number of clusters:   61   Maximum cluster size: 7 
+> chn.fit.ar1 <- geeglm(variable~change.simpson+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "ar1", std.err="san.se")
+> summary(chn.fit.ar1)			#not significant
+
+Call:
+geeglm(formula = variable ~ change.simpson + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "ar1", std.err = "san.se")
+
+ Coefficients:
+                Estimate   Std.err Wald Pr(>|W|)   
+(Intercept)    -0.752843  0.275637 7.46   0.0063 **
+change.simpson -0.000680  0.000386 3.11   0.0779 . 
+sample_n       -0.056263  0.020412 7.60   0.0058 **
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)     1.19   0.302
+
+Correlation: Structure = ar1  Link = identity 
+
+Estimated Correlation Parameters:
+      Estimate Std.err
+alpha     1.14  0.0418
+Number of clusters:   61   Maximum cluster size: 7 
+> 
+> #independence:
+> inv.fit.ind <- geeglm(variable~invsimpson.x+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "independence", std.err="san.se")
+> summary(inv.fit.ind)			# not significant
+
+Call:
+geeglm(formula = variable ~ invsimpson.x + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "independence", 
+    std.err = "san.se")
+
+ Coefficients:
+             Estimate  Std.err  Wald Pr(>|W|)    
+(Intercept)  -1.36229  0.35112 15.05  0.00010 ***
+invsimpson.x -0.00684  0.00544  1.58  0.20843    
+sample_n      0.42464  0.12361 11.80  0.00059 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)    0.997  0.0937
+
+Correlation: Structure = independenceNumber of clusters:   61   Maximum cluster size: 7 
+> chn.fit.ind <- geeglm(variable~change.simpson+sample_n, family=binomial(link="logit"),
++ 	data=sub.rec, id=patientID, corstr = "independence", std.err="san.se")
+> summary(chn.fit.ind)			#not significant
+
+Call:
+geeglm(formula = variable ~ change.simpson + sample_n, family = binomial(link = "logit"), 
+    data = sub.rec, id = patientID, corstr = "independence", 
+    std.err = "san.se")
+
+ Coefficients:
+               Estimate  Std.err  Wald Pr(>|W|)    
+(Intercept)    -1.41341  0.35016 16.29  5.4e-05 ***
+change.simpson  0.00417  0.00483  0.75  0.38787    
+sample_n        0.42441  0.12403 11.71  0.00062 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Estimated Scale Parameters:
+            Estimate Std.err
+(Intercept)        1  0.0956
+
+Correlation: Structure = independenceNumber of clusters:   61   Maximum cluster size: 7 
+> 
+> 

@@ -1,5 +1,5 @@
 ## Making a dotplot of LefSe-identified OTUs
-# 1.7.15
+# 1.7.16
 # Anna M. Seekatz
 
 library(shape)
@@ -167,7 +167,9 @@ text(0.641238, -0.412713, label="Otu2: \nEnterococcus", cex=.6, pos=1)
 #### Used for Figure 4A,B:
 # both PCOA w/axes:
 par(mfrow=c(1,2))
-plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="PCOA: by patient group")
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, 
+	xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), 
+	xlim=c(-0.7,0.7), main="PCOA: by patient group")
 Arrows(0, 0, x1=0.637056, y1=0.348986, lty=1, arr.length=0.3, arr.type="triangle")
 	text(0.637056, 0.348986, label="Otu2: \nEnterococcus", cex=.6, pos=2)
 Arrows(0, 0, x1=-0.560707, y1=-0.479283, lty=1, arr.length=0.3, arr.type="triangle")
@@ -178,7 +180,9 @@ Arrows(0, 0, x1=-0.414691, y1=-0.349732, lty=1, arr.length=0.3, arr.type="triang
 legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
 	text(0.38,-0.55, labels="AMOVA, p=0.107", cex=0.7)
 
-plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="PCOA: by sample clinical status")
+plot(df$pcoa_axis2~df$pcoa_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, 
+	xlab="PCOA 1 (12.4%)", ylab="PCOA 2 (9.9%)", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), 
+	main="PCOA: by sample clinical status")
 Arrows(0, 0, x1=0.637056, y1=0.348986, lty=1, arr.length=0.3, arr.type="triangle")
 	text(0.637056, 0.348986, label="Otu2: \nEnterococcus", cex=.6, pos=2)
 Arrows(0, 0, x1=-0.560707, y1=-0.479283, lty=1, arr.length=0.3, arr.type="triangle")
@@ -193,15 +197,20 @@ legend("topright",legend=c("positive", "negative"), col="black", pt.bg=c("magent
 
 # both NMDS w/axes:
 par(mfrow=c(1,2))
-plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="NMDS: by patient group")
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=group.col(df$group_reinfection), cex=1, 
+	xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), 
+	main="NMDS: by patient group")
 Arrows(0, 0, x1=0.404481, y1=0.277719, lty=1, arr.length=0.3, arr.type="triangle")
 	text(0.404481, 0.277719, label="Otu1: \nEnterobacteriaceae", cex=.6, pos=4)
 Arrows(0, 0, x1=0.6412387, y1=-0.412713, lty=1, arr.length=0.3, arr.type="triangle")
 	text(0.641238, -0.412713, label="Otu2: \nEnterococcus", cex=.6, pos=1)
-legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
+legend("topright",legend=c("recurrent", "nonrecurrent", "reinfection"), col="black", 
+	pt.bg=c("orange", "chartreuse3", "darkgoldenrod"), cex=0.7, pch=21)
 	text(0.38,-0.65, labels="AMOVA, p=0.107", cex=0.7)
 
-plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), main="NMDS: by sample clinical status")
+plot(df$nmds_axis2~df$nmds_axis1, pch=21, col="black", bg=clin.col(df$clinical_result), cex=1, 
+	xlab="NMDS 1", ylab="NMDS 2", cex.lab=0.8, cex.axis=0.8, ylim=c(-0.7,0.7), xlim=c(-0.7,0.7), 
+	main="NMDS: by sample clinical status")
 Arrows(0, 0, x1=0.404481, y1=0.277719, lty=1, arr.length=0.3, arr.type="triangle")
 	text(0.404481, 0.277719, label="Otu1: \nEnterobacteriaceae", cex=.6, pos=4)
 Arrows(0, 0, x1=0.6412387, y1=-0.412713, lty=1, arr.length=0.3, arr.type="triangle")
