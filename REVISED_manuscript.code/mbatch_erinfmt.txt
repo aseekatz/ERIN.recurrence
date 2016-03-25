@@ -1,0 +1,59 @@
+##mbatch for erinfmt vs. ERIN samples
+# This is a list of the steps in mothur used to filter sequences for the ERIN recurrence project
+# The original sequencing file contained more sequences than used for the project
+# For PCOA/NMDS, samples were subsetted to all 225 samples used in the manuscript 
+# for lefse/amova, .design files were created depending on which clinical parameter was used (there were many)
+# 3.21.16
+# Anna M. Seekatz
+
+make.contigs(file=erinfmt.files, processors=10)
+summary.seqs(fasta=erinfmt.trim.contigs.fasta, processors=10)
+screen.seqs(fasta=erinfmt.trim.contigs.fasta, group=erinfmt.contigs.groups, maxambig=0, maxlength=275, processors=10)
+unique.seqs(fasta=erinfmt.trim.contigs.good.fasta)
+count.seqs(name=erinfmt.trim.contigs.good.names, group=erinfmt.contigs.good.groups)
+summary.seqs(count=erinfmt.trim.contigs.good.count_table, processors=10)
+pcr.seqs(fasta=silva.seed_v119.align, start=11894, end=25319, keepdots=F, processors=10)
+system(mv silva.seed_v119.pcr.align silva.v4.fasta)
+summary.seqs(fasta=silva.v4.fasta, processors=10)
+align.seqs(fasta=erinfmt.trim.contigs.good.unique.fasta, reference=silva.v4.fasta, processors=10)
+summary.seqs(fasta=erinfmt.trim.contigs.good.unique.align, count=erinfmt.trim.contigs.good.count_table, processors=10)
+screen.seqs(fasta=erinfmt.trim.contigs.good.unique.align, count=erinfmt.trim.contigs.good.count_table, summary=erinfmt.trim.contigs.good.unique.summary, start=1968, end=11550, maxhomop=8, processors=10)
+summary.seqs(fasta=current, count=current, processors=10)
+filter.seqs(fasta=erinfmt.trim.contigs.good.unique.good.align, vertical=T, trump=., processors=10)
+unique.seqs(fasta=erinfmt.trim.contigs.good.unique.good.filter.fasta, count=erinfmt.trim.contigs.good.good.count_table)
+pre.cluster(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.fasta, count=erinfmt.trim.contigs.good.unique.good.filter.count_table, diffs=2, processors=10)
+chimera.uchime(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.fasta, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.count_table, dereplicate=t, processors=10)
+remove.seqs(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.fasta, accnos=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.accnos)
+summary.seqs(fasta=current, count=current, processors=10)
+classify.seqs(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.count_table, reference=trainset10_082014.rdp.fasta, taxonomy=trainset10_082014.rdp.tax, cutoff=80)
+remove.lineage(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.fasta, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.count_table, taxonomy=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.taxonomy, taxon=Chloroplast-Mitochondria-unknown-Archaea-Eukaryota)
+count.seqs(name=erinfmt.trim.contigs.good.names, group=erinfmt.contigs.good.groups)
+count.groups(count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.pick.count_table)
+
+#remove.groups(count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.pick.count_table, fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.fasta, taxonomy=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pds.wang.pick.taxonomy, groups=PBS)
+#dist.seqs(fasta=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.fasta, cutoff=0.15)
+#cluster(column=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.dist, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.pick.pick.count_table)
+#make.shared(list=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.list, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.pick.pick.count_table, label=0.03)
+#classify.otu(list=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.list, count=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.uchime.pick.pick.pick.count_table, taxonomy=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.rdp.wang.pick.pick.taxonomy, label=0.03)
+
+## for shared distances:
+#summary.shared(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, calc=sharedsobs-braycurtis-spearman-thetayc-sharednseqs-morisitahorn-jsd-rjsd)
+
+## for diversity metrics (single):
+#summary.single(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, calc=simpson-invsimpson-shannon-npshannon-sobs-chao-nseqs)
+
+## extra commands for subset of sequences used for manuscript:
+
+## pcoa/nmds (following subsetting of samples included):
+#dist.shared(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, calc=thetayc-jclass)
+#pcoa(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.jclass.0.03.lt.dist)
+#nmds(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, mindim=4, maxdim=4)
+
+# different clinical data was used for amova:
+#amova(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, design=erinsubset.group.design)
+#amova(phylip=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.thetayc.0.03.lt.dist, design=erinsubset.clinical.design)
+
+# sample applies for lefse:
+#get.groups(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.shared, groups=groups-used-for-specific-comparisons)
+#lefse(shared=erinfmt.trim.contigs.good.unique.good.filter.unique.precluster.pick.pick.pick.an.unique_list.0.03.pick.shared, design=erinsubset.group.design)
+#lefse(shared=erinsubset.0.03.shared, design=erinsubset.clinical.design)

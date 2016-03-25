@@ -1,0 +1,8 @@
+nonrecurrent-recurrent	Among	Within	Total
+SS	0.642377	28.3223	28.9647
+df	1	72	73
+MS	0.642377	0.393366
+
+Fs:	1.63303
+p-value: 0.078
+

@@ -1,0 +1,204 @@
+Mac version
+
+Using ReadLine
+
+Running 64Bit Version
+
+mothur v.1.33.3
+Last updated: 4/4/2014
+
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+University of Michigan
+pschloss@umich.edu
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+Type 'quit()' to exit program
+Interactive Mode
+
+
+mothur > dist.shared(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, calc=thetayc)
+
+Using 1 processors.
+0.03
+
+Output File Names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.thetayc.0.03.lt.dist
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.thetayc.0.03.lt.dist erinsubset.allgrps.dist)
+
+
+mothur > amova(phylip=erinsubset.allgrps.dist, design=updated_all.groups.design)
+nonrecurrent-recurrent-reinfection	Among	Within	Total
+SS	1.5421	91.9516	93.4937
+df	2	227	229
+MS	0.771051	0.405073
+
+Fs:	1.90348
+p-value: 0.004*
+
+nonrecurrent-recurrent	Among	Within	Total
+SS	0.922206	71.0284	71.9506
+df	1	177	178
+MS	0.922206	0.40129
+
+Fs:	2.2981
+p-value: 0.007*
+
+nonrecurrent-reinfection	Among	Within	Total
+SS	0.694583	55.0804	55.775
+df	1	134	135
+MS	0.694583	0.411048
+
+Fs:	1.68979
+p-value: 0.048
+
+recurrent-reinfection	Among	Within	Total
+SS	0.656173	57.7945	58.4507
+df	1	143	144
+MS	0.656173	0.404157
+
+Fs:	1.62356
+p-value: 0.07
+
+Experiment-wise error rate: 0.05
+Pair-wise error rate (Bonferroni): 0.0166667
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+erinsubset.allgrps.amova
+
+
+mothur > dist.shared(shared=../UPDATED_lefse/recurrent_index.shared, calc=thetayc)
+
+Using 1 processors.
+0.03
+
+Output File Names: 
+../UPDATED_lefse/recurrent_index.thetayc.0.03.lt.dist
+
+
+mothur > system(mv ../UPDATED_lefse/recurrent_index.thetayc.0.03.lt.dist erinsubset_index.dist)
+
+
+mothur > amova(phylip=erinsubset_index.dist, design=updated_all.index.design)
+nonrecurrent-recurrent	Among	Within	Total
+SS	0.672711	30.4556	31.1283
+df	1	77	78
+MS	0.672711	0.395527
+
+Fs:	1.7008
+p-value: 0.064
+
+Experiment-wise error rate: 0.05
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+erinsubset_index.amova
+
+
+mothur > amova(phylip=erinsubset_index.dist, design=updated_all.index.design)
+nonrecurrent-recurrent	Among	Within	Total
+SS	0.672711	30.4556	31.1283
+df	1	77	78
+MS	0.672711	0.395527
+
+Fs:	1.7008
+p-value: 0.066
+
+Experiment-wise error rate: 0.05
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+erinsubset_index.amova
+
+
+mothur > amova(phylip=erinsubset_index.dist, design=updated_all.index.design, iters=10000)
+nonrecurrent-recurrent	Among	Within	Total
+SS	0.672711	30.4556	31.1283
+df	1	77	78
+MS	0.672711	0.395527
+
+Fs:	1.7008
+p-value: 0.0624
+
+Experiment-wise error rate: 0.05
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+erinsubset_index.amova
+
+
+mothur > dist.shared(shared=../../erinsubset_mothurfiles/updated_clinical2.shared, calc=thetayc)
+Unable to open ../../erinsubset_mothurfiles/updated_clinical2.shared
+
+Using 1 processors.
+[ERROR]: did not complete dist.shared.
+
+mothur > dist.shared(shared=../UPDATED_lefse/updated_clinical2.shared, calc=thetayc)
+
+Using 1 processors.
+0.03
+
+Output File Names: 
+../UPDATED_lefse/updated_clinical2.thetayc.0.03.lt.dist
+
+
+mothur > system(mv ../UPDATED_lefse/updated_clinical2.thetayc.0.03.lt.dist updated_clinical2.thetayc.0.03.lt.dist)
+
+
+mothur > amova(phylip=updated_clinical2.thetayc.0.03.lt.dist, design=updated_clinical2.design)
+negative-positive	Among	Within	Total
+SS	0.806056	81.7131	82.5191
+df	1	202	203
+MS	0.806056	0.40452
+
+Fs:	1.99262
+p-value: 0.02*
+
+Experiment-wise error rate: 0.05
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+updated_clinical2.thetayc.0.03.lt.amova
+
+
+mothur > dist.shared(shared=../UPDATED_lefse/updated_plating.shared, calc=thetayc)
+
+Using 1 processors.
+0.03
+
+Output File Names: 
+../UPDATED_lefse/updated_plating.thetayc.0.03.lt.dist
+
+
+mothur > system(mv ../UPDATED_lefse/updated_plating.thetayc.0.03.lt.dist updated_plating.thetayc.0.03.lt.dist)
+
+
+mothur > amova(phylip=updated_plating.thetayc.0.03.lt.dist, design=updated_plating.design)
+negative-positive	Among	Within	Total
+SS	1.14909	87.974	89.1231
+df	1	217	218
+MS	1.14909	0.40541
+
+Fs:	2.83439
+p-value: 0.002*
+
+Experiment-wise error rate: 0.05
+If you have borderline P-values, you should try increasing the number of iterations
+
+Output File Names: 
+updated_plating.thetayc.0.03.lt.amova
+
+
+mothur > quit()

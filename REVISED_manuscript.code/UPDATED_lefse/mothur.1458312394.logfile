@@ -1,0 +1,638 @@
+Mac version
+
+Using ReadLine
+
+Running 64Bit Version
+
+mothur v.1.33.3
+Last updated: 4/4/2014
+
+by
+Patrick D. Schloss
+
+Department of Microbiology & Immunology
+University of Michigan
+pschloss@umich.edu
+http://www.mothur.org
+
+When using, please cite:
+Schloss, P.D., et al., Introducing mothur: Open-source, platform-independent, community-supported software for describing and comparing microbial communities. Appl Environ Microbiol, 2009. 75(23):7537-41.
+
+Distributed under the GNU General Public License
+
+Type 'help()' for information on the commands that are available
+
+Type 'quit()' to exit program
+Interactive Mode
+
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0157-DA0165-DA0192-DA0208-DA0281-DA0283-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0382-DA0394-DA0397-DA0415-DA0417-DA0427-DA0435-DA0453-DA0461-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0556-DA0565-DA0568-DA0600-DA0611-DA0617-DA0638-DA0673-DA0695-DA0705-DA0718_RDA0719-DA0721_RDA0725-DA0731-DA0734_RDA0735-DA0738-DA0741-DA0752-DA0754-DA0776-DA0779-DA0780-DA0793-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0977-DA0978-DA0980-DA0989-DA0991_RDA0993-DA1008-DA1026-DA1033_RDA1039-DA1043-DA1044-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1324-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1514-DA1519-DA1525-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2267-DA2347-DA2363-DA2444-DA2559-DA2699-DA2763-DA2764-DA2766-DA2792-DA2819-DA2822-DA2832-DA2840-DA2850-DA2852-DA2867-DA2869-DA2870-DA2871-DA2879-DA2905-DA2909-DA2910-DA2932-DA2939-DA2942-DA2960-DA2997-DA3035-DA3108-DA3143-DA3173-DA3240-DA3260_PDA3298-DA3299-DA3376)
+DA0718_RDA0719 is not a valid group, and will be disregarded.
+DA0721_RDA0725 is not a valid group, and will be disregarded.
+DA0734_RDA0735 is not a valid group, and will be disregarded.
+DA0991_RDA0993 is not a valid group, and will be disregarded.
+DA1033_RDA1039 is not a valid group, and will be disregarded.
+DA3260_PDA3298 is not a valid group, and will be disregarded.
+Selected groups: DA0157, DA0165, DA0192, DA0208, DA0281, DA0283, DA0296, DA0299, DA0309, DA0318, DA0338, DA0345, DA0379, DA0382, DA0394, DA0397, DA0415, DA0417, DA0427, DA0435, DA0453, DA0461, DA0474, DA0475, DA0476, DA0488, DA0498, DA0527, DA0530, DA0556, DA0565, DA0568, DA0600, DA0611, DA0617, DA0638, DA0673, DA0695, DA0705, DA0718_RDA0719, DA0721_RDA0725, DA0731, DA0734_RDA0735, DA0738, DA0741, DA0752, DA0754, DA0776, DA0779, DA0780, DA0793, DA0820, DA0845, DA0864, DA0904, DA0908, DA0918, DA0926, DA0933, DA0939, DA0941, DA0943, DA0948, DA0949, DA0954, DA0977, DA0978, DA0980, DA0989, DA0991_RDA0993, DA1008, DA1026, DA1033_RDA1039, DA1043, DA1044, DA1088, DA1102, DA1120, DA1125, DA1174, DA1193, DA1208, DA1217, DA1223, DA1227, DA1231, DA1235, DA1244, DA1249, DA1250, DA1251, DA1287, DA1324, DA1365, DA1369, DA1370, DA1384, DA1388, DA1399, DA1419, DA1468, DA1475, DA1482, DA1483, DA1484, DA1497, DA1504, DA1514, DA1519, DA1525, DA1563, DA1609, DA1621, DA1645, DA1648, DA1673, DA1686, DA1718, DA1749, DA1752, DA1779, DA1810, DA1837, DA1918, DA1936, DA1937, DA1945, DA1960, DA1993, DA2014, DA2045, DA2047, DA2058, DA2063, DA2095, DA2102, DA2267, DA2347, DA2363, DA2444, DA2559, DA2699, DA2763, DA2764, DA2766, DA2792, DA2819, DA2822, DA2832, DA2840, DA2850, DA2852, DA2867, DA2869, DA2870, DA2871, DA2879, DA2905, DA2909, DA2910, DA2932, DA2939, DA2942, DA2960, DA2997, DA3035, DA3108, DA3143, DA3173, DA3240, DA3260_PDA3298, DA3299, DA3376 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0157-DA0165-DA0192-DA0208-DA0281-DA0283-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0382-DA0394-DA0397-DA0415-DA0417-DA0427-DA0435-DA0453-DA0461-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0556-DA0565-DA0568-DA0600-DA0611-DA0617-DA0638-DA0673-DA0695-DA0705-DA0718_R-DA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0754-DA0776-DA0779-DA0780-DA0793-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1033_R-DA1039-DA1043-DA1044-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1324-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1514-DA1519-DA1525-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2267-DA2347-DA2363-DA2444-DA2559-DA2699-DA2763-DA2764-DA2766-DA2792-DA2819-DA2822-DA2832-DA2840-DA2850-DA2852-DA2867-DA2869-DA2870-DA2871-DA2879-DA2905-DA2909-DA2910-DA2932-DA2939-DA2942-DA2960-DA2997-DA3035-DA3108-DA3143-DA3173-DA3240-DA3260_P-DA3298-DA3299-DA3376)
+Selected groups: DA0157, DA0165, DA0192, DA0208, DA0281, DA0283, DA0296, DA0299, DA0309, DA0318, DA0338, DA0345, DA0379, DA0382, DA0394, DA0397, DA0415, DA0417, DA0427, DA0435, DA0453, DA0461, DA0474, DA0475, DA0476, DA0488, DA0498, DA0527, DA0530, DA0556, DA0565, DA0568, DA0600, DA0611, DA0617, DA0638, DA0673, DA0695, DA0705, DA0718_R, DA0719, DA0721_R, DA0725, DA0731, DA0734_R, DA0735, DA0738, DA0741, DA0752, DA0754, DA0776, DA0779, DA0780, DA0793, DA0820, DA0845, DA0864, DA0904, DA0908, DA0918, DA0926, DA0933, DA0939, DA0941, DA0943, DA0948, DA0949, DA0954, DA0977, DA0978, DA0980, DA0989, DA0991_R, DA0993, DA1008, DA1026, DA1033_R, DA1039, DA1043, DA1044, DA1088, DA1102, DA1120, DA1125, DA1174, DA1193, DA1208, DA1217, DA1223, DA1227, DA1231, DA1235, DA1244, DA1249, DA1250, DA1251, DA1287, DA1324, DA1365, DA1369, DA1370, DA1384, DA1388, DA1399, DA1419, DA1468, DA1475, DA1482, DA1483, DA1484, DA1497, DA1504, DA1514, DA1519, DA1525, DA1563, DA1609, DA1621, DA1645, DA1648, DA1673, DA1686, DA1718, DA1749, DA1752, DA1779, DA1810, DA1837, DA1918, DA1936, DA1937, DA1945, DA1960, DA1993, DA2014, DA2045, DA2047, DA2058, DA2063, DA2095, DA2102, DA2267, DA2347, DA2363, DA2444, DA2559, DA2699, DA2763, DA2764, DA2766, DA2792, DA2819, DA2822, DA2832, DA2840, DA2850, DA2852, DA2867, DA2869, DA2870, DA2871, DA2879, DA2905, DA2909, DA2910, DA2932, DA2939, DA2942, DA2960, DA2997, DA3035, DA3108, DA3143, DA3173, DA3240, DA3260_P, DA3298, DA3299, DA3376 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared updated_recurrent.shared)
+
+
+mothur > lefse(shared=../../erinsubset_mothurfiles/updated_recurrent.shared, design=recurrent2.design)
+Unable to open ../../erinsubset_mothurfiles/updated_recurrent.shared
+Unable to open recurrent2.design
+[ERROR]: did not complete lefse.
+
+mothur > lefse(shared=updated_recurrent.shared, design=recurrent2.group.design)
+
+You did not provide a class, using group_reinfection.
+
+0.03
+
+Number of significantly discriminative features: 4 ( 117 ) before internal wilcoxon.
+Number of discriminative features with abs LDA score > 2 : 4.
+
+Output File Names: 
+updated_recurrent.0.03.lefse_summary
+
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0157-DA0165-DA0192-DA0281-DA0283-DA0296-DA0299-DA0318-DA0382-DA0394-DA0461-DA0498-DA0530-DA0556-DA0568-DA0600-DA0638-DA0673-DA0705-DA0721_R-DA0735-DA0754-DA0864-DA0904-DA0908-DA0918-DA0926-DA0939-DA0943-DA0949-DA0989-DA1026-DA1044-DA1088-DA1193-DA1208-DA1223-DA1227-DA1231-DA1235-DA1244-DA1370-DA1384-DA1388-DA1468-DA1482-DA1504-DA1563-DA1609-DA1621-DA1686-DA1749-DA1752-DA1810-DA1918-DA1936-DA2058-DA2063-DA2095-DA2347-DA2363-DA2444-DA2559-DA2763-DA2792-DA2819-DA2840-DA2869-DA2870-DA2905-DA2932-DA2942-DA2997-DA3143-DA3240-DA3260_P-DA3298-DA3299-DA3376)
+Selected groups: DA0157, DA0165, DA0192, DA0281, DA0283, DA0296, DA0299, DA0318, DA0382, DA0394, DA0461, DA0498, DA0530, DA0556, DA0568, DA0600, DA0638, DA0673, DA0705, DA0721_R, DA0735, DA0754, DA0864, DA0904, DA0908, DA0918, DA0926, DA0939, DA0943, DA0949, DA0989, DA1026, DA1044, DA1088, DA1193, DA1208, DA1223, DA1227, DA1231, DA1235, DA1244, DA1370, DA1384, DA1388, DA1468, DA1482, DA1504, DA1563, DA1609, DA1621, DA1686, DA1749, DA1752, DA1810, DA1918, DA1936, DA2058, DA2063, DA2095, DA2347, DA2363, DA2444, DA2559, DA2763, DA2792, DA2819, DA2840, DA2869, DA2870, DA2905, DA2932, DA2942, DA2997, DA3143, DA3240, DA3260_P, DA3298, DA3299, DA3376 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared recurrent_index.shared)
+
+
+mothur > lefse(shared=recurrent_index.shared, design=recurrent_first.design)
+Unable to open recurrent_first.design
+[ERROR]: did not complete lefse.
+
+mothur > lefse(shared=recurrent_index.shared, design=recurrent_index.design)
+
+You did not provide a class, using group_reinfection.
+
+0.03
+
+Number of significantly discriminative features: 2 ( 22 ) before internal wilcoxon.
+Number of discriminative features with abs LDA score > 2 : 2.
+
+Output File Names: 
+recurrent_index.0.03.lefse_summary
+
+
+mothur > lefse(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, design=updated_clinical.design)
+
+You did not provide a class, using POS_NEG.
+
+0.03
+[ERROR]: group DA0154 is not in your design file. Please correct.
+[ERROR]: group DA0154 is not in your design file. Please correct.
+[ERROR]: group DA0156 is not in your design file. Please correct.
+[ERROR]: group DA0156 is not in your design file. Please correct.
+[ERROR]: group DA0207 is not in your design file. Please correct.
+[ERROR]: group DA0207 is not in your design file. Please correct.
+[ERROR]: group DA0208 is not in your design file. Please correct.
+[ERROR]: group DA0208 is not in your design file. Please correct.
+[ERROR]: group DA0288 is not in your design file. Please correct.
+[ERROR]: group DA0288 is not in your design file. Please correct.
+[ERROR]: group DA0309 is not in your design file. Please correct.
+[ERROR]: group DA0309 is not in your design file. Please correct.
+[ERROR]: group DA0338 is not in your design file. Please correct.
+[ERROR]: group DA0338 is not in your design file. Please correct.
+[ERROR]: group DA0345 is not in your design file. Please correct.
+[ERROR]: group DA0345 is not in your design file. Please correct.
+[ERROR]: group DA0379 is not in your design file. Please correct.
+[ERROR]: group DA0379 is not in your design file. Please correct.
+[ERROR]: group DA0381 is not in your design file. Please correct.
+[ERROR]: group DA0381 is not in your design file. Please correct.
+[ERROR]: group DA0383 is not in your design file. Please correct.
+[ERROR]: group DA0383 is not in your design file. Please correct.
+[ERROR]: group DA0397 is not in your design file. Please correct.
+[ERROR]: group DA0397 is not in your design file. Please correct.
+[ERROR]: group DA0415 is not in your design file. Please correct.
+[ERROR]: group DA0415 is not in your design file. Please correct.
+[ERROR]: group DA0416 is not in your design file. Please correct.
+[ERROR]: group DA0416 is not in your design file. Please correct.
+[ERROR]: group DA0417 is not in your design file. Please correct.
+[ERROR]: group DA0417 is not in your design file. Please correct.
+[ERROR]: group DA0426 is not in your design file. Please correct.
+[ERROR]: group DA0426 is not in your design file. Please correct.
+[ERROR]: group DA0427 is not in your design file. Please correct.
+[ERROR]: group DA0427 is not in your design file. Please correct.
+[ERROR]: group DA0435 is not in your design file. Please correct.
+[ERROR]: group DA0435 is not in your design file. Please correct.
+[ERROR]: group DA0450 is not in your design file. Please correct.
+[ERROR]: group DA0450 is not in your design file. Please correct.
+[ERROR]: group DA0453 is not in your design file. Please correct.
+[ERROR]: group DA0453 is not in your design file. Please correct.
+[ERROR]: group DA0458 is not in your design file. Please correct.
+[ERROR]: group DA0458 is not in your design file. Please correct.
+[ERROR]: group DA0467 is not in your design file. Please correct.
+[ERROR]: group DA0467 is not in your design file. Please correct.
+[ERROR]: group DA0474 is not in your design file. Please correct.
+[ERROR]: group DA0474 is not in your design file. Please correct.
+[ERROR]: group DA0475 is not in your design file. Please correct.
+[ERROR]: group DA0475 is not in your design file. Please correct.
+[ERROR]: group DA0476 is not in your design file. Please correct.
+[ERROR]: group DA0476 is not in your design file. Please correct.
+[ERROR]: group DA0488 is not in your design file. Please correct.
+[ERROR]: group DA0488 is not in your design file. Please correct.
+[ERROR]: group DA0527 is not in your design file. Please correct.
+[ERROR]: group DA0527 is not in your design file. Please correct.
+[ERROR]: group DA0551 is not in your design file. Please correct.
+[ERROR]: group DA0551 is not in your design file. Please correct.
+[ERROR]: group DA0565 is not in your design file. Please correct.
+[ERROR]: group DA0565 is not in your design file. Please correct.
+[ERROR]: group DA0574 is not in your design file. Please correct.
+[ERROR]: group DA0574 is not in your design file. Please correct.
+[ERROR]: group DA0603 is not in your design file. Please correct.
+[ERROR]: group DA0603 is not in your design file. Please correct.
+[ERROR]: group DA0611 is not in your design file. Please correct.
+[ERROR]: group DA0611 is not in your design file. Please correct.
+[ERROR]: group DA0617 is not in your design file. Please correct.
+[ERROR]: group DA0617 is not in your design file. Please correct.
+[ERROR]: group DA0618 is not in your design file. Please correct.
+[ERROR]: group DA0618 is not in your design file. Please correct.
+[ERROR]: group DA0635 is not in your design file. Please correct.
+[ERROR]: group DA0635 is not in your design file. Please correct.
+[ERROR]: group DA0666 is not in your design file. Please correct.
+[ERROR]: group DA0666 is not in your design file. Please correct.
+[ERROR]: group DA0676 is not in your design file. Please correct.
+[ERROR]: group DA0676 is not in your design file. Please correct.
+[ERROR]: group DA0689 is not in your design file. Please correct.
+[ERROR]: group DA0689 is not in your design file. Please correct.
+[ERROR]: group DA0695 is not in your design file. Please correct.
+[ERROR]: group DA0695 is not in your design file. Please correct.
+[ERROR]: group DA0718_R is not in your design file. Please correct.
+[ERROR]: group DA0718_R is not in your design file. Please correct.
+[ERROR]: group DA0719 is not in your design file. Please correct.
+[ERROR]: group DA0719 is not in your design file. Please correct.
+[ERROR]: group DA0725 is not in your design file. Please correct.
+[ERROR]: group DA0725 is not in your design file. Please correct.
+[ERROR]: group DA0731 is not in your design file. Please correct.
+[ERROR]: group DA0731 is not in your design file. Please correct.
+[ERROR]: group DA0734_R is not in your design file. Please correct.
+[ERROR]: group DA0734_R is not in your design file. Please correct.
+[ERROR]: group DA0738 is not in your design file. Please correct.
+[ERROR]: group DA0738 is not in your design file. Please correct.
+[ERROR]: group DA0741 is not in your design file. Please correct.
+[ERROR]: group DA0741 is not in your design file. Please correct.
+[ERROR]: group DA0752 is not in your design file. Please correct.
+[ERROR]: group DA0752 is not in your design file. Please correct.
+[ERROR]: group DA0753 is not in your design file. Please correct.
+[ERROR]: group DA0753 is not in your design file. Please correct.
+[ERROR]: group DA0776 is not in your design file. Please correct.
+[ERROR]: group DA0776 is not in your design file. Please correct.
+[ERROR]: group DA0778 is not in your design file. Please correct.
+[ERROR]: group DA0778 is not in your design file. Please correct.
+[ERROR]: group DA0779 is not in your design file. Please correct.
+[ERROR]: group DA0779 is not in your design file. Please correct.
+[ERROR]: group DA0780 is not in your design file. Please correct.
+[ERROR]: group DA0780 is not in your design file. Please correct.
+[ERROR]: group DA0793 is not in your design file. Please correct.
+[ERROR]: group DA0793 is not in your design file. Please correct.
+[ERROR]: group DA0806 is not in your design file. Please correct.
+[ERROR]: group DA0806 is not in your design file. Please correct.
+[ERROR]: group DA0820 is not in your design file. Please correct.
+[ERROR]: group DA0820 is not in your design file. Please correct.
+[ERROR]: group DA0845 is not in your design file. Please correct.
+[ERROR]: group DA0845 is not in your design file. Please correct.
+[ERROR]: group DA0933 is not in your design file. Please correct.
+[ERROR]: group DA0933 is not in your design file. Please correct.
+[ERROR]: group DA0941 is not in your design file. Please correct.
+[ERROR]: group DA0941 is not in your design file. Please correct.
+[ERROR]: group DA0948 is not in your design file. Please correct.
+[ERROR]: group DA0948 is not in your design file. Please correct.
+[ERROR]: group DA0954 is not in your design file. Please correct.
+[ERROR]: group DA0954 is not in your design file. Please correct.
+[ERROR]: group DA0963 is not in your design file. Please correct.
+[ERROR]: group DA0963 is not in your design file. Please correct.
+[ERROR]: group DA0977 is not in your design file. Please correct.
+[ERROR]: group DA0977 is not in your design file. Please correct.
+[ERROR]: group DA0978 is not in your design file. Please correct.
+[ERROR]: group DA0978 is not in your design file. Please correct.
+[ERROR]: group DA0980 is not in your design file. Please correct.
+[ERROR]: group DA0980 is not in your design file. Please correct.
+[ERROR]: group DA0991_R is not in your design file. Please correct.
+[ERROR]: group DA0991_R is not in your design file. Please correct.
+[ERROR]: group DA0993 is not in your design file. Please correct.
+[ERROR]: group DA0993 is not in your design file. Please correct.
+[ERROR]: group DA1008 is not in your design file. Please correct.
+[ERROR]: group DA1008 is not in your design file. Please correct.
+[ERROR]: group DA1030 is not in your design file. Please correct.
+[ERROR]: group DA1030 is not in your design file. Please correct.
+[ERROR]: group DA1033_R is not in your design file. Please correct.
+[ERROR]: group DA1033_R is not in your design file. Please correct.
+[ERROR]: group DA1039 is not in your design file. Please correct.
+[ERROR]: group DA1039 is not in your design file. Please correct.
+[ERROR]: group DA1043 is not in your design file. Please correct.
+[ERROR]: group DA1043 is not in your design file. Please correct.
+[ERROR]: group DA1046 is not in your design file. Please correct.
+[ERROR]: group DA1046 is not in your design file. Please correct.
+[ERROR]: group DA1071 is not in your design file. Please correct.
+[ERROR]: group DA1071 is not in your design file. Please correct.
+[ERROR]: group DA1102 is not in your design file. Please correct.
+[ERROR]: group DA1102 is not in your design file. Please correct.
+[ERROR]: group DA1120 is not in your design file. Please correct.
+[ERROR]: group DA1120 is not in your design file. Please correct.
+[ERROR]: group DA1125 is not in your design file. Please correct.
+[ERROR]: group DA1125 is not in your design file. Please correct.
+[ERROR]: group DA1174 is not in your design file. Please correct.
+[ERROR]: group DA1174 is not in your design file. Please correct.
+[ERROR]: group DA1217 is not in your design file. Please correct.
+[ERROR]: group DA1217 is not in your design file. Please correct.
+[ERROR]: group DA1249 is not in your design file. Please correct.
+[ERROR]: group DA1249 is not in your design file. Please correct.
+[ERROR]: group DA1250 is not in your design file. Please correct.
+[ERROR]: group DA1250 is not in your design file. Please correct.
+[ERROR]: group DA1251 is not in your design file. Please correct.
+[ERROR]: group DA1251 is not in your design file. Please correct.
+[ERROR]: group DA1287 is not in your design file. Please correct.
+[ERROR]: group DA1287 is not in your design file. Please correct.
+[ERROR]: group DA1306 is not in your design file. Please correct.
+[ERROR]: group DA1306 is not in your design file. Please correct.
+[ERROR]: group DA1320 is not in your design file. Please correct.
+[ERROR]: group DA1320 is not in your design file. Please correct.
+[ERROR]: group DA1324 is not in your design file. Please correct.
+[ERROR]: group DA1324 is not in your design file. Please correct.
+[ERROR]: group DA1335 is not in your design file. Please correct.
+[ERROR]: group DA1335 is not in your design file. Please correct.
+[ERROR]: group DA1359 is not in your design file. Please correct.
+[ERROR]: group DA1359 is not in your design file. Please correct.
+[ERROR]: group DA1365 is not in your design file. Please correct.
+[ERROR]: group DA1365 is not in your design file. Please correct.
+[ERROR]: group DA1369 is not in your design file. Please correct.
+[ERROR]: group DA1369 is not in your design file. Please correct.
+[ERROR]: group DA1399 is not in your design file. Please correct.
+[ERROR]: group DA1399 is not in your design file. Please correct.
+[ERROR]: group DA1419 is not in your design file. Please correct.
+[ERROR]: group DA1419 is not in your design file. Please correct.
+[ERROR]: group DA1428 is not in your design file. Please correct.
+[ERROR]: group DA1428 is not in your design file. Please correct.
+[ERROR]: group DA1475 is not in your design file. Please correct.
+[ERROR]: group DA1475 is not in your design file. Please correct.
+[ERROR]: group DA1483 is not in your design file. Please correct.
+[ERROR]: group DA1483 is not in your design file. Please correct.
+[ERROR]: group DA1484 is not in your design file. Please correct.
+[ERROR]: group DA1484 is not in your design file. Please correct.
+[ERROR]: group DA1497 is not in your design file. Please correct.
+[ERROR]: group DA1497 is not in your design file. Please correct.
+[ERROR]: group DA1513 is not in your design file. Please correct.
+[ERROR]: group DA1513 is not in your design file. Please correct.
+[ERROR]: group DA1514 is not in your design file. Please correct.
+[ERROR]: group DA1514 is not in your design file. Please correct.
+[ERROR]: group DA1519 is not in your design file. Please correct.
+[ERROR]: group DA1519 is not in your design file. Please correct.
+[ERROR]: group DA1525 is not in your design file. Please correct.
+[ERROR]: group DA1525 is not in your design file. Please correct.
+[ERROR]: group DA1536 is not in your design file. Please correct.
+[ERROR]: group DA1536 is not in your design file. Please correct.
+[ERROR]: group DA1645 is not in your design file. Please correct.
+[ERROR]: group DA1645 is not in your design file. Please correct.
+[ERROR]: group DA1648 is not in your design file. Please correct.
+[ERROR]: group DA1648 is not in your design file. Please correct.
+[ERROR]: group DA1673 is not in your design file. Please correct.
+[ERROR]: group DA1673 is not in your design file. Please correct.
+[ERROR]: group DA1718 is not in your design file. Please correct.
+[ERROR]: group DA1718 is not in your design file. Please correct.
+[ERROR]: group DA1779 is not in your design file. Please correct.
+[ERROR]: group DA1779 is not in your design file. Please correct.
+[ERROR]: group DA1837 is not in your design file. Please correct.
+[ERROR]: group DA1837 is not in your design file. Please correct.
+[ERROR]: group DA1937 is not in your design file. Please correct.
+[ERROR]: group DA1937 is not in your design file. Please correct.
+[ERROR]: group DA1945 is not in your design file. Please correct.
+[ERROR]: group DA1945 is not in your design file. Please correct.
+[ERROR]: group DA1960 is not in your design file. Please correct.
+[ERROR]: group DA1960 is not in your design file. Please correct.
+[ERROR]: group DA1993 is not in your design file. Please correct.
+[ERROR]: group DA1993 is not in your design file. Please correct.
+[ERROR]: group DA2014 is not in your design file. Please correct.
+[ERROR]: group DA2014 is not in your design file. Please correct.
+[ERROR]: group DA2045 is not in your design file. Please correct.
+[ERROR]: group DA2045 is not in your design file. Please correct.
+[ERROR]: group DA2047 is not in your design file. Please correct.
+[ERROR]: group DA2047 is not in your design file. Please correct.
+[ERROR]: group DA2102 is not in your design file. Please correct.
+[ERROR]: group DA2102 is not in your design file. Please correct.
+[ERROR]: group DA2245 is not in your design file. Please correct.
+[ERROR]: group DA2245 is not in your design file. Please correct.
+[ERROR]: group DA2267 is not in your design file. Please correct.
+[ERROR]: group DA2267 is not in your design file. Please correct.
+[ERROR]: group DA2276 is not in your design file. Please correct.
+[ERROR]: group DA2276 is not in your design file. Please correct.
+[ERROR]: group DA2355 is not in your design file. Please correct.
+[ERROR]: group DA2355 is not in your design file. Please correct.
+[ERROR]: group DA2699 is not in your design file. Please correct.
+[ERROR]: group DA2699 is not in your design file. Please correct.
+[ERROR]: group DA2710 is not in your design file. Please correct.
+[ERROR]: group DA2710 is not in your design file. Please correct.
+[ERROR]: group DA2764 is not in your design file. Please correct.
+[ERROR]: group DA2764 is not in your design file. Please correct.
+[ERROR]: group DA2766 is not in your design file. Please correct.
+[ERROR]: group DA2766 is not in your design file. Please correct.
+[ERROR]: group DA2797 is not in your design file. Please correct.
+[ERROR]: group DA2797 is not in your design file. Please correct.
+[ERROR]: group DA2803 is not in your design file. Please correct.
+[ERROR]: group DA2803 is not in your design file. Please correct.
+[ERROR]: group DA2822 is not in your design file. Please correct.
+[ERROR]: group DA2822 is not in your design file. Please correct.
+[ERROR]: group DA2826 is not in your design file. Please correct.
+[ERROR]: group DA2826 is not in your design file. Please correct.
+[ERROR]: group DA2830 is not in your design file. Please correct.
+[ERROR]: group DA2830 is not in your design file. Please correct.
+[ERROR]: group DA2832 is not in your design file. Please correct.
+[ERROR]: group DA2832 is not in your design file. Please correct.
+[ERROR]: group DA2845 is not in your design file. Please correct.
+[ERROR]: group DA2845 is not in your design file. Please correct.
+[ERROR]: group DA2850 is not in your design file. Please correct.
+[ERROR]: group DA2850 is not in your design file. Please correct.
+[ERROR]: group DA2851 is not in your design file. Please correct.
+[ERROR]: group DA2851 is not in your design file. Please correct.
+[ERROR]: group DA2852 is not in your design file. Please correct.
+[ERROR]: group DA2852 is not in your design file. Please correct.
+[ERROR]: group DA2867 is not in your design file. Please correct.
+[ERROR]: group DA2867 is not in your design file. Please correct.
+[ERROR]: group DA2871 is not in your design file. Please correct.
+[ERROR]: group DA2871 is not in your design file. Please correct.
+[ERROR]: group DA2875 is not in your design file. Please correct.
+[ERROR]: group DA2875 is not in your design file. Please correct.
+[ERROR]: group DA2879 is not in your design file. Please correct.
+[ERROR]: group DA2879 is not in your design file. Please correct.
+[ERROR]: group DA2894 is not in your design file. Please correct.
+[ERROR]: group DA2894 is not in your design file. Please correct.
+[ERROR]: group DA2909 is not in your design file. Please correct.
+[ERROR]: group DA2909 is not in your design file. Please correct.
+[ERROR]: group DA2910 is not in your design file. Please correct.
+[ERROR]: group DA2910 is not in your design file. Please correct.
+[ERROR]: group DA2911 is not in your design file. Please correct.
+[ERROR]: group DA2911 is not in your design file. Please correct.
+[ERROR]: group DA2939 is not in your design file. Please correct.
+[ERROR]: group DA2939 is not in your design file. Please correct.
+[ERROR]: group DA2940 is not in your design file. Please correct.
+[ERROR]: group DA2940 is not in your design file. Please correct.
+[ERROR]: group DA2946 is not in your design file. Please correct.
+[ERROR]: group DA2946 is not in your design file. Please correct.
+[ERROR]: group DA2960 is not in your design file. Please correct.
+[ERROR]: group DA2960 is not in your design file. Please correct.
+[ERROR]: group DA3035 is not in your design file. Please correct.
+[ERROR]: group DA3035 is not in your design file. Please correct.
+[ERROR]: group DA3081 is not in your design file. Please correct.
+[ERROR]: group DA3081 is not in your design file. Please correct.
+[ERROR]: group DA3091 is not in your design file. Please correct.
+[ERROR]: group DA3091 is not in your design file. Please correct.
+[ERROR]: group DA3108 is not in your design file. Please correct.
+[ERROR]: group DA3108 is not in your design file. Please correct.
+[ERROR]: group DA3137 is not in your design file. Please correct.
+[ERROR]: group DA3137 is not in your design file. Please correct.
+[ERROR]: group DA3173 is not in your design file. Please correct.
+[ERROR]: group DA3173 is not in your design file. Please correct.
+[ERROR]: group DA0154 is not in your design file. Please correct.
+[ERROR]: group DA0156 is not in your design file. Please correct.
+[ERROR]: group DA0207 is not in your design file. Please correct.
+[ERROR]: group DA0208 is not in your design file. Please correct.
+[ERROR]: group DA0288 is not in your design file. Please correct.
+[ERROR]: group DA0309 is not in your design file. Please correct.
+[ERROR]: group DA0338 is not in your design file. Please correct.
+[ERROR]: group DA0345 is not in your design file. Please correct.
+[ERROR]: group DA0379 is not in your design file. Please correct.
+[ERROR]: group DA0381 is not in your design file. Please correct.
+[ERROR]: group DA0383 is not in your design file. Please correct.
+[ERROR]: group DA0397 is not in your design file. Please correct.
+[ERROR]: group DA0415 is not in your design file. Please correct.
+[ERROR]: group DA0416 is not in your design file. Please correct.
+[ERROR]: group DA0417 is not in your design file. Please correct.
+[ERROR]: group DA0426 is not in your design file. Please correct.
+[ERROR]: group DA0427 is not in your design file. Please correct.
+[ERROR]: group DA0435 is not in your design file. Please correct.
+[ERROR]: group DA0450 is not in your design file. Please correct.
+[ERROR]: group DA0453 is not in your design file. Please correct.
+[ERROR]: group DA0458 is not in your design file. Please correct.
+[ERROR]: group DA0467 is not in your design file. Please correct.
+[ERROR]: group DA0474 is not in your design file. Please correct.
+[ERROR]: group DA0475 is not in your design file. Please correct.
+[ERROR]: group DA0476 is not in your design file. Please correct.
+[ERROR]: group DA0488 is not in your design file. Please correct.
+[ERROR]: group DA0527 is not in your design file. Please correct.
+[ERROR]: group DA0551 is not in your design file. Please correct.
+[ERROR]: group DA0565 is not in your design file. Please correct.
+[ERROR]: group DA0574 is not in your design file. Please correct.
+[ERROR]: group DA0603 is not in your design file. Please correct.
+[ERROR]: group DA0611 is not in your design file. Please correct.
+[ERROR]: group DA0617 is not in your design file. Please correct.
+[ERROR]: group DA0618 is not in your design file. Please correct.
+[ERROR]: group DA0635 is not in your design file. Please correct.
+[ERROR]: group DA0666 is not in your design file. Please correct.
+[ERROR]: group DA0676 is not in your design file. Please correct.
+[ERROR]: group DA0689 is not in your design file. Please correct.
+[ERROR]: group DA0695 is not in your design file. Please correct.
+[ERROR]: group DA0718_R is not in your design file. Please correct.
+[ERROR]: group DA0719 is not in your design file. Please correct.
+[ERROR]: group DA0725 is not in your design file. Please correct.
+[ERROR]: group DA0731 is not in your design file. Please correct.
+[ERROR]: group DA0734_R is not in your design file. Please correct.
+[ERROR]: group DA0738 is not in your design file. Please correct.
+[ERROR]: group DA0741 is not in your design file. Please correct.
+[ERROR]: group DA0752 is not in your design file. Please correct.
+[ERROR]: group DA0753 is not in your design file. Please correct.
+[ERROR]: group DA0776 is not in your design file. Please correct.
+[ERROR]: group DA0778 is not in your design file. Please correct.
+[ERROR]: group DA0779 is not in your design file. Please correct.
+[ERROR]: group DA0780 is not in your design file. Please correct.
+[ERROR]: group DA0793 is not in your design file. Please correct.
+[ERROR]: group DA0806 is not in your design file. Please correct.
+[ERROR]: group DA0820 is not in your design file. Please correct.
+[ERROR]: group DA0845 is not in your design file. Please correct.
+[ERROR]: group DA0933 is not in your design file. Please correct.
+[ERROR]: group DA0941 is not in your design file. Please correct.
+[ERROR]: group DA0948 is not in your design file. Please correct.
+[ERROR]: group DA0954 is not in your design file. Please correct.
+[ERROR]: group DA0963 is not in your design file. Please correct.
+[ERROR]: group DA0977 is not in your design file. Please correct.
+[ERROR]: group DA0978 is not in your design file. Please correct.
+[ERROR]: group DA0980 is not in your design file. Please correct.
+[ERROR]: group DA0991_R is not in your design file. Please correct.
+[ERROR]: group DA0993 is not in your design file. Please correct.
+[ERROR]: group DA1008 is not in your design file. Please correct.
+[ERROR]: group DA1030 is not in your design file. Please correct.
+[ERROR]: group DA1033_R is not in your design file. Please correct.
+[ERROR]: group DA1039 is not in your design file. Please correct.
+[ERROR]: group DA1043 is not in your design file. Please correct.
+[ERROR]: group DA1046 is not in your design file. Please correct.
+[ERROR]: group DA1071 is not in your design file. Please correct.
+[ERROR]: group DA1102 is not in your design file. Please correct.
+[ERROR]: group DA1120 is not in your design file. Please correct.
+[ERROR]: group DA1125 is not in your design file. Please correct.
+[ERROR]: group DA1174 is not in your design file. Please correct.
+[ERROR]: group DA1217 is not in your design file. Please correct.
+[ERROR]: group DA1249 is not in your design file. Please correct.
+[ERROR]: group DA1250 is not in your design file. Please correct.
+[ERROR]: group DA1251 is not in your design file. Please correct.
+[ERROR]: group DA1287 is not in your design file. Please correct.
+[ERROR]: group DA1306 is not in your design file. Please correct.
+[ERROR]: group DA1320 is not in your design file. Please correct.
+[ERROR]: group DA1324 is not in your design file. Please correct.
+[ERROR]: group DA1335 is not in your design file. Please correct.
+[ERROR]: group DA1359 is not in your design file. Please correct.
+[ERROR]: group DA1365 is not in your design file. Please correct.
+[ERROR]: group DA1369 is not in your design file. Please correct.
+[ERROR]: group DA1399 is not in your design file. Please correct.
+[ERROR]: group DA1419 is not in your design file. Please correct.
+[ERROR]: group DA1428 is not in your design file. Please correct.
+[ERROR]: group DA1475 is not in your design file. Please correct.
+[ERROR]: group DA1483 is not in your design file. Please correct.
+[ERROR]: group DA1484 is not in your design file. Please correct.
+[ERROR]: group DA1497 is not in your design file. Please correct.
+[ERROR]: group DA1513 is not in your design file. Please correct.
+[ERROR]: group DA1514 is not in your design file. Please correct.
+[ERROR]: group DA1519 is not in your design file. Please correct.
+[ERROR]: group DA1525 is not in your design file. Please correct.
+[ERROR]: group DA1536 is not in your design file. Please correct.
+[ERROR]: group DA1645 is not in your design file. Please correct.
+[ERROR]: group DA1648 is not in your design file. Please correct.
+[ERROR]: group DA1673 is not in your design file. Please correct.
+[ERROR]: group DA1718 is not in your design file. Please correct.
+[ERROR]: group DA1779 is not in your design file. Please correct.
+[ERROR]: group DA1837 is not in your design file. Please correct.
+[ERROR]: group DA1937 is not in your design file. Please correct.
+[ERROR]: group DA1945 is not in your design file. Please correct.
+[ERROR]: group DA1960 is not in your design file. Please correct.
+[ERROR]: group DA1993 is not in your design file. Please correct.
+[ERROR]: group DA2014 is not in your design file. Please correct.
+[ERROR]: group DA2045 is not in your design file. Please correct.
+[ERROR]: group DA2047 is not in your design file. Please correct.
+[ERROR]: group DA2102 is not in your design file. Please correct.
+[ERROR]: group DA2245 is not in your design file. Please correct.
+[ERROR]: group DA2267 is not in your design file. Please correct.
+[ERROR]: group DA2276 is not in your design file. Please correct.
+[ERROR]: group DA2355 is not in your design file. Please correct.
+[ERROR]: group DA2699 is not in your design file. Please correct.
+[ERROR]: group DA2710 is not in your design file. Please correct.
+[ERROR]: group DA2764 is not in your design file. Please correct.
+[ERROR]: group DA2766 is not in your design file. Please correct.
+[ERROR]: group DA2797 is not in your design file. Please correct.
+[ERROR]: group DA2803 is not in your design file. Please correct.
+[ERROR]: group DA2822 is not in your design file. Please correct.
+[ERROR]: group DA2826 is not in your design file. Please correct.
+[ERROR]: group DA2830 is not in your design file. Please correct.
+[ERROR]: group DA2832 is not in your design file. Please correct.
+[ERROR]: group DA2845 is not in your design file. Please correct.
+[ERROR]: group DA2850 is not in your design file. Please correct.
+[ERROR]: group DA2851 is not in your design file. Please correct.
+[ERROR]: group DA2852 is not in your design file. Please correct.
+[ERROR]: group DA2867 is not in your design file. Please correct.
+[ERROR]: group DA2871 is not in your design file. Please correct.
+[ERROR]: group DA2875 is not in your design file. Please correct.
+[ERROR]: group DA2879 is not in your design file. Please correct.
+[ERROR]: group DA2894 is not in your design file. Please correct.
+[ERROR]: group DA2909 is not in your design file. Please correct.
+[ERROR]: group DA2910 is not in your design file. Please correct.
+[ERROR]: group DA2911 is not in your design file. Please correct.
+[ERROR]: group DA2939 is not in your design file. Please correct.
+[ERROR]: group DA2940 is not in your design file. Please correct.
+[ERROR]: group DA2946 is not in your design file. Please correct.
+[ERROR]: group DA2960 is not in your design file. Please correct.
+[ERROR]: group DA3035 is not in your design file. Please correct.
+[ERROR]: group DA3081 is not in your design file. Please correct.
+[ERROR]: group DA3091 is not in your design file. Please correct.
+[ERROR]: group DA3108 is not in your design file. Please correct.
+[ERROR]: group DA3137 is not in your design file. Please correct.
+[ERROR]: group DA3173 is not in your design file. Please correct.
+
+Number of significantly discriminative features: 0 ( 0 ) before internal wilcoxon.
+No features with significant differences between the classes.
+
+mothur > lefse(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, design=updated_clinical.design)
+
+You did not provide a class, using POS_NEG.
+
+0.03
+
+Number of significantly discriminative features: 5 ( 57 ) before internal wilcoxon.
+Number of discriminative features with abs LDA score > 2 : 5.
+
+Output File Names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.lefse_summary
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.lefse_summary updated_clinical.lefse_summary)
+
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0417-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0719-DA0721_R DA0725-DA0735-DA0738-DA0741-DA0753-DA0754-DA0778-DA0779-DA0780-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0978-DA0980-DA0989-DA1008-DA1026-DA1030-DA1033_R DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2832-DA2840-DA2852-DA2867-DA2869-DA2870-DA2871-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143)
+DA0721_R DA0725 is not a valid group, and will be disregarded.
+DA1033_R DA1039 is not a valid group, and will be disregarded.
+Selected groups: DA0154, DA0156, DA0157, DA0165, DA0192, DA0208, DA0281, DA0283, DA0288, DA0296, DA0299, DA0309, DA0318, DA0338, DA0345, DA0379, DA0381, DA0382, DA0383, DA0394, DA0397, DA0415, DA0417, DA0435, DA0450, DA0453, DA0458, DA0461, DA0467, DA0474, DA0475, DA0476, DA0498, DA0527, DA0530, DA0551, DA0556, DA0565, DA0568, DA0574, DA0600, DA0603, DA0611, DA0617, DA0618, DA0635, DA0638, DA0666, DA0673, DA0676, DA0689, DA0695, DA0705, DA0719, DA0721_R DA0725, DA0735, DA0738, DA0741, DA0753, DA0754, DA0778, DA0779, DA0780, DA0806, DA0820, DA0845, DA0864, DA0904, DA0908, DA0918, DA0926, DA0933, DA0939, DA0941, DA0943, DA0948, DA0949, DA0954, DA0963, DA0978, DA0980, DA0989, DA1008, DA1026, DA1030, DA1033_R DA1039, DA1043, DA1044, DA1046, DA1071, DA1088, DA1102, DA1120, DA1125, DA1174, DA1193, DA1208, DA1217, DA1223, DA1227, DA1231, DA1235, DA1244, DA1249, DA1250, DA1251, DA1287, DA1306, DA1320, DA1324, DA1335, DA1359, DA1365, DA1369, DA1370, DA1384, DA1388, DA1399, DA1419, DA1428, DA1468, DA1475, DA1482, DA1483, DA1484, DA1497, DA1504, DA1513, DA1514, DA1519, DA1525, DA1536, DA1563, DA1609, DA1621, DA1645, DA1673, DA1686, DA1718, DA1749, DA1752, DA1779, DA1810, DA1837, DA1918, DA1936, DA1937, DA1945, DA1960, DA1993, DA2014, DA2045, DA2047, DA2058, DA2063, DA2095, DA2102, DA2245, DA2267, DA2276, DA2347, DA2355, DA2363, DA2444, DA2559, DA2699, DA2710, DA2763, DA2764, DA2766, DA2792, DA2797, DA2803, DA2819, DA2822, DA2826, DA2832, DA2840, DA2852, DA2867, DA2869, DA2870, DA2871, DA2879, DA2894, DA2905, DA2909, DA2910, DA2911, DA2932, DA2939, DA2940, DA2942, DA2946, DA2960, DA2997, DA3035, DA3081, DA3091, DA3108, DA3137, DA3143 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > ./get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0417-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0719-DA0721_R-DA0725-DA0735-DA0738-DA0741-DA0753-DA0754-DA0778-DA0779-DA0780-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0978-DA0980-DA0989-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2832-DA2840-DA2852-DA2867-DA2869-DA2870-DA2871-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143)
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0417-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0635-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0719-DA0721_R-DA0725-DA0735-DA0738-DA0741-DA0753-DA0754-DA0778-DA0779-DA0780-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0978-DA0980-DA0989-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2826-DA2832-DA2840-DA2852-DA2867-DA2869-DA2870-DA2871-DA2879-DA2894-DA2905-DA2909-DA2910-DA2911-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143)
+Selected groups: DA0154, DA0156, DA0157, DA0165, DA0192, DA0208, DA0281, DA0283, DA0288, DA0296, DA0299, DA0309, DA0318, DA0338, DA0345, DA0379, DA0381, DA0382, DA0383, DA0394, DA0397, DA0415, DA0417, DA0435, DA0450, DA0453, DA0458, DA0461, DA0467, DA0474, DA0475, DA0476, DA0498, DA0527, DA0530, DA0551, DA0556, DA0565, DA0568, DA0574, DA0600, DA0603, DA0611, DA0617, DA0618, DA0635, DA0638, DA0666, DA0673, DA0676, DA0689, DA0695, DA0705, DA0719, DA0721_R, DA0725, DA0735, DA0738, DA0741, DA0753, DA0754, DA0778, DA0779, DA0780, DA0806, DA0820, DA0845, DA0864, DA0904, DA0908, DA0918, DA0926, DA0933, DA0939, DA0941, DA0943, DA0948, DA0949, DA0954, DA0963, DA0978, DA0980, DA0989, DA1008, DA1026, DA1030, DA1033_R, DA1039, DA1043, DA1044, DA1046, DA1071, DA1088, DA1102, DA1120, DA1125, DA1174, DA1193, DA1208, DA1217, DA1223, DA1227, DA1231, DA1235, DA1244, DA1249, DA1250, DA1251, DA1287, DA1306, DA1320, DA1324, DA1335, DA1359, DA1365, DA1369, DA1370, DA1384, DA1388, DA1399, DA1419, DA1428, DA1468, DA1475, DA1482, DA1483, DA1484, DA1497, DA1504, DA1513, DA1514, DA1519, DA1525, DA1536, DA1563, DA1609, DA1621, DA1645, DA1673, DA1686, DA1718, DA1749, DA1752, DA1779, DA1810, DA1837, DA1918, DA1936, DA1937, DA1945, DA1960, DA1993, DA2014, DA2045, DA2047, DA2058, DA2063, DA2095, DA2102, DA2245, DA2267, DA2276, DA2347, DA2355, DA2363, DA2444, DA2559, DA2699, DA2710, DA2763, DA2764, DA2766, DA2792, DA2797, DA2803, DA2819, DA2822, DA2826, DA2832, DA2840, DA2852, DA2867, DA2869, DA2870, DA2871, DA2879, DA2894, DA2905, DA2909, DA2910, DA2911, DA2932, DA2939, DA2940, DA2942, DA2946, DA2960, DA2997, DA3035, DA3081, DA3091, DA3108, DA3137, DA3143 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared updated_clinical2.shared)
+
+
+mothur > lefse(shared=updated_clinical2.shared, design=updated_clinical2.design)
+
+You did not provide a class, using POS_NEG.
+
+0.03
+
+Number of significantly discriminative features: 5 ( 209 ) before internal wilcoxon.
+Number of discriminative features with abs LDA score > 2 : 5.
+
+Output File Names: 
+updated_clinical2.0.03.lefse_summary
+
+
+mothur > get.groups(shared=../../erinsubset_mothurfiles/erinsubset.0.03.shared, groups=DA0154-DA0156-DA0157-DA0165-DA0192-DA0207-DA0208-DA0281-DA0283-DA0288-DA0296-DA0299-DA0309-DA0318-DA0338-DA0345-DA0379-DA0381-DA0382-DA0383-DA0394-DA0397-DA0415-DA0416-DA0417-DA0426-DA0427-DA0435-DA0450-DA0453-DA0458-DA0461-DA0467-DA0474-DA0475-DA0476-DA0488-DA0498-DA0527-DA0530-DA0551-DA0556-DA0565-DA0568-DA0574-DA0600-DA0603-DA0611-DA0617-DA0618-DA0638-DA0666-DA0673-DA0676-DA0689-DA0695-DA0705-DA0718_R-DA0719-DA0721_R-DA0725-DA0731-DA0734_R-DA0735-DA0738-DA0741-DA0752-DA0754-DA0776-DA0778-DA0779-DA0780-DA0793-DA0806-DA0820-DA0845-DA0864-DA0904-DA0908-DA0918-DA0926-DA0933-DA0939-DA0941-DA0943-DA0948-DA0949-DA0954-DA0963-DA0977-DA0978-DA0980-DA0989-DA0991_R-DA0993-DA1008-DA1026-DA1030-DA1033_R-DA1039-DA1043-DA1044-DA1046-DA1071-DA1088-DA1102-DA1120-DA1125-DA1174-DA1193-DA1208-DA1217-DA1223-DA1227-DA1231-DA1235-DA1244-DA1249-DA1250-DA1251-DA1287-DA1306-DA1320-DA1324-DA1335-DA1359-DA1365-DA1369-DA1370-DA1384-DA1388-DA1399-DA1419-DA1428-DA1468-DA1475-DA1482-DA1483-DA1484-DA1497-DA1504-DA1513-DA1514-DA1519-DA1525-DA1536-DA1563-DA1609-DA1621-DA1645-DA1648-DA1673-DA1686-DA1718-DA1749-DA1752-DA1779-DA1810-DA1837-DA1918-DA1936-DA1937-DA1945-DA1960-DA1993-DA2014-DA2045-DA2047-DA2058-DA2063-DA2095-DA2102-DA2245-DA2267-DA2276-DA2347-DA2355-DA2363-DA2444-DA2559-DA2699-DA2710-DA2763-DA2764-DA2766-DA2792-DA2797-DA2803-DA2819-DA2822-DA2832-DA2840-DA2845-DA2850-DA2851-DA2852-DA2867-DA2869-DA2870-DA2871-DA2875-DA2879-DA2894-DA2905-DA2909-DA2910-DA2932-DA2939-DA2940-DA2942-DA2946-DA2960-DA2997-DA3035-DA3081-DA3091-DA3108-DA3137-DA3143)
+Selected groups: DA0154, DA0156, DA0157, DA0165, DA0192, DA0207, DA0208, DA0281, DA0283, DA0288, DA0296, DA0299, DA0309, DA0318, DA0338, DA0345, DA0379, DA0381, DA0382, DA0383, DA0394, DA0397, DA0415, DA0416, DA0417, DA0426, DA0427, DA0435, DA0450, DA0453, DA0458, DA0461, DA0467, DA0474, DA0475, DA0476, DA0488, DA0498, DA0527, DA0530, DA0551, DA0556, DA0565, DA0568, DA0574, DA0600, DA0603, DA0611, DA0617, DA0618, DA0638, DA0666, DA0673, DA0676, DA0689, DA0695, DA0705, DA0718_R, DA0719, DA0721_R, DA0725, DA0731, DA0734_R, DA0735, DA0738, DA0741, DA0752, DA0754, DA0776, DA0778, DA0779, DA0780, DA0793, DA0806, DA0820, DA0845, DA0864, DA0904, DA0908, DA0918, DA0926, DA0933, DA0939, DA0941, DA0943, DA0948, DA0949, DA0954, DA0963, DA0977, DA0978, DA0980, DA0989, DA0991_R, DA0993, DA1008, DA1026, DA1030, DA1033_R, DA1039, DA1043, DA1044, DA1046, DA1071, DA1088, DA1102, DA1120, DA1125, DA1174, DA1193, DA1208, DA1217, DA1223, DA1227, DA1231, DA1235, DA1244, DA1249, DA1250, DA1251, DA1287, DA1306, DA1320, DA1324, DA1335, DA1359, DA1365, DA1369, DA1370, DA1384, DA1388, DA1399, DA1419, DA1428, DA1468, DA1475, DA1482, DA1483, DA1484, DA1497, DA1504, DA1513, DA1514, DA1519, DA1525, DA1536, DA1563, DA1609, DA1621, DA1645, DA1648, DA1673, DA1686, DA1718, DA1749, DA1752, DA1779, DA1810, DA1837, DA1918, DA1936, DA1937, DA1945, DA1960, DA1993, DA2014, DA2045, DA2047, DA2058, DA2063, DA2095, DA2102, DA2245, DA2267, DA2276, DA2347, DA2355, DA2363, DA2444, DA2559, DA2699, DA2710, DA2763, DA2764, DA2766, DA2792, DA2797, DA2803, DA2819, DA2822, DA2832, DA2840, DA2845, DA2850, DA2851, DA2852, DA2867, DA2869, DA2870, DA2871, DA2875, DA2879, DA2894, DA2905, DA2909, DA2910, DA2932, DA2939, DA2940, DA2942, DA2946, DA2960, DA2997, DA3035, DA3081, DA3091, DA3108, DA3137, DA3143 from your shared file.
+
+Output File names: 
+../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared
+
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared updated_plating.shared)
+
+
+mothur > ./lefse(shared=updated_plating.shared, design=updated_plating.design)
+
+mothur > system(mv ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared updated_plating.shared)
+mv: ../../erinsubset_mothurfiles/erinsubset.0.03.0.03.pick.shared: No such file or directory
+
+
+mothur > lefse(shared=updated_plating.shared, design=updated_plating.design)
+
+You did not provide a class, using final_plating.
+
+0.03
+
+Number of significantly discriminative features: 7 ( 360 ) before internal wilcoxon.
+Number of discriminative features with abs LDA score > 2 : 7.
+
+Output File Names: 
+updated_plating.0.03.lefse_summary
+
+
+mothur > quit()
